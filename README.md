@@ -9,7 +9,7 @@ This project uses the following Firebase C# libraries:
 2. Authentication(login/logout/register) - [Firebase Auth](https://github.com/step-up-labs/firebase-authentication-dotnet)
 3. Storage(uploading photos etc...) - [Firebase Storage](https://github.com/step-up-labs/firebase-storage-dotnet)
 
-# Architecture Overview
+# Architecture Overview (Example available in code)
 Each feature is represented as a `Manager` class which is a class that holds some data and provides methods for each use case in it's domain, for example: `UserManager` holds the current `User` and provides methods like `Login`, `Register`, `Logout`. It also extends the `Observable` abstract class and calls `OnPropertyChanged(string propName)` whenever the current user changes so we can later bind it to the UI.
 
 The UI is implemented via XAML Views and Their corrosponding `*.xaml.cs` controller classes. the controller class is responsible for routing clicks to methods of the manager class, and the XAML View is responsible for binding to the data in the manager class.
