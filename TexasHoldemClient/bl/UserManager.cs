@@ -1,8 +1,14 @@
-﻿using System;
+﻿using Firebase.Auth;
+using Firebase.Database;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace TexasHoldemClient.bl
 {
@@ -26,7 +32,10 @@ namespace TexasHoldemClient.bl
 
     class UserManager : Observable
     {
-        private UserManager() { }
+        private UserManager()
+        {
+            
+        }
         public static UserManager instance = new UserManager();
 
         private User user = new User();
@@ -35,7 +44,7 @@ namespace TexasHoldemClient.bl
             get { return user; }
             set
             {
-                if (user != value)
+                if(user != value)
                 {
                     user = value;
                     OnPropertyChanged("User");
@@ -43,7 +52,9 @@ namespace TexasHoldemClient.bl
             }
         }
 
-        public void Logout()
+        public string FirebaseApiKey { get; private set; }
+
+        public async void Logout()
         {
             this.User = null;
         }
@@ -52,10 +63,47 @@ namespace TexasHoldemClient.bl
         {
             this.User = new User() { Name = "new user" };
         }
-
-        internal void Login(string v)
+        string GoogleClientId = "989213145723-78seudgbebld842o21up0t7nml3fffhu.apps.googleusercontent.com"; // https://console.developers.google.com/apis/credentials
+        string GoogleClientSecret = "K9n32CzRfQeOXZX-miDWxrde"; // https://console.developers.google.com/apis/credentials
+        string FirebaseAppKey = "AIzaSyDNeJein6-7c543frBjRY-YMj30GV-9XZI"; // https://console.firebase.google.com/
+        public async Task Login(string v)
         {
-            this.User = new User() { Name = v };
+            try
+            {
+                var cr = new PromptCodeReceiver();
+
+                var result = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    new ClientSecrets { ClientId = GoogleClientId, ClientSecret = GoogleClientSecret },
+                    new[] { "email", "profile" },
+                    "user",
+                    CancellationToken.None);
+
+                if (result.Token.IsExpired(SystemClock.Default))
+                {
+                    await result.RefreshTokenAsync(CancellationToken.None);
+                }
+
+                this.FetchFirebaseData(result.Token.AccessToken, FirebaseAuthType.Google);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private async void FetchFirebaseData(string accessToken, FirebaseAuthType authType)
+        {
+            try
+            {
+                // Convert the access token to firebase token
+                var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseAppKey));
+                var data = await auth.SignInWithOAuthAsync(authType, accessToken);
+                this.User = new User() { Name = data.User.DisplayName };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
