@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TexasHoldemClient.bl;
+using TexasHoldemClient.Exceptions;
+using TexasHoldemClient.Models;
+using TexasHoldemClient.pages;
 
 namespace TexasHoldemClient
 {
@@ -22,21 +25,58 @@ namespace TexasHoldemClient
     public partial class LoginPage : Page
     {
         UserManager manager = UserManager.instance;
+        NavigationManager navi = NavigationManager.instance;
 
         public LoginPage()
         {
             InitializeComponent();
-            DataContext = manager;
         }
         
         private void RegisterClick(object sender, RoutedEventArgs e)
         {
-            manager.Register();
+            navi.Page = new RegisterPage();
         }
 
         private void LoginClick(object sender, RoutedEventArgs e)
         {
-            manager.Login("matan");
+            Task<User> task = manager.Login(textBoxUsername.Text, passwordBox1.Password);
+
+            // If it failed.
+            task.ContinueWith(t => 
+                {
+                    Exception ex = t.Exception;
+                    while (ex is AggregateException && ex.InnerException != null)
+                        ex = ex.InnerException;
+                    if (ex is LoginException)
+                    {
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            errorToLogIn.Text = "Cannot Log In :\\";
+                        });
+                        
+                    }
+                },
+                TaskContinuationOptions.OnlyOnFaulted);
+
+            // If it succeeded.
+            task.ContinueWith(t =>
+                {
+                    MessageBox.Show("Login Succses");
+                    Application.Current.Dispatcher.Invoke((Action)delegate
+                    {
+                        GameCenter gc = new GameCenter();
+                        gc.Show();
+
+                        Application.Current.Windows.OfType<Window>().ElementAt(0).Close();
+                    });
+
+                },
+                TaskContinuationOptions.OnlyOnRanToCompletion);
+
+
+
+
+
         }
     }
 }

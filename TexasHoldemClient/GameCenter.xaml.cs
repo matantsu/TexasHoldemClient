@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,28 +10,36 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TexasHoldemClient.bl;
+using TexasHoldemClient.Models;
 
-namespace TexasHoldemClient.pages
+namespace TexasHoldemClient
 {
     /// <summary>
-    /// Interaction logic for MasterPage.xaml
+    /// Interaction logic for GameCenter.xaml
     /// </summary>
-    public partial class MasterPage : Page
+    public partial class GameCenter : Window
     {
+        NavigationManager navi = NavigationManager.instance;
         UserManager manager = UserManager.instance;
 
-        public MasterPage()
+        public GameCenter()
         {
             InitializeComponent();
-            this.DataContext = manager;
+            navi.PropertyChanged += PageChange_PropertyChanged;
+
         }
 
-        private void LogoutClick(object sender, RoutedEventArgs e)
+
+        private void PageChange_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            manager.Logout();
+            if (e.PropertyName == "Page")
+            {
+
+            }
         }
+
+     
     }
 }

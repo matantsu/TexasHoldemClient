@@ -25,14 +25,17 @@ namespace TexasHoldemClient
     public partial class MainWindow : Window
     {
         UserManager manager = UserManager.instance;
+        NavigationManager navi = NavigationManager.instance;
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = manager;
-            Navigate(new LoginPage());
 
             manager.PropertyChanged += Manager_PropertyChanged;
+            navi.PropertyChanged += PageChange_PropertyChanged;
+
+            navi.Page = new LoginPage();
         }
 
         private void Manager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -40,15 +43,22 @@ namespace TexasHoldemClient
             if(e.PropertyName == "User")
             {
                 if(manager.User != null)
-                    Navigate(new MasterPage());
+                    navi.Page = new RegisterPage();
                 else
-                    Navigate(new LoginPage());
+                   navi.Page = new LoginPage();
             }
         }
 
-        public void Navigate(object content)
+
+        private void PageChange_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            mainFrame.Navigate(content);
+            if (e.PropertyName == "Page")
+            {
+                mainFrame.Navigate(navi.Page);
+            }
         }
+
+        
+
     }
 }
