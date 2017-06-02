@@ -41,6 +41,6 @@ namespace TexasHoldemClient
             }
         }
 
-
+        
     }
 }

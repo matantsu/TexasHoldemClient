@@ -36,5 +36,25 @@ namespace TexasHoldemClient.Bridge
             }
             throw new LoginException();
         }
+
+        public async override Task<Game> createNewGame(GamePolicy gp,
+                                              int buyIn,
+                                              int chipsPerPlayer,
+                                              int minBet,
+                                              int minAmoutPlayers,
+                                              int maxAmoutPlayers,
+                                              bool isSpectAllow)
+        {
+
+
+            Game g = new Game(gp, buyIn, chipsPerPlayer, minBet, minAmoutPlayers, maxAmoutPlayers, isSpectAllow);
+            activeGames.AddFirst(g);
+            return g;
+        }
+
+        public async override Task<ICollection<Game>> getActiveGames()
+        {
+            return activeGames;
+        }
     }
 }

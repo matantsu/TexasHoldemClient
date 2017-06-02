@@ -17,5 +17,14 @@ namespace TexasHoldemClient.bl
         public abstract Task<bool> Register(string username, string email, string password);
         public abstract Task<User> Login(string username, string password);
 
+        public abstract Task<Game> createNewGame(GamePolicy gp,
+                                                int buyIn,
+                                                int chipsPerPlayer,
+                                                int minBet,
+                                                int minAmoutPlayers,
+                                                int maxAmoutPlayers,
+                                                bool isSpectAllow);
+        public abstract Task<ICollection<Game>> getActiveGames();
+
     }
 }
