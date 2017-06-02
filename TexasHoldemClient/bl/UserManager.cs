@@ -59,13 +59,15 @@ namespace TexasHoldemClient.bl
             this.User = null;
         }
 
-        internal void Register()
+        public void Register()
         {
             this.User = new User() { Name = "new user" };
         }
+
         string GoogleClientId = "989213145723-78seudgbebld842o21up0t7nml3fffhu.apps.googleusercontent.com"; // https://console.developers.google.com/apis/credentials
         string GoogleClientSecret = "K9n32CzRfQeOXZX-miDWxrde"; // https://console.developers.google.com/apis/credentials
         string FirebaseAppKey = "AIzaSyDNeJein6-7c543frBjRY-YMj30GV-9XZI"; // https://console.firebase.google.com/
+
         public async Task Login(string v)
         {
             try
