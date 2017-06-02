@@ -11,7 +11,7 @@ using TexasHoldemClient.Models;
 namespace TexasHoldemClient.bl
 {
 
-    class UserManager : Observable
+    public class UserManager : Observable
     {
         private UserManager()
         {

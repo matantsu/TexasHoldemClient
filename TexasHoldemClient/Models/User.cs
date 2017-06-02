@@ -8,7 +8,7 @@ using TexasHoldemClient.bl;
 namespace TexasHoldemClient.Models
 {
 
-    class User : Observable
+    public class User : Observable
     {
         private string username;
         private string password;

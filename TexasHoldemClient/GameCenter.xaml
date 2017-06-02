@@ -27,7 +27,7 @@
                         <TextBlock  TextWrapping="Wrap" >
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" Hi- {0}">
-                                    <Binding Path="User.Username"/>
+                                    <Binding Path="manager.User.Username"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -39,7 +39,7 @@
                         <TextBlock  TextWrapping="Wrap" >
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" Wallet: {0}">
-                                    <Binding Path="User.Wallet"/>
+                                    <Binding Path="manager.User.Wallet"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -49,7 +49,7 @@
                         <TextBlock  TextWrapping="Wrap" >
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" League: {0}">
-                                    <Binding Path="User.League"/>
+                                    <Binding Path="manager.User.League"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -71,16 +71,31 @@
                 </Grid>
                 <Grid Name="CreateNewGameButtom" Grid.Column="1" >
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                       <Button>+ Create new game</Button>
+                       <Button Click="CreateNewGame_Click">+ Create new game</Button>
                      </StackPanel>
                 </Grid>
 
             </Grid>
 
             <Grid Name="tableOfGames" Grid.Row="2" >
-                <DataGrid Name="dgActiveGames" CanUserAddRows="False" CanUserResizeColumns="True" CanUserSortColumns="True" IsReadOnly="True" />
-
-
+                <DataGrid ItemsSource="{Binding gcm.ActiveGames}" Name="ActiveGamesDataGrid" IsReadOnly="True" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="Spectate_Click">Spectate</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="Join_Click" IsEnabled="{Binding CanJoin}">Join</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Grid>
 

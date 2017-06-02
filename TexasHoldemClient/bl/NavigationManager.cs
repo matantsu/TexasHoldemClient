@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TexasHoldemClient.bl
 {
-    class NavigationManager : Observable
+    public class NavigationManager : Observable
     {
         private NavigationManager()
         {

@@ -126,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CreateNewGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameCenter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +153,9 @@
     <Compile Include="bl\NavigationManager.cs" />
     <Compile Include="bl\Observable.cs" />
     <Compile Include="bl\UserManager.cs" />
+    <Compile Include="CreateNewGame.xaml.cs">
+      <DependentUpon>CreateNewGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions\LoginExceptions.cs" />
     <Compile Include="GameCenter.xaml.cs">
       <DependentUpon>GameCenter.xaml</DependentUpon>

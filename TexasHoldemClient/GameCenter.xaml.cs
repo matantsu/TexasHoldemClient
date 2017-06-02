@@ -21,15 +21,15 @@ namespace TexasHoldemClient
     /// </summary>
     public partial class GameCenter : Window
     {
-        NavigationManager navi = NavigationManager.instance;
-        UserManager manager = UserManager.instance;
+        public NavigationManager navi { get; set; } = NavigationManager.instance;
+        public UserManager manager { get; set; } = UserManager.instance;
+        public GameCenterManager gcm { get; set; } = GameCenterManager.instance;
 
         public GameCenter()
         {
-            
+            DataContext = this;
             InitializeComponent();
             navi.PropertyChanged += PageChange_PropertyChanged;
-            DataContext = manager;
         }
 
 
@@ -41,6 +41,22 @@ namespace TexasHoldemClient
             }
         }
 
-        
+        private void Join_Click(object sender, RoutedEventArgs e)
+        {
+
+            MessageBox.Show(ActiveGamesDataGrid.SelectedIndex + "");
+        }
+
+        private void Spectate_Click(object sender, RoutedEventArgs e)
+        {
+
+            MessageBox.Show(ActiveGamesDataGrid.SelectedIndex + "");
+        }
+
+        private void CreateNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewGame cng = new CreateNewGame();
+            cng.Show();
+        }
     }
 }
