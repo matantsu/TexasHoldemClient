@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TexasHoldemClient.bl
 {
-    abstract class Observable : INotifyPropertyChanged
+    public abstract class Observable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
