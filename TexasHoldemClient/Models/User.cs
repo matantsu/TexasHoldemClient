@@ -13,16 +13,21 @@ namespace TexasHoldemClient.Models
         private string username;
         private string password;
         private string email;
+        private int wallet;
+        private int league;
+
 
         public User()
         {
         }
 
-        public User(string username,string email, string password)
+        public User(string username,string email, string password, int wallet, int league)
         {
             this.username = username;
             this.password = password;
             this.email = email;
+            this.wallet = wallet;
+            this.league = league;
         }
 
         public string Username
@@ -60,6 +65,32 @@ namespace TexasHoldemClient.Models
                 {
                     password = value;
                     OnPropertyChanged("Password");
+                }
+            }
+        }
+
+        public int Wallet
+        {
+            get { return wallet; }
+            set
+            {
+                if (wallet != value)
+                {
+                    wallet = value;
+                    OnPropertyChanged("Wallet");
+                }
+            }
+        }
+
+        public int League
+        {
+            get { return league; }
+            set
+            {
+                if (league != value)
+                {
+                    league = value;
+                    OnPropertyChanged("League");
                 }
             }
         }

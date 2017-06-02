@@ -143,6 +143,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="bl\GameCenterManager.cs" />
+    <Compile Include="Bridge\ConcreteImplementor.cs" />
+    <Compile Include="Bridge\Realmplementor.cs" />
+    <Compile Include="Bridge\ServerAPI.cs" />
     <Compile Include="bl\NavigationManager.cs" />
     <Compile Include="bl\Observable.cs" />
     <Compile Include="bl\UserManager.cs" />
@@ -150,6 +153,7 @@
     <Compile Include="GameCenter.xaml.cs">
       <DependentUpon>GameCenter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>

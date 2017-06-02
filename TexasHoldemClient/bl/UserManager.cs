@@ -18,9 +18,7 @@ namespace TexasHoldemClient.bl
             
         }
         public static UserManager instance = new UserManager();
-
         private User user;
-        private LinkedList<User> registeredUsers = new LinkedList<User>();
 
 
         public User User
@@ -44,26 +42,14 @@ namespace TexasHoldemClient.bl
         
         public async Task<bool> Register(string username, string email, string password)
         {
-            if(!ExceptionControl.LoginAllow) throw new RegestrationException();
-            registeredUsers.AddFirst(new User(username, email, password));
-            return true;
+            bool task = await ServerAPI.serverApi.Register(username, email, password);
+            return task;
         }
 
         public async Task<User> Login(string username, string password)
         {
-            if (!ExceptionControl.LoginAllow) throw new LoginException();
-            
-            foreach (User u in registeredUsers)
-            {
-                //Console.WriteLine("username: {0}, password: {1}", u.Username , u.Password);
-                if (u.Username == username && u.Password == password)
-                {
-                    this.User = u;
-                    return u;
-                }
-            }
-            throw new LoginException();
-
+            user = await ServerAPI.serverApi.Login(username, password);
+            return user;
         }
 
 

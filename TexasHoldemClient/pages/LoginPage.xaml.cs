@@ -44,11 +44,14 @@ namespace TexasHoldemClient
             // If it failed.
             task.ContinueWith(t => 
                 {
+                    
+
                     Exception ex = t.Exception;
                     while (ex is AggregateException && ex.InnerException != null)
                         ex = ex.InnerException;
                     if (ex is LoginException)
                     {
+
                         this.Dispatcher.Invoke(() =>
                         {
                             errorToLogIn.Text = "Cannot Log In :\\";
@@ -72,10 +75,6 @@ namespace TexasHoldemClient
 
                 },
                 TaskContinuationOptions.OnlyOnRanToCompletion);
-
-
-
-
 
         }
     }

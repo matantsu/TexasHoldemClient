@@ -26,9 +26,10 @@ namespace TexasHoldemClient
 
         public GameCenter()
         {
+            
             InitializeComponent();
             navi.PropertyChanged += PageChange_PropertyChanged;
-
+            DataContext = manager;
         }
 
 
@@ -40,6 +41,6 @@ namespace TexasHoldemClient
             }
         }
 
-     
+
     }
 }
