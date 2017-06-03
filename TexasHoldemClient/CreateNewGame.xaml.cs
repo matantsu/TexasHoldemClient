@@ -29,7 +29,7 @@ namespace TexasHoldemClient
             gamePolicyComboBox.ItemsSource = Enum.GetValues(typeof(GamePolicy)).Cast<GamePolicy>();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CreateNewGame_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("{0}", newGame.GamePolicy);
         }

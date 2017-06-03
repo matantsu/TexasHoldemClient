@@ -81,7 +81,7 @@
                     <CheckBox IsChecked="{Binding IsSpectAllow, Mode = TwoWay}" />
                 </StackPanel>
             </Grid>
-            <Button Content="Create" HorizontalAlignment="Left" Margin="152,74,0,-73" Grid.Row="6" VerticalAlignment="Top" Width="97" Height="42" Click="Button_Click"/>
+            <Button Content="Create" HorizontalAlignment="Left" Margin="152,74,0,-73" Grid.Row="6" VerticalAlignment="Top" Width="97" Height="42" Click="CreateNewGame_Click"/>
 
 
         </Grid>
