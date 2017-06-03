@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TexasHoldemClient.bl;
+using TexasHoldemClient.uc;
 
 namespace TexasHoldemClient.Models
 {
@@ -86,8 +88,8 @@ namespace TexasHoldemClient.Models
             }
         }
 
-        private int players;
-        public int Players
+        private ObservableCollection<Player> players = new ObservableCollection<Player>();
+        public ObservableCollection<Player> Players
         {
             get { return players; }
             set
@@ -97,6 +99,33 @@ namespace TexasHoldemClient.Models
                     players = value;
                     OnPropertyChanged("Players");
                     OnPropertyChanged("CanJoin");
+                }
+            }
+        }
+
+        private Player currentPlayer;
+        public Player CurrentPlayer
+        {
+            get { return currentPlayer; }
+            set
+            {
+                if (currentPlayer != value)
+                {
+                    currentPlayer = value;
+                    OnPropertyChanged("CurrentPlayer");
+                }
+            }
+        }
+        private Player dealer;
+        public Player Dealer
+        {
+            get { return dealer; }
+            set
+            {
+                if (dealer != value)
+                {
+                    dealer = value;
+                    OnPropertyChanged("Dealer");
                 }
             }
         }
@@ -130,9 +159,7 @@ namespace TexasHoldemClient.Models
             }
         }
 
-
-        public bool CanJoin { get { return Players < MaxAmoutPlayers; } }
-
+        public bool CanJoin { get { return Players.Count < MaxAmoutPlayers; } }
 
         public Game()
         {
@@ -148,7 +175,6 @@ namespace TexasHoldemClient.Models
         {
             this.gp = gp;
             this.buyIn = buyIn;
-            this.players = 0;
             this.chipsPerPlayer = chipsPerPlayer;
             this.minBet = minBet;
             this.minAmoutPlayers = minAmoutPlayers;
