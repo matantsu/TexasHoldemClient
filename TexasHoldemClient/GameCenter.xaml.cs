@@ -24,14 +24,15 @@ namespace TexasHoldemClient
         public NavigationManager navi { get; set; } = NavigationManager.instance;
         public UserManager manager { get; set; } = UserManager.instance;
         public GameCenterManager gcm { get; set; } = GameCenterManager.instance;
-
+        public BusinessLayer.GameManager gameManager { get; set; } = BusinessLayer.BL.GameManager;
         public GameCenter()
         {
             DataContext = this;
             InitializeComponent();
             navi.PropertyChanged += PageChange_PropertyChanged;
-        }
 
+            
+        }
 
         private void PageChange_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {

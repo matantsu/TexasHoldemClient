@@ -57,9 +57,10 @@ namespace TexasHoldemClient
     /// </summary>
     public partial class GameWindow : Window
     {
+        
+
+
         private ICollection<PlayerControl> playerControls = new List<PlayerControl>();
-
-
         ObservableCollection<ChatMessage> messages = new ObservableCollection<ChatMessage>();
         Game game = new Game();
 
@@ -72,7 +73,7 @@ namespace TexasHoldemClient
 
             Chat.ItemsSource = messages;
 
-
+            GameManager gm = GameManager.Instance;
 
             game.Players.CollectionChanged += Players_CollectionChanged;
 
