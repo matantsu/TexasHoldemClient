@@ -78,7 +78,7 @@
             </Grid>
 
             <Grid Name="tableOfGames" Grid.Row="2" >
-                <DataGrid ItemsSource="{Binding gcm.ActiveGames}" Name="ActiveGamesDataGrid" IsReadOnly="True" >
+                <DataGrid ItemsSource="{Binding gameManager.ActiveGames}" Name="ActiveGamesDataGrid" IsReadOnly="True" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
