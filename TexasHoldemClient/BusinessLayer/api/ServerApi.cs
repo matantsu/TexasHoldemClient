@@ -17,20 +17,12 @@ namespace TexasHoldemClient.BusinessLayer.api
 
             string email);
 
-        [Get("/createGame?" +
-
-            "gametype={gametype}&" +
-            "buyin={buyin}&" +
-            "initialChips={initialChips}&" +
-            "minBet={minBet}&" +
-            "minPlayers={minPlayers}&" +
-            "maxPlayers={maxPlayers}&" +
-            "spectatingAllowed={spectatingAllowed}")]
+        [Get("/createGame?gameType={gameType}&buyin={buyin}&initialChips={initialChips}&minBet={minBet}&minPlayers={minPlayers}&maxPlayers={maxPlayers}&spectatingAllowed={spectatingAllowed}")]
         Task CreateGame(
             [Header("username")] string username, 
             [Header("password")] string password,
 
-            GameType gametype,
+            int gameType,
             int buyin,
             int initialChips,
             int minBet,
@@ -60,11 +52,7 @@ namespace TexasHoldemClient.BusinessLayer.api
 
             int gameId);
 
-        [Get("/playerAction?" +
-            "playerId={playerId}&" +
-            "gameId={gameId}&" +
-            "newStatus={newStatus}&" +
-            "newBet={newBet}&")]
+        [Get("/playerAction?playerId={playerId}&gameId={gameId}&newStatus={newStatus}&newBet={newBet}&")]
         Task PlayerAction(
             [Header("username")] string username,
             [Header("password")] string password,
