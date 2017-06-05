@@ -168,6 +168,9 @@
     <Compile Include="BusinessLayer\Models\Player.cs" />
     <Compile Include="BusinessLayer\Models\User.cs" />
     <Compile Include="BusinessLayer\Changing.cs" />
+    <Compile Include="BusinessLayer\TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BusinessLayer\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="BusinessLayer\TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PL\Pages\GameCenterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
