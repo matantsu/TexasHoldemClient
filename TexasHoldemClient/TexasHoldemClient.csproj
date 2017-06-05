@@ -148,10 +148,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="bl\GameManager.cs" />
     <Compile Include="bl\Models\Game.cs" />
     <Compile Include="BusinessLayer\api\RxFirebase.cs" />
@@ -163,80 +159,18 @@
     <Compile Include="BusinessLayer\Models\User.cs" />
     <Compile Include="BusinessLayer\Changing.cs" />
     <Compile Include="BusinessLayer\UserManager.cs" />
-    <Compile Include="Models\Player.cs" />
-    <Compile Include="TestWindow.xaml.cs">
-      <DependentUpon>TestWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="uc\PlayerControl.xaml.cs">
-      <DependentUpon>PlayerControl.xaml</DependentUpon>
-    </Compile>
-    <Page Include="CreateNewGame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameCenter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="pages\LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="bl\ChatManager.cs" />
     <Compile Include="bl\GameCenterManager.cs" />
-    <Compile Include="Bridge\ConcreteImplementor.cs" />
-    <Compile Include="Bridge\Realmplementor.cs" />
-    <Compile Include="Bridge\ServerAPI.cs" />
     <Compile Include="bl\NavigationManager.cs" />
     <Compile Include="bl\Observable.cs" />
     <Compile Include="bl\UserManager.cs" />
-    <Compile Include="CreateNewGame.xaml.cs">
-      <DependentUpon>CreateNewGame.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Exceptions\LoginExceptions.cs" />
-    <Compile Include="GameCenter.xaml.cs">
-      <DependentUpon>GameCenter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GameWindow.xaml.cs">
-      <DependentUpon>GameWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="pages\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="pages\RegisterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TestWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="uc\PlayerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pages\RegisterPage.xaml.cs">
-      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    <Compile Include="PL\Windows\GameCenterWindow.xaml.cs">
+      <DependentUpon>GameCenterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\Windows\GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -276,9 +210,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\dealer.jpg" />
-  </ItemGroup>
   <ItemGroup Condition="$(VisualStudioVersion) == '15.0'">
     <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=13.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>$(SSDTPath)\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
@@ -294,7 +225,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\poker-table.jpg" />
+    <Page Include="PL\Windows\GameCenterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Windows\GameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PL\Images\poker_table.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PL\Pages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

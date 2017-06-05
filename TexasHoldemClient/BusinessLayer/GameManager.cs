@@ -82,7 +82,7 @@ namespace TexasHoldemClient.BusinessLayer
                 if(userManager.CurrentUser != null)
                 {
 
-                    IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/activeGamesIds");
+                    IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/activeGamesIds").Select(x => x != null ? x : new List<int>());
                     IObservable<IDictionary<string, dynamic>> activeGamesOb = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(x => x.Select(id => "games/" + id)));
                     activeGamesOb.Select(xs => xs.Select(x => new Game { ID = x.Key, Bet = x.Value.bet }))
                         .SubscribeOn(Dispatcher.CurrentDispatcher)
@@ -91,7 +91,7 @@ namespace TexasHoldemClient.BusinessLayer
                             ActiveGames = ls;
                         });
 
-                    IObservable<IEnumerable<int>> spectatingIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/spectatingGamesIds");
+                    IObservable<IEnumerable<int>> spectatingIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/spectatingGamesIds").Select(x => x != null ? x : new List<int>());
                     IObservable<IDictionary<string, dynamic>> spectatingGamesOb = RxFirebase.FromPaths<dynamic>(fb, spectatingIds.Select(x => x.Select(id => "games/" + id)));
                     spectatingGamesOb.Select(xs => xs.Select(x => new Game { ID = x.Key, Bet = x.Value.bet }))
                         .SubscribeOn(Dispatcher.CurrentDispatcher)

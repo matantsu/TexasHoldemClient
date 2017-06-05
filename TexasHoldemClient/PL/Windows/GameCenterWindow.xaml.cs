@@ -11,21 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TexasHoldemClient.BusinessLayer;
-using TexasHoldemClient.BusinessLayer.Models;
 
-namespace TexasHoldemClient
+namespace TexasHoldemClient.PL.Windows
 {
     /// <summary>
-    /// Interaction logic for TestWindow.xaml
+    /// Interaction logic for GameCenterWindow.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class GameCenterWindow : Window
     {
-        public TestWindow()
+        public GameCenterWindow()
         {
             InitializeComponent();
-
-            BL.UserManager.Login("test1", "123456");
         }
     }
 }

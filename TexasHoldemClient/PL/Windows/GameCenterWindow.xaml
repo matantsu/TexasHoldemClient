@@ -1,0 +1,128 @@
+﻿<Window x:Class="TexasHoldemClient.PL.Windows.GameCenterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TexasHoldemClient.PL.Windows"
+        mc:Ignorable="d"
+        Title="GameCenterWindow"    WindowState="Maximized"
+        WindowStyle="SingleBorderWindow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.8*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="8*" />
+
+            </Grid.RowDefinitions>
+
+            <Grid Name="MainBar" Grid.Row="0" Background="LightGray">
+                <StackPanel Margin="8" Orientation="Horizontal">
+                    <TextBlock Text="Hi - {BindingNeeded}"></TextBlock>
+                    <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />
+                    <Button>Settings</Button>
+                    <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />
+                    <TextBlock Text="Wallet - {BindingNeeded}"></TextBlock>
+                    <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />
+                    <TextBlock Text="league - {BindingNeeded}"></TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid Name="CurrentActiveGamesBar" Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid Name="CurrentGamesTitle" Grid.Column="0" >
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox>
+                            <TextBlock  TextWrapping="Wrap" >Current Active Games:</TextBlock>
+                        </Viewbox>
+                    </StackPanel>
+                </Grid>
+                <Grid Name="CreateNewGameButtom" Grid.Column="1" >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button>+ Create new game</Button>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+            <Grid Name="TableOfActiveGames" Grid.Row="2" >
+                <DataGrid Name="ActiveGamesDataGrid" IsReadOnly="True" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>Spectate</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>Join</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Name="JoinedGamesBar" Grid.Row="3" >
+                <Grid Name="JoinedGamesBarTitle" Grid.Column="0" >
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox>
+                            <TextBlock TextWrapping="Wrap" >Current Joined Games:</TextBlock>
+                        </Viewbox>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Name="TableOfJoinedGames" Grid.Row="4" >
+                <DataGrid Name="JoidGamesDataGrid" IsReadOnly="True"   >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>returnToGame</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Name="ReplayGamesBar" Grid.Row="5" >
+                <Grid Name="ReplayGamesTitle" Grid.Column="0" >
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox>
+                            <TextBlock  TextWrapping="Wrap">Replay Games:</TextBlock>
+                        </Viewbox>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Name="TableOfReplayGames" Grid.Row="6" >
+                <DataGrid Name="ReplayGamesDataGrid" IsReadOnly="True"   >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>Replay</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>
