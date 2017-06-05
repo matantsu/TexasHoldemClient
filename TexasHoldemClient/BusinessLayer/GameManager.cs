@@ -181,10 +181,22 @@ namespace TexasHoldemClient.BusinessLayer
             await api.SpectateGame(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID);
         }
 
-        public async Task DoAction(Game game, GameAction action)
+        public async Task Check(Game game)
         {
             int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.Username).ID;
-            await api.PlayerAction(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID, playerId, action.status, action.bet);
+            await api.PlayerAction(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID, playerId, PlayerStatus.Check, null);
+        }
+
+        public async Task Raise(Game game, int bet)
+        {
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.Username).ID;
+            await api.PlayerAction(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID, playerId, PlayerStatus.Raise, bet);
+        }
+
+        public async Task Fold(Game game)
+        {
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.Username).ID;
+            await api.PlayerAction(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID, playerId, PlayerStatus.Fold, null);
         }
 
         private IDictionary<Game, IDisposable> gameListeners = new Dictionary<Game, IDisposable>(); 

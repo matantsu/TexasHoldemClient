@@ -8,9 +8,9 @@ namespace TexasHoldemClient.BusinessLayer.Models
 {
     public enum GameType
     {
-        Limit,
-        NoLimit,
-        PotLimit
+        Limit = 0,
+        NoLimit = 1,
+        PotLimit = 2
     }
 
     public enum GameStage
