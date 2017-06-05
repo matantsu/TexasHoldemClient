@@ -27,7 +27,7 @@
 
             <Grid Name="GameSpace" Grid.Column="0">
                 <Grid.Background>
-                    <ImageBrush ImageSource="c:\Users\Barakmen\Documents\Visual Studio 2017\Projects\ClientPokerWPF\ClientPokerWPF\Images\poker_table.jpg"/>
+                    <ImageBrush ImageSource="c:\Users\Barakmen\Documents\Visual Studio 2017\Projects\ClientPokerWPF\ClientPokerWPF\PL\Images\poker_table.jpg"/>
                 </Grid.Background>
 
 
