@@ -181,6 +181,12 @@ namespace TexasHoldemClient.BusinessLayer
             await api.SpectateGame(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID);
         }
 
+        public async Task DoAction(Game game, GameAction action)
+        {
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.Username).ID;
+            await api.PlayerAction(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID, playerId, action.status, action.bet);
+        }
+
         private IDictionary<Game, IDisposable> gameListeners = new Dictionary<Game, IDisposable>(); 
         public Game Listen(int gameId)
         {

@@ -46,6 +46,19 @@ namespace TexasHoldemClient.BusinessLayer.Models
         King,
     }
 
+    //Value Object
+    public class GameAction
+    {
+        public readonly PlayerStatus status;
+        public readonly int? bet;
+        
+        public GameAction(PlayerStatus status, int? bet)
+        {
+            this.status = status;
+            this.bet = bet;
+        }
+    }
+
     // Value Object
     public class Card
     {
