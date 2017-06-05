@@ -147,7 +147,7 @@ namespace TexasHoldemClient.BusinessLayer
             };
         }
 
-        public async Task Create(
+        public async Task<int> Create(
             GameType gametype,
             int buyin,
             int initialChips,
@@ -156,7 +156,7 @@ namespace TexasHoldemClient.BusinessLayer
             int maxPlayers,
             bool spectatingAllowed)
         {
-            await api.CreateGame(
+            var r = await api.CreateGame(
                 userManager.CurrentUser.Username,
                 userManager.CurrentUser.Password,
                 (int)gametype,
@@ -166,6 +166,7 @@ namespace TexasHoldemClient.BusinessLayer
                 minPlayers,
                 maxPlayers,
                 spectatingAllowed);
+            return r.result;
         }
 
         public async Task Join(Game game)

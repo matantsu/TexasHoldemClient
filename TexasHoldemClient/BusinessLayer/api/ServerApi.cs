@@ -18,7 +18,7 @@ namespace TexasHoldemClient.BusinessLayer.api
             string email);
 
         [Get("/createGame?gameType={gameType}&buyin={buyin}&initialChips={initialChips}&minBet={minBet}&minPlayers={minPlayers}&maxPlayers={maxPlayers}&spectatingAllowed={spectatingAllowed}")]
-        Task CreateGame(
+        Task<dynamic> CreateGame(
             [Header("username")] string username, 
             [Header("password")] string password,
 

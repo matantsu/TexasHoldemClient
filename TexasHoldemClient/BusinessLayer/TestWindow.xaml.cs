@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient.BusinessLayer
 {
@@ -22,7 +23,13 @@ namespace TexasHoldemClient.BusinessLayer
         public TestWindow()
         {
             InitializeComponent();
-            GameManager g = BL.GameManager;
+            s();
+        }
+
+        private async void s(){
+            await BL.UserManager.Login(null, null);
+            int i = await BL.GameManager.Create(GameType.Limit, 0, 0, 0, 0, 0, true);
+            MessageBox.Show("" + i);
         }
     }
 }
