@@ -148,8 +148,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bl\GameManager.cs" />
-    <Compile Include="bl\Models\Game.cs" />
     <Compile Include="BusinessLayer\api\RxFirebase.cs" />
     <Compile Include="BusinessLayer\api\ServerApi.cs" />
     <Compile Include="BusinessLayer\BL.cs" />
@@ -159,11 +157,6 @@
     <Compile Include="BusinessLayer\Models\User.cs" />
     <Compile Include="BusinessLayer\Changing.cs" />
     <Compile Include="BusinessLayer\UserManager.cs" />
-    <Compile Include="bl\ChatManager.cs" />
-    <Compile Include="bl\GameCenterManager.cs" />
-    <Compile Include="bl\NavigationManager.cs" />
-    <Compile Include="bl\Observable.cs" />
-    <Compile Include="bl\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PL\Windows\GameCenterWindow.xaml.cs">
