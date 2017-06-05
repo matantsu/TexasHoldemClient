@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TexasHoldemClient.bl;
-using TexasHoldemClient.Models;
+using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient
 {
@@ -42,10 +42,11 @@ namespace TexasHoldemClient
             }
         }
 
-        private void Join_Click(object sender, RoutedEventArgs e)
+        private async void Join_Click(object sender, RoutedEventArgs e)
         {
-
-            MessageBox.Show(ActiveGamesDataGrid.SelectedIndex + "");
+            Game joined = gameManager.ActiveGames.ElementAt(ActiveGamesDataGrid.SelectedIndex);
+            await gameManager.Join(joined);
+            
         }
 
         private void Spectate_Click(object sender, RoutedEventArgs e)

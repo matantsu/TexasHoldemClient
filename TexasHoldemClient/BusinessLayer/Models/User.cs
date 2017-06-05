@@ -8,15 +8,15 @@ namespace TexasHoldemClient.BusinessLayer.Models
 {
     public class User : Changing
     {
-        private string username;
-        public string Username
+        private string displayName;
+        public string DisplayName
         {
-            get { return username; }
+            get { return displayName; }
             set
             {
-                if (username != value)
+                if (displayName != value)
                 {
-                    username = value;
+                    displayName = value;
                     OnPropertyChanged("DisplayName");
                 }
             }
@@ -36,32 +36,7 @@ namespace TexasHoldemClient.BusinessLayer.Models
             }
         }
 
-        private int league;
-        public int League
-        {
-            get { return league; }
-            set
-            {
-                if (league != value)
-                {
-                    league = value;
-                    OnPropertyChanged("League");
-                }
-            }
-        }
-
-        private string password;
-        public string Password
-        {
-            get { return password; }
-            set
-            {
-                if (password != value)
-                {
-                    password = value;
-                    OnPropertyChanged("Password");
-                }
-            }
-        }
+        public string Username = "test1";
+        public string Password = "123456";
     }
 }

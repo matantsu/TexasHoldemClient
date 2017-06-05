@@ -160,6 +160,7 @@
     <Compile Include="BusinessLayer\Config.cs" />
     <Compile Include="BusinessLayer\GameManager.cs" />
     <Compile Include="BusinessLayer\Models\Game.cs" />
+    <Compile Include="BusinessLayer\Models\Player.cs" />
     <Compile Include="BusinessLayer\Models\User.cs" />
     <Compile Include="BusinessLayer\Changing.cs" />
     <Compile Include="BusinessLayer\UserManager.cs" />

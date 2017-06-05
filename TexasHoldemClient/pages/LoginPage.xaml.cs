@@ -39,8 +39,8 @@ namespace TexasHoldemClient
 
         private void LoginClick(object sender, RoutedEventArgs e)
         {
-            BusinessLayer.BL.UserManager.Login("test1","123456");
-            Task<User> task = manager.Login(textBoxUsername.Text, passwordBox1.Password);
+            Task task = BusinessLayer.BL.UserManager.Login("test1","123456");
+            //Task<User> task = manager.Login(textBoxUsername.Text, passwordBox1.Password);
 
             // If it failed.
             task.ContinueWith(t => 

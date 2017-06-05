@@ -1,4 +1,5 @@
-﻿using FireSharp;
+﻿using Firebase.Auth;
+using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
 using Refit;
@@ -18,16 +19,17 @@ namespace TexasHoldemClient.BusinessLayer
 
         static BL()
         {
-            IFirebaseConfig config = new FirebaseConfig
+            IFirebaseConfig config = new FireSharp.Config.FirebaseConfig
             {
                 
-                BasePath = Config.DATABASE_ROOT
+                BasePath = Config.DatabaseRoot
             };
             IFirebaseClient fb = new FirebaseClient(config);
+            var authProvider = new FirebaseAuthProvider(new Firebase.Auth.FirebaseConfig(Config.FirebaseAppKey));
 
-            ServerApi api = RestService.For<ServerApi>(Config.API_ROOT);
+            ServerApi api = RestService.For<ServerApi>(Config.ApiRoot);
 
-            UserManager = new UserManager(api);
+            UserManager = new UserManager(api, authProvider);
             GameManager = new GameManager(UserManager, fb, api);
         }
     }
