@@ -15,8 +15,10 @@
         </Grid.RowDefinitions>
 
 
-        <Grid x:Name="ToolsBarSpace" Grid.Row="0" Background="Gray"/>
 
+        <Grid Name="ToolsBarSpace" Grid.Row="0" Background="Gray">
+            
+        </Grid>
 
         <Grid x:Name="GameAndChatSpace" Grid.Row="1">
             <Grid.ColumnDefinitions>
