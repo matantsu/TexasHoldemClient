@@ -33,7 +33,17 @@ namespace TexasHoldemClient.PL.Windows
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
-            /*await gm.Create(
+
+            Console.WriteLine("" +
+                        (GameType)Enum.GetValues(typeof(GameType)).GetValue(gametype_ComboBox.SelectedIndex) + "\n" +
+                        Int32.Parse(buyin_TextBox.Text) + "\n" +
+                        Int32.Parse(initialChips_TextBox.Text) + "\n" +
+                        Int32.Parse(minBet_TextBox.Text) + "\n" +
+                        Int32.Parse(minPlayers_TextBox.Text) + "\n" +
+                        Int32.Parse(maxPlayers_TextBox.Text) + "\n" +
+                        spectatingAllowed_CheckBox.IsChecked.GetValueOrDefault());
+
+            await gm.Create(
 
                         (GameType)Enum.GetValues(typeof(GameType)).GetValue(gametype_ComboBox.SelectedIndex),
                         Int32.Parse(buyin_TextBox.Text),
@@ -41,7 +51,7 @@ namespace TexasHoldemClient.PL.Windows
                         Int32.Parse(minBet_TextBox.Text),
                         Int32.Parse(minPlayers_TextBox.Text),
                         Int32.Parse(maxPlayers_TextBox.Text),
-                        spectatingAllowed_CheckBox.IsChecked.GetValueOrDefault());*/
+                        spectatingAllowed_CheckBox.IsChecked.GetValueOrDefault());
          
         }
     }

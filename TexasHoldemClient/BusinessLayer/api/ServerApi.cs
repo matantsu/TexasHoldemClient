@@ -17,18 +17,25 @@ namespace TexasHoldemClient.BusinessLayer.api
 
             [Header("email")] string email);
 
-        [Get("/createGame")]
+        [Get("/createGame?" +
+           "gametype={gametype}&" +
+           "buyin={buyin}&" +
+           "initialChips={initialChips}&" +
+           "minBet={minBet}&" +
+           "minPlayers={minPlayers}&" +
+           "maxPlayers={maxPlayers}&" +
+           "spectatingAllowed={spectatingAllowed}")]
         Task CreateGame(
-            [Header("username")] string username, 
-            [Header("password")] string password,
+           [Header("username")] string username,
+           [Header("password")] string password,
 
-            [Header("gametype")] GameType gametype,
-            [Header("buyin")] int buyin,
-            [Header("initialChips")] int initialChips,
-            [Header("minBet")] int minBet,
-            [Header("minPlayers")] int minPlayers,
-            [Header("maxPlayers")] int maxPlayers,
-            [Header("spectatingAllowed")] bool spectatingAllowed);
+           GameType gametype,
+           int buyin,
+           int initialChips,
+           int minBet,
+           int minPlayers,
+           int maxPlayers,
+           bool spectatingAllowed);
 
         [Get("/joinGame?gameId={gameId}")]
         Task JoinGame(
