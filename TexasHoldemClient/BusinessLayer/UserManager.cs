@@ -1,10 +1,15 @@
-﻿using Refit;
+﻿using Firebase.Auth;
+using FireSharp.Interfaces;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Util;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using TexasHoldemClient.BusinessLayer.api;
@@ -14,8 +19,8 @@ namespace TexasHoldemClient.BusinessLayer
 {
     public class UserManager : Changing
     {
-        private User currentUser = null;
-        public User CurrentUser
+        private Models.User currentUser = null;
+        public Models.User CurrentUser
         {
             get { return currentUser; }
             set
@@ -29,38 +34,37 @@ namespace TexasHoldemClient.BusinessLayer
         }
 
         private ServerApi userApi;
-        public UserManager(ServerApi api)
+        private FirebaseAuthProvider authProvider;
+
+        public UserManager(ServerApi api, FirebaseAuthProvider authProvider)
         {
             this.userApi = api;
+            this.authProvider = authProvider;
         }
 
-        public async Task Login(string username, string password)
+        public async Task Login(string email, string password)
         {
-            CurrentUser = new User() { Username = username, Password = password };
+            var cr = new PromptCodeReceiver();
+
+            var result = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                new ClientSecrets { ClientId = Config.GoogleClientId, ClientSecret = Config.GoogleClientSecret },
+                new[] { "email", "profile" },
+                "user",
+                CancellationToken.None);
+
+            if (result.Token.IsExpired(SystemClock.Default))
+            {
+                await result.RefreshTokenAsync(CancellationToken.None);
+            }
+
+            var auth = new FirebaseAuthProvider(new FirebaseConfig(Config.FirebaseAppKey));
+            var data = await auth.SignInWithOAuthAsync(FirebaseAuthType.Google, result.Token.AccessToken);
+            CurrentUser = new Models.User { PhotoURL = data.User.PhotoUrl, DisplayName = data.User.DisplayName };
         }
 
         public async Task Logout(string username, string password)
         {
             CurrentUser = null;
-        }
-
-        public async Task Register(string username, string password, string email)
-        {
-            try
-            {
-                await userApi.Register(username, password, email);
-                MessageBox.Show("Registered");
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            
-        }
-
-        public async Task UploadPhoto(Stream fileStream)
-        {
-            
         }
     }
 }

@@ -30,25 +30,25 @@ namespace TexasHoldemClient.BusinessLayer.api
             [Header("maxPlayers")] int maxPlayers,
             [Header("spectatingAllowed")] bool spectatingAllowed);
 
-        [Get("/joinGame")]
+        [Get("/joinGame?gameId={gameId}")]
         Task JoinGame(
             [Header("username")] string username, 
             [Header("password")] string password, 
 
-            [Header("gameId")] string gameId);
+            int gameId);
 
-        [Get("/leaveGame")]
+        [Get("/leaveGame?gameId={gameId}")]
         Task LeaveGame(
             [Header("username")] string username, 
             [Header("password")] string password, 
 
-            [Header("gameId")] string gameId);
+            int gameId);
 
-        [Get("/spectateGame")]
+        [Get("/spectateGame?gameId={gameId}")]
         Task SpectateGame(
             [Header("username")] string username, 
             [Header("password")] string password, 
 
-            [Header("gameId")] string gameId);
+            int gameId);
     }
 }
