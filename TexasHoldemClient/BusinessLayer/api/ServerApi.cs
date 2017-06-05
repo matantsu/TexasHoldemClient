@@ -22,7 +22,7 @@ namespace TexasHoldemClient.BusinessLayer.api
             [Header("username")] string username, 
             [Header("password")] string password,
 
-            GameType gameType,
+            int gameType,
             int buyin,
             int initialChips,
             int minBet,

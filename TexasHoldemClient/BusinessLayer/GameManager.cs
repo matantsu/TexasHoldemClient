@@ -72,7 +72,9 @@ namespace TexasHoldemClient.BusinessLayer
 
             userManager.PropertyChanged += UserManager_PropertyChanged;
 
-            RxFirebase.FromPath<IDictionary<string, dynamic>>(fb, "games").Select(xs => xs.Select(x => new Game { Key = x.Key, Bet = x.Value.bet })).Subscribe(games => Games = games);
+            RxFirebase.FromPath<List<dynamic>>(fb, "games")
+                .Select(xs => xs.FindAll(agafaffs => agafaffs != null).Select((x, i) => new KeyValuePair<string, dynamic>("games/" + i, x)).Select(ToGame))
+                .Subscribe(games => Games = games);
         }
 
         private void UserManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -157,7 +159,7 @@ namespace TexasHoldemClient.BusinessLayer
             await api.CreateGame(
                 userManager.CurrentUser.Username,
                 userManager.CurrentUser.Password,
-                gametype,
+                (int)gametype,
                 buyin,
                 initialChips,
                 minBet,
