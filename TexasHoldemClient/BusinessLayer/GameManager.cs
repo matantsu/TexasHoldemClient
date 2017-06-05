@@ -72,10 +72,10 @@ namespace TexasHoldemClient.BusinessLayer
 
             userManager.PropertyChanged += UserManager_PropertyChanged;
 
-            RxFirebase.FromPath<IDictionary<string,dynamic>>(fb,"games").Select(xs => xs.Select(x => new Game { ID = x.Key, Bet = x.Value.bet })).Subscribe(games => Games = games);
+            RxFirebase.FromPath<IDictionary<string,dynamic>>(fb,"games").Select(xs => xs.Select(x => new Game { Key = x.Key, Bet = x.Value.bet })).Subscribe(games => Games = games);
         }
 
-        private async void UserManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void UserManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(e.PropertyName == "CurrentUser")
             {
@@ -84,7 +84,7 @@ namespace TexasHoldemClient.BusinessLayer
 
                     IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/activeGamesIds").Select(x => x != null ? x : new List<int>());
                     IObservable<IDictionary<string, dynamic>> activeGamesOb = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(x => x.Select(id => "games/" + id)));
-                    activeGamesOb.Select(xs => xs.Select(x => new Game { ID = x.Key, Bet = x.Value.bet }))
+                    activeGamesOb.Select(xs => xs.Select(ToGame))
                         .SubscribeOn(Dispatcher.CurrentDispatcher)
                         .Subscribe(ls =>
                         {
@@ -93,7 +93,7 @@ namespace TexasHoldemClient.BusinessLayer
 
                     IObservable<IEnumerable<int>> spectatingIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/spectatingGamesIds").Select(x => x != null ? x : new List<int>());
                     IObservable<IDictionary<string, dynamic>> spectatingGamesOb = RxFirebase.FromPaths<dynamic>(fb, spectatingIds.Select(x => x.Select(id => "games/" + id)));
-                    spectatingGamesOb.Select(xs => xs.Select(x => new Game { ID = x.Key, Bet = x.Value.bet }))
+                    spectatingGamesOb.Select(xs => xs.Select(ToGame))
                         .SubscribeOn(Dispatcher.CurrentDispatcher)
                         .Subscribe(ls =>
                         {
@@ -106,6 +106,43 @@ namespace TexasHoldemClient.BusinessLayer
                     SpectatingGames = new List<Game>();
                 }
             }
+        }
+
+        private Game ToGame(KeyValuePair<string,dynamic> pair)
+        {
+            var json = pair.Value;
+            List<dynamic> p = json.openCards != null ? json.allPlayers.ToObject<List<dynamic>>() : new List<dynamic>();
+            List<Player> allPlayers = new List<Player>(p.FindAll(x => x != null).Select(ToPlayer));
+            List<int> activeIds = json.activePlayers != null ? json.activePlayers.ToObject<List<int>>() : new List<int>();
+            return new Game
+            {
+                Key = pair.Key,
+                Bet = json.bet,
+                Buyin = json.buyin,
+                InitialChips = json.initialChips,
+                MaxPlayers = json.maxPlayers,
+                MinBet = json.minBet,
+                MinPlayers = json.minPlayers,
+                IsSpectatingAllowed = json.spectatingAllowed,
+                Type = json.type,
+                League = json.league,
+                OpenCards = json.openCards != null ? json.openCards.ToObject<List<Card>>() : new List<Card>(),
+                Stage = json.stage,
+                Players = allPlayers,
+                BigBlind = json.bigBlind != null ? json.bigBlind : 0,
+                CurrentPlayer = allPlayers.Find(x => x.ID == json.currentPlayer),
+                ActivePlayers = allPlayers.FindAll(x => activeIds.Contains(x.ID)),
+                Pot = json.pot,
+                SmallBet = json.smallBet != null ? json.smallBet : 0
+            };
+        }
+
+        private Player ToPlayer(dynamic json)
+        {
+            return new Player
+            {
+                ID = json.playerId,
+            };
         }
 
         public async Task Create(

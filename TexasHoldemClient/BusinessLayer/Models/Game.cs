@@ -8,13 +8,110 @@ namespace TexasHoldemClient.BusinessLayer.Models
 {
     public enum GameType
     {
-        Limit = 0,
-        NoLimit = 1,
-        PotLimit = 2
+        Limit,
+        NoLimit,
+        PotLimit
+    }
+
+    public enum GameStage
+    {
+        Preflop,
+        Flop,
+        Turn,
+        River
+    }
+
+    public enum CardType
+    {
+        Spade,
+        Club,
+        Heart,
+        Diamond,
+    }
+
+    public enum CardRank
+    {
+        Ace,
+        Two,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        Jack,
+        Queen,
+        King,
+    }
+
+    // Value Object
+    public class Card
+    {
+        public readonly CardType type;
+        public readonly CardRank number;
+        public Card(CardType type, CardRank number)
+        {
+            this.type = type;
+            this.number = number;
+        }
     }
 
     public class Game : Changing
     {
+        private string key;
+        public string Key
+        {
+            get { return key; }
+            set
+            {
+                if (key != value)
+                {
+                    key = value;
+                    OnPropertyChanged("Key");
+                    OnPropertyChanged("ID");
+                }
+            }
+        }
+        
+        public int ID
+        {
+            get {
+                int i;
+                int.TryParse(key.Split('/').Last(), out i);
+                return i;
+            }
+        }
+
+        private GameStage stage;
+        public GameStage Stage
+        {
+            get { return stage; }
+            set
+            {
+                if (stage != value)
+                {
+                    stage = value;
+                    OnPropertyChanged("Stage");
+                }
+            }
+        }
+
+        private IEnumerable<Card> openCards;
+        public IEnumerable<Card> OpenCards
+        {
+            get { return openCards; }
+            set
+            {
+                if (openCards != value)
+                {
+                    openCards = value;
+                    OnPropertyChanged("OpenCards");
+                }
+            }
+        }
+
         private int bet;
         public int Bet
         {
@@ -25,20 +122,6 @@ namespace TexasHoldemClient.BusinessLayer.Models
                 {
                     bet = value;
                     OnPropertyChanged("Bet");
-                }
-            }
-        }
-
-        private string id;
-        public string ID
-        {
-            get { return id; }
-            set
-            {
-                if (id != value)
-                {
-                    id = value;
-                    OnPropertyChanged("ID");
                 }
             }
         }
@@ -67,6 +150,20 @@ namespace TexasHoldemClient.BusinessLayer.Models
                 {
                     buyin = value;
                     OnPropertyChanged("Buyin");
+                }
+            }
+        }
+
+        private int league;
+        public int League
+        {
+            get { return league; }
+            set
+            {
+                if (league != value)
+                {
+                    league = value;
+                    OnPropertyChanged("League");
                 }
             }
         }
@@ -127,19 +224,102 @@ namespace TexasHoldemClient.BusinessLayer.Models
             }
         }
 
-        private int spectatingAllowed;
-        public int SpectatingAllowed
+        private bool isSpectatingAllowed;
+        public bool IsSpectatingAllowed
         {
-            get { return spectatingAllowed; }
+            get { return isSpectatingAllowed; }
             set
             {
-                if (spectatingAllowed != value)
+                if (isSpectatingAllowed != value)
                 {
-                    spectatingAllowed = value;
+                    isSpectatingAllowed = value;
                     OnPropertyChanged("SpectatingAllowed");
                 }
             }
         }
 
+        private IEnumerable<Player> players;
+        public IEnumerable<Player> Players
+        {
+            get { return players; }
+            set
+            {
+                if (players != value)
+                {
+                    players = value;
+                    OnPropertyChanged("Players");
+                }
+            }
+        }
+
+        private Player currentPlayer;
+        public Player CurrentPlayer
+        {
+            get { return currentPlayer; }
+            set
+            {
+                if (currentPlayer != value)
+                {
+                    currentPlayer = value;
+                    OnPropertyChanged("CurrentPlayer");
+                }
+            }
+        }
+
+        private IEnumerable<Player> activePlayers;
+        public IEnumerable<Player> ActivePlayers
+        {
+            get { return activePlayers; }
+            set
+            {
+                if (activePlayers != value)
+                {
+                    activePlayers = value;
+                    OnPropertyChanged("ActivePlayers");
+                }
+            }
+        }
+
+        private int smallBet;
+        public int SmallBet
+        {
+            get { return smallBet; }
+            set
+            {
+                if (smallBet != value)
+                {
+                    smallBet = value;
+                    OnPropertyChanged("SmallBet");
+                }
+            }
+        }
+
+        private int pot;
+        public int Pot
+        {
+            get { return pot; }
+            set
+            {
+                if (pot != value)
+                {
+                    pot = value;
+                    OnPropertyChanged("Pot");
+                }
+            }
+        }
+
+        private int bigBlind;
+        public int BigBlind
+        {
+            get { return bigBlind; }
+            set
+            {
+                if (bigBlind != value)
+                {
+                    bigBlind = value;
+                    OnPropertyChanged("BigBlind");
+                }
+            }
+        }
     }
 }
