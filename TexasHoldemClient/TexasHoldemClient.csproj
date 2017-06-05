@@ -167,6 +167,18 @@
     <Compile Include="BusinessLayer\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PL\Pages\ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\Pages\GameCenterPage.xaml.cs">
+      <DependentUpon>GameCenterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\Windows\GameCenterMainWindow.xaml.cs">
+      <DependentUpon>GameCenterMainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PL\Windows\GameCenterWindow.xaml.cs">
       <DependentUpon>GameCenterWindow.xaml</DependentUpon>
     </Compile>
@@ -230,6 +242,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="PL\Pages\ChatPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Pages\GameCenterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Windows\GameCenterMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PL\Windows\GameCenterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,9 +270,7 @@
   <ItemGroup>
     <Resource Include="PL\Images\poker_table.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PL\Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
