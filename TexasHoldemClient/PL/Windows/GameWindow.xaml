@@ -1,31 +1,30 @@
-﻿<Window x:Class="TexasHoldemClient.PL.Windows.GameWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TexasHoldemClient.PL.Windows"
+        xmlns:UserControls="clr-namespace:TexasHoldemClient.PL.UserControls" x:Class="TexasHoldemClient.PL.Windows.GameWindow"
         mc:Ignorable="d"
         Title="GameWindow"  WindowState="Maximized"
         WindowStyle="SingleBorderWindow">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Name="RowFor_ToolsBarSpace"  Height="1*" />
-            <RowDefinition Name="RowFor_GameAndChatSpace" Height="15*" />
+            <RowDefinition x:Name="RowFor_ToolsBarSpace"  Height="1*" />
+            <RowDefinition x:Name="RowFor_GameAndChatSpace" Height="15*" />
         </Grid.RowDefinitions>
 
 
-        <Grid Name="ToolsBarSpace" Grid.Row="0" Background="Gray">
-
-        </Grid>
+        <Grid x:Name="ToolsBarSpace" Grid.Row="0" Background="Gray"/>
 
 
-        <Grid Name="GameAndChatSpace" Grid.Row="1">
+        <Grid x:Name="GameAndChatSpace" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Name="ColFor_ChatSpace"  Width="5*" />
-                <ColumnDefinition Name="ColFor_GameSpace" Width="1*" />
+                <ColumnDefinition x:Name="ColFor_ChatSpace"  Width="5*" />
+                <ColumnDefinition x:Name="ColFor_GameSpace" Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Name="GameSpace" Grid.Column="0">
+            <Grid x:Name="GameSpace" Grid.Column="0">
                 <Grid.Background>
                     <ImageBrush ImageSource="c:\Users\Barakmen\Documents\Visual Studio 2017\Projects\ClientPokerWPF\ClientPokerWPF\PL\Images\poker_table.jpg"/>
                 </Grid.Background>
@@ -35,28 +34,9 @@
             </Grid>
 
 
-            <Grid Name="ChatSpace" Grid.Column="1" Background="GreenYellow">
-                <Grid.RowDefinitions>
-                    <RowDefinition Name="RowFor_ShowChatMessagesSpace"  Height="15*" />
-                    <RowDefinition Name="RowFor_SendingMessageSpace" Height="1*" />
-                </Grid.RowDefinitions>
+            <Grid x:Name="ChatSpace" Grid.Column="1" Background="GreenYellow">
 
-                <Grid Name="ShowChatMessagesSpace" Grid.Row="0">
-                    <DataGrid Name="ShowChatMessagesDataGrid" IsReadOnly="True"   >
-
-                    </DataGrid>
-                </Grid>
-
-                <Grid Name="SendingMessageSpace" Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Name="ColFor_ContentOfMessageSpace"  Width="6*" />
-                        <ColumnDefinition Name="ColFor_SendingButtomSpace" Width="1*" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBox Name="ContentOfMessage" Grid.Column="0"></TextBox>
-                    <Button Name="SendingButton" Grid.Column="1" Content="Send" ></Button>
-                </Grid>
-
+                <UserControls:ChatControl />
 
             </Grid>
 

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TexasHoldemClient.BusinessLayer;
+using TexasHoldemClient.PL.Windows;
 
 namespace TexasHoldemClient.PL.Pages
 {
@@ -20,11 +22,22 @@ namespace TexasHoldemClient.PL.Pages
     /// </summary>
     public partial class GameCenterPage : Page
     {
+        UserManager um = BL.UserManager;
+
         public GameCenterPage()
         {
             InitializeComponent();
+        }
 
-            _chatFrame.Navigate(new ChatPage());
+        private async void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterButton.IsEnabled = false;
+            await um.Logout(null, null);
+        }
+
+        private void CreateNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            new CreateNewGameWindow().Show();
         }
     }
 }

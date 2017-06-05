@@ -24,13 +24,17 @@ namespace TexasHoldemClient.PL.Pages
 
         UserManager um = BL.UserManager;
 
+
+
         public LoginPage()
         {
-            InitializeComponent();
+
+            InitializeComponent();            
         }
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
+            LoginButton.IsEnabled = false;
             await um.Login(null, null);
         }
     }

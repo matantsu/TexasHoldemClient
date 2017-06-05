@@ -1,0 +1,72 @@
+﻿<Window x:Class="TexasHoldemClient.PL.Windows.CreateNewGameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TexasHoldemClient.PL.Windows"
+        mc:Ignorable="d"
+        Title="CreateNewGameWindow" Height="500" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" Name="RowFor_Title"/>
+            <RowDefinition Height="Auto" Name="RowFor_CollectData" />
+            <RowDefinition Height="Auto" Name="RowFor_Submit" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Name="TitleSpace" HorizontalAlignment="Center" Grid.Row="0">
+            <Label Content="Set Game Preferences For New Game" FontSize="15" />
+        </StackPanel>
+
+        <Grid Name="CollectDataSpace" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" Name="RowFor_GameTypeSpace"/>
+                <RowDefinition Height="Auto" Name="RowFor_BuyinSpace"/>
+                <RowDefinition Height="Auto" Name="RowFor_InitialChipsSpace"/>
+                <RowDefinition Height="Auto" Name="RowFor_MinBetSpace"/>
+                <RowDefinition Height="Auto" Name="RowFor_MinPlayersSpace"/>
+                <RowDefinition Height="Auto" Name="RowFor_MaxPlayersSpace"/>
+                <RowDefinition Height="Auto" Name="RowFor_SpectatingAllowedSpace"/>
+
+            </Grid.RowDefinitions>
+
+            <StackPanel Name="gametype" Orientation="Horizontal" Grid.Row="0">
+                <TextBlock Text="game type:"/>
+                <ComboBox Name="gametype_ComboBox"/>
+            </StackPanel>
+
+            <StackPanel Name="buyin" Orientation="Horizontal" Grid.Row="1">
+                <TextBlock Text="buyin:"/>
+                <TextBox Name="buyin_TextBox" Width="30" />
+            </StackPanel>
+
+            <StackPanel Name="initialChips" Orientation="Horizontal" Grid.Row="2">
+                <TextBlock Text="initialChips:"/>
+                <TextBox Name="initialChips_TextBox" Width="28"/>
+            </StackPanel>
+
+            <StackPanel Name="minBet" Orientation="Horizontal" Grid.Row="3">
+                <TextBlock Text="minBet:"/>
+                <TextBox Name="minBet_TextBox" Width="34"/>
+            </StackPanel>
+
+            <StackPanel Name="minPlayers" Orientation="Horizontal" Grid.Row="4">
+                <TextBlock Text="minPlayers:"/>
+                <TextBox Name="minPlayers_TextBox" Width="31"/>
+            </StackPanel>
+
+            <StackPanel Name="maxPlayers" Orientation="Horizontal" Grid.Row="5">
+                <TextBlock Text="maxPlayers:"/>
+                <TextBox Name="maxPlayers_TextBox" Width="39"/>
+            </StackPanel>
+
+            <StackPanel Name="spectatingAllowed" Orientation="Horizontal" Grid.Row="6">
+                <TextBlock Text="spectatingAllowed:"/>
+                <CheckBox Name="spectatingAllowed_CheckBox" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Name="SubmitSpace" Grid.Row="2">
+            <Button Content="Submit" Click="Submit_Click"/>
+        </Grid>
+    </Grid>
+</Window>

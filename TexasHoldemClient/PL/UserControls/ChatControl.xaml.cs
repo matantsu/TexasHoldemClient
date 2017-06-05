@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TexasHoldemClient.PL.Pages
+namespace TexasHoldemClient.PL.UserControls
 {
     /// <summary>
-    /// Interaction logic for ChatPage.xaml
+    /// Interaction logic for ChatControl.xaml
     /// </summary>
-    public partial class ChatPage : Page
+    public partial class ChatControl : UserControl
     {
-        public ChatPage()
+        public ChatControl()
         {
             InitializeComponent();
         }

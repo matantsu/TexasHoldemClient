@@ -10,6 +10,5 @@
         WindowStyle="SingleBorderWindow">
     <Grid>
         <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden" />
-
     </Grid>
 </Window>
