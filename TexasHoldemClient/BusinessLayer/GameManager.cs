@@ -72,14 +72,14 @@ namespace TexasHoldemClient.BusinessLayer
 
             userManager.PropertyChanged += UserManager_PropertyChanged;
 
-            RxFirebase.FromPath<IDictionary<string,dynamic>>(fb,"games").Select(xs => xs.Select(x => new Game { Key = x.Key, Bet = x.Value.bet })).Subscribe(games => Games = games);
+            RxFirebase.FromPath<IDictionary<string, dynamic>>(fb, "games").Select(xs => xs.Select(x => new Game { Key = x.Key, Bet = x.Value.bet })).Subscribe(games => Games = games);
         }
 
         private void UserManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "CurrentUser")
+            if (e.PropertyName == "CurrentUser")
             {
-                if(userManager.CurrentUser != null)
+                if (userManager.CurrentUser != null)
                 {
 
                     IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/activeGamesIds").Select(x => x != null ? x : new List<int>());
@@ -108,7 +108,7 @@ namespace TexasHoldemClient.BusinessLayer
             }
         }
 
-        private Game ToGame(KeyValuePair<string,dynamic> pair)
+        private Game ToGame(KeyValuePair<string, dynamic> pair)
         {
             var json = pair.Value;
             List<dynamic> p = json.openCards != null ? json.allPlayers.ToObject<List<dynamic>>() : new List<dynamic>();
@@ -179,6 +179,23 @@ namespace TexasHoldemClient.BusinessLayer
         public async Task Spectate(Game game)
         {
             await api.SpectateGame(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID);
+        }
+
+        private IDictionary<Game, IDisposable> gameListeners = new Dictionary<Game, IDisposable>(); 
+        public Game Listen(int gameId)
+        {
+            Game g = new Game();
+            var sub = RxFirebase.FromPath<dynamic>(fb,"games/" + gameId).Subscribe(x => g.Patch(ToGame(x)));
+            gameListeners.Add(g, sub);
+            return g;
+        }
+
+        public void Dispose(Game game)
+        {
+            IDisposable disposable;
+            gameListeners.TryGetValue(game, out disposable);
+            if (disposable != null)
+                disposable.Dispose();
         }
     }
 }

@@ -60,6 +60,7 @@ namespace TexasHoldemClient.BusinessLayer.Models
 
     public class Game : Changing
     {
+        
         private string key;
         public string Key
         {
@@ -320,6 +321,27 @@ namespace TexasHoldemClient.BusinessLayer.Models
                     OnPropertyChanged("BigBlind");
                 }
             }
+        }
+
+        public void Patch(Game x)
+        {
+            this.Stage = x.Stage;
+            this.OpenCards = x.OpenCards;
+            this.Bet = x.Bet;
+            this.Type = x.Type;
+            this.Buyin = x.Buyin;
+            this.League = x.League;
+            this.InitialChips = x.InitialChips;
+            this.MinBet = x.MinBet;
+            this.MinPlayers = x.MinPlayers;
+            this.MaxPlayers = x.MaxPlayers;
+            this.IsSpectatingAllowed = x.IsSpectatingAllowed;
+            this.Players = x.Players;
+            this.CurrentPlayer = x.CurrentPlayer;
+            this.ActivePlayers = x.ActivePlayers;
+            this.SmallBet = x.SmallBet;
+            this.Pot = x.Pot;
+            this.BigBlind = x.BigBlind;
         }
     }
 }
