@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TexasHoldemClient.PL.Windows
+namespace TexasHoldemClient.PL.UserControls
 {
     /// <summary>
-    /// Interaction logic for GameCenterWindow.xaml
+    /// Interaction logic for PlayerControl.xaml
     /// </summary>
-    public partial class GameCenterWindow : Window
+    public partial class PlayerControl : UserControl
     {
-        public GameCenterWindow()
+        public PlayerControl()
         {
             InitializeComponent();
         }
