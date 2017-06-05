@@ -73,7 +73,7 @@ namespace TexasHoldemClient.BusinessLayer
             userManager.PropertyChanged += UserManager_PropertyChanged;
 
             RxFirebase.FromPath<List<dynamic>>(fb, "games")
-                .Select(xs => xs.FindAll(agafaffs => agafaffs != null).Select((x, i) => new KeyValuePair<string, dynamic>("games/" + i, x)).Select(ToGame))
+                .Select(xs => xs.Select((x, i) => new KeyValuePair<string, dynamic>("games/" + i, x)).Where(x => x.Value != null).Select(ToGame))
                 .Subscribe(games => Games = games);
         }
 
