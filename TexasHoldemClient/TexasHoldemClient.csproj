@@ -159,6 +159,9 @@
     <Compile Include="BusinessLayer\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PL\Windows\GameCenterWindow.xaml.cs">
       <DependentUpon>GameCenterWindow.xaml</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PL\Windows\GameCenterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
