@@ -48,7 +48,7 @@
                 <Grid Name="CurrentGamesTitle" Grid.Column="0" >
                     <StackPanel Orientation="Horizontal">
                         <Viewbox>
-                            <TextBlock  TextWrapping="Wrap" >Current Active Games:</TextBlock>
+                            <TextBlock  TextWrapping="Wrap" >Current Games:</TextBlock>
                         </Viewbox>
                     </StackPanel>
                 </Grid>
@@ -59,8 +59,8 @@
                 </Grid>
 
             </Grid>
-            <Grid Name="TableOfActiveGames" Grid.Row="2" >
-                <DataGrid Name="ActiveGamesDataGrid" IsReadOnly="True" >
+            <Grid Name="TableOfGames" Grid.Row="2" >
+                <DataGrid Name="GamesDataGrid" ItemsSource="{Binding Games}" IsReadOnly="True" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
@@ -72,7 +72,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button>Join</Button>
+                                    <Button Click="Join_Click">Join</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -90,7 +90,7 @@
                 </Grid>
             </Grid>
             <Grid Name="TableOfJoinedGames" Grid.Row="4" >
-                <DataGrid Name="JoidGamesDataGrid" IsReadOnly="True"   >
+                <DataGrid Name="JoidGamesDataGrid" ItemsSource="{Binding ActiveGames}"   IsReadOnly="True"   >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
@@ -113,7 +113,7 @@
                 </Grid>
             </Grid>
             <Grid Name="TableOfReplayGames" Grid.Row="6" >
-                <DataGrid Name="ReplayGamesDataGrid" IsReadOnly="True"   >
+                <DataGrid Name="ReplayGamesDataGrid" ItemsSource="{Binding SpectatingGames}"   IsReadOnly="True"   >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
