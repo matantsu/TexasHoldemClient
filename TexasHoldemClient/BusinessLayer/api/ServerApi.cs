@@ -18,6 +18,7 @@ namespace TexasHoldemClient.BusinessLayer.api
             string email);
 
         [Get("/createGame?" +
+
             "gametype={gametype}&" +
             "buyin={buyin}&" +
             "initialChips={initialChips}&" +
