@@ -45,9 +45,16 @@ namespace TexasHoldemClient.PL.Pages
 
         private async void Join_Click(object sender, RoutedEventArgs e)
         {
-            Game g = gm.ActiveGames.ElementAt(GamesDataGrid.SelectedIndex);
+            Game g = gm.Games.ElementAt(GamesDataGrid.SelectedIndex);
             await gm.Join(g);
         }
 
+        private void returnToGame_Click(object sender, RoutedEventArgs e)
+        {
+
+            Game g = gm.ActiveGames.ElementAt(JoidGamesDataGrid.SelectedIndex);
+            //new GameWindow(g.ID).Show();
+        }
+        
     }
 }

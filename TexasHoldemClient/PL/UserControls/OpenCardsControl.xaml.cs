@@ -12,29 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient.PL.UserControls
 {
     /// <summary>
-    /// Interaction logic for PlayerControl.xaml
+    /// Interaction logic for OpenCardsControl.xaml
     /// </summary>
-    public partial class PlayerControl : UserControl
+    public partial class OpenCardsControl : UserControl
     {
-        public Player Player
+        public OpenCardsControl()
         {
-            get { return (Player)GetValue(PlayerProperty); }
-            set { SetValue(PlayerProperty, value); DataContext = value; }
-        }
-
-        public static DependencyProperty PlayerProperty = DependencyProperty.Register("Player", typeof(Player), typeof(PlayerControl));
-
-        public PlayerControl()
-        {
-            DataContext = Player;
             InitializeComponent();
         }
 
-
+        
     }
 }

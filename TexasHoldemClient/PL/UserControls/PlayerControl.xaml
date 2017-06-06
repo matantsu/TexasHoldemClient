@@ -13,9 +13,18 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Column="1">
-            <TextBlock Text="NAME: {BindingNeeded}" Width="Auto" Height="Auto"/>
-            <TextBlock Text="NAME: {BindingNeeded}" Width="Auto" Height="Auto"/>
-            <TextBlock Text="NAME: {BindingNeeded}" Width="Auto" Height="Auto"/>
+            <TextBlock Text="NAME: {BindingNeeded}"/>
+            <TextBlock Text="{Binding PlayerStatus}"/>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat=" STATUS: - {0}">
+                        <Binding Path="PlayerStatus"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            
+            
+            
         </StackPanel>
         
         
