@@ -56,16 +56,16 @@ namespace TexasHoldemClient.BusinessLayer
 
         static BL()
         {
-            fake();
+            real();
         }
 
-        static void fake()
+        public static void fake()
         {
             UserManager = new Fake.UserManager();
             GameManager = new Fake.GameManager();
         }
 
-        static void real()
+        public static void real()
         {
             IFirebaseConfig config = new FireSharp.Config.FirebaseConfig
             {

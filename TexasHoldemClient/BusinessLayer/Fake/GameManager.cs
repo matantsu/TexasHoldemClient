@@ -64,6 +64,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
                 IsSpectatingAllowed = true,
                 Players = new List<Player>
                 {
+                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "one"},
                     new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "two"},
                     new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Fold, Username = "three"},
                 }
