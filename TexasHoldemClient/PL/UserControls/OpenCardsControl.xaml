@@ -5,21 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TexasHoldemClient.PL.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="96" d:DesignWidth="376">
+             d:DesignHeight="106" d:DesignWidth="410">
             <!-- height of card is 96, width is 72 -->
     <Grid>
-        <ListBox x:Name="list">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding}" Width="72" Height="96" Margin="1,0,0,0"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+        <StackPanel Orientation="Horizontal" >
+            <Grid  Margin="5">
+                <local:CardControl x:Name="Card0"  Height="96" Width="72"/>
+            </Grid>
+            <Grid  Margin="5">
+                <local:CardControl x:Name="Card1"  Height="96" Width="72"/>
+            </Grid>
+            <Grid  Margin="5">
+                <local:CardControl x:Name="Card2"  Height="96" Width="72"/>
+            </Grid>
+            <Grid  Margin="5">
+                <local:CardControl x:Name="Card3"  Height="96" Width="72"/>
+            </Grid>
+            <Grid  Margin="5">
+                <local:CardControl x:Name="Card4"  Height="96" Width="72"/>
+            </Grid>
+
+
+
+        </StackPanel>
 
     </Grid>
 </UserControl>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient.PL.UserControls
 {
@@ -20,11 +21,64 @@ namespace TexasHoldemClient.PL.UserControls
     /// </summary>
     public partial class OpenCardsControl : UserControl
     {
+
+        LinkedList<CardControl> cardControls = new LinkedList<CardControl>();
+
+        public LinkedList<Card> Cards
+        {
+            get { return (LinkedList<Card>)GetValue(CardsProperty); }
+            set {
+                SetValue(CardsProperty, value);
+                DataContext = value;
+                for (int i = 0; i < cardControls.Count; i++)
+                {
+                    if (i < value.Count())
+                    {
+                        cardControls.ElementAt(i).Card = value.ElementAt(i);
+                        cardControls.ElementAt(i).Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        cardControls.ElementAt(i).Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+
+        public static DependencyProperty CardsProperty = DependencyProperty.Register("Cards", typeof(LinkedList<Card>), typeof(OpenCardsControl));
+
         public OpenCardsControl()
         {
             InitializeComponent();
+            cardControls.AddFirst(Card0);
+            cardControls.AddFirst(Card1);
+            cardControls.AddFirst(Card2);
+            cardControls.AddFirst(Card3);
+            cardControls.AddFirst(Card4);
+
+            foreach (CardControl cc in cardControls)
+            {
+                cc.Visibility = Visibility.Hidden;
+            }
+
+            LinkedList<Card> Cardslst = new LinkedList<Card>();
+
+            Card c0 = new Card(CardType.Club, CardRank.Ace);
+            Card c1 = new Card(CardType.Club, CardRank.Ace);
+            Card c2 = new Card(CardType.Club, CardRank.Ace);
+            Card c3 = new Card(CardType.Club, CardRank.Ace);
+            Card c4 = new Card(CardType.Club, CardRank.Ace);
+
+            Cardslst.AddFirst(c0);
+            Cardslst.AddFirst(c1);
+            Cardslst.AddFirst(c2);
+            Cardslst.AddFirst(c3);
+            Cardslst.AddFirst(c4);
+
+            Cards = Cardslst;
+
         }
 
-        
+
     }
 }

@@ -32,22 +32,84 @@
                     <RowDefinition Name="RowFor_UserActionsSpace" Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <Grid Name="GameBoardSpace" Grid.Row="0">
-                    <Grid.Background>
-                        <ImageBrush ImageSource="c:\Users\Barakmen\Documents\Visual Studio 2017\Projects\ClientPokerWPF\ClientPokerWPF\PL\Images\poker_table.jpg"/>
+                <Grid Name="GameBoardSpace_cards" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\poker_table.jpg"/>
                     </Grid.Background>
 
-                    <DockPanel LastChildFill="True">
-                        <Button Content="Cards" Height="30" Width="50"/>
-                    </DockPanel>
-                    <UserControls:PlayerControl x:Name="Player0" Margin="338,82,87,299" />
-                    <UserControls:PlayerControl x:Name="Player1" Margin="380,207,45,174" />
-                    <UserControls:PlayerControl x:Name="Player2" Margin="338,315,87,66" />
-                    <UserControls:PlayerControl x:Name="Player3" Margin="10,315,415,66" />
-                    <UserControls:PlayerControl x:Name="Player4" Margin="0,207,425,174" />
-                    <UserControls:PlayerControl x:Name="Player5" Margin="10,82,415,299" />
-
+                    <UserControls:OpenCardsControl Grid.Row="1" Grid.Column="1"></UserControls:OpenCardsControl>
                 </Grid>
+                <Grid Name="placeUserControls" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Name="RowFor_EmptyMarginsSpace" Height="1*"/>
+                            <RowDefinition Name="RowFor_Players01Space" Height="1*"/>
+                            <RowDefinition Name="RowFor_Players23Space" Height="1*"/>
+                            <RowDefinition Name="RowFor_Players45Space" Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Name="Players01Space" Grid.Row="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Name="Player0Space" Grid.Column="0" >
+                                <StackPanel Orientation="Horizontal" Margin="150,0,0,0" HorizontalAlignment="Left">
+                                    <UserControls:PlayerControl x:Name="Player0" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Canvas.Left="44" Canvas.Top="176"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Name="Player1Space" Grid.Column="1" >
+                                <StackPanel Orientation="Horizontal" Margin="190,0,0,0" HorizontalAlignment="Left">
+                                    <UserControls:PlayerControl x:Name="Player1" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Name="Players23Space" Grid.Row="2" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Name="Player2Space" Grid.Column="0" >
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <UserControls:PlayerControl Margin="100,0,0,0" x:Name="Player2" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Canvas.Left="44" Canvas.Top="176"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Name="Player3Space" Grid.Column="1" >
+                                <StackPanel Orientation="Horizontal" Margin="230,0,0,0" HorizontalAlignment="Left">
+                                    <UserControls:PlayerControl x:Name="Player3" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Canvas.Left="44" Canvas.Top="176"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Name="Players45Space" Grid.Row="3" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Name="Player4Space" Grid.Column="0" >
+                                <StackPanel Orientation="Horizontal" Margin="150,0,0,0" HorizontalAlignment="Left">
+                                    <UserControls:PlayerControl x:Name="Player4" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Name="Player5Space" Grid.Column="1" >
+                                <StackPanel Orientation="Horizontal" Margin="150,0,0,0" HorizontalAlignment="Left">
+                                    <UserControls:PlayerControl x:Name="Player5" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Canvas.Left="44" Canvas.Top="176"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        
+                    </Grid>
 
                 <Grid Name="UserActionsSpace" Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -77,9 +139,9 @@
                             <TextBlock Grid.Column="0" Text="Enter Bet:"/>
                             <TextBox Name="BetTextBox" Grid.Column="1" />
                         </Grid>
-                        
-                        
-                       
+
+
+
                     </Grid>
 
                 </Grid>

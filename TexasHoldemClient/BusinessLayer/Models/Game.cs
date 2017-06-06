@@ -62,8 +62,8 @@ namespace TexasHoldemClient.BusinessLayer.Models
     // Value Object
     public class Card
     {
-        public readonly CardType type;
-        public readonly CardRank number;
+        public CardType type { get; set; }
+        public CardRank number { get; set; }
         public Card(CardType type, CardRank number)
         {
             this.type = type;

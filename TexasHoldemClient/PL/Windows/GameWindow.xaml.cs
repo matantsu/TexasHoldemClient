@@ -25,7 +25,7 @@ namespace TexasHoldemClient.PL.Windows
     {
 
         Game game = new Game();
-        GameManager gm = BL.GameManager;
+       // GameManager gm = BL.GameManager;
         LinkedList<PlayerControl> playerControls = new LinkedList<PlayerControl>();
         LinkedList<Player> currentPlayers = new LinkedList<Player>();
 
@@ -53,18 +53,26 @@ namespace TexasHoldemClient.PL.Windows
 
 
             LinkedList<Player> playerslst = new LinkedList<Player>();
-            
 
+            Player p0 = new Player();
+            p0.PlayerStatus = PlayerStatus.Check;
             Player p1 = new Player();
             p1.PlayerStatus = PlayerStatus.Check;
             Player p2 = new Player();
-            p1.PlayerStatus = PlayerStatus.Check;
+            p2.PlayerStatus = PlayerStatus.Check;
             Player p3 = new Player();
-            p1.PlayerStatus = PlayerStatus.Check;
+            p3.PlayerStatus = PlayerStatus.Check;
+            Player p4 = new Player();
+            p4.PlayerStatus = PlayerStatus.Check;
+            Player p5 = new Player();
+            p5.PlayerStatus = PlayerStatus.Check;
 
+            playerslst.AddFirst(p0);
             playerslst.AddFirst(p1);
             playerslst.AddFirst(p2);
             playerslst.AddFirst(p3);
+            playerslst.AddFirst(p4);
+            playerslst.AddFirst(p5);
             game.Players = playerslst;
 
 
@@ -101,17 +109,17 @@ namespace TexasHoldemClient.PL.Windows
 
         private async void Check_Click(object sender, RoutedEventArgs e)
         {
-            await gm.Check(game);
+            //await gm.Check(game);
         }
 
         private async void Fold_Click(object sender, RoutedEventArgs e)
         {
-            await gm.Fold(game);
+           // await gm.Fold(game);
         }
 
         private async void Raise_Click(object sender, RoutedEventArgs e)
         {
-            await gm.Raise(game, Int32.Parse(BetTextBox.Text));
+           // await gm.Raise(game, Int32.Parse(BetTextBox.Text));
         }
     }
 }
