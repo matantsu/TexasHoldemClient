@@ -22,7 +22,7 @@ namespace TexasHoldemClient.PL.Pages
     /// </summary>
     public partial class GameCenterPage : Page
     {
-        UserManager um = BL.UserManager;
+        IUserManager um = BL.UserManager;
 
         public GameCenterPage()
         {

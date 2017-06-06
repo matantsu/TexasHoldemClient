@@ -21,8 +21,7 @@ namespace TexasHoldemClient.BusinessLayer
     /// </summary>
     public partial class TestWindow : Window
     {
-        private Game g;
-
+       
         public TestWindow()
         {
             InitializeComponent();
@@ -30,16 +29,8 @@ namespace TexasHoldemClient.BusinessLayer
         }
 
         private async void s(){
-            await BL.UserManager.Login(null, null);
-            g = BL.GameManager.Listen(1);
-            MessageBox.Show("" + g);
-
-            g.PropertyChanged += G_PropertyChanged;
-        }
-
-        private void G_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            MessageBox.Show(JsonConvert.SerializeObject(g));
+            var user = await BL.UserManager.Login("newnewone1@gmail.com", "newnewone1123");
+            var gid = await BL.GameManager.Create(GameType.PotLimit, "newnewone1's new game", 1, 2, 3, 4, 5, true);
         }
     }
 }

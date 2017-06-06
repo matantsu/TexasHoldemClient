@@ -8,20 +8,19 @@ using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient.BusinessLayer.api
 {
-    public interface ServerApi
+    public interface TestApi
     {
         [Get("/register")]
         Task Register(
             [Header("email")] string email,
-            [Header("username")] string username,
-            [Header("password")] string password,
-            [Header("token")] string token);
+            [Header("username")] string username, 
+            [Header("password")] string password);
 
-        [Get("/createGame?gameType={gameType}&gameName={gameName}&buyin={buyin}&initialChips={initialChips}&minBet={minBet}&minPlayers={minPlayers}&maxPlayers={maxPlayers}&spectatingAllowed={spectatingAllowed}")]
+        [Get("/createGame?gameType={gameType}&buyin={buyin}&initialChips={initialChips}&minBet={minBet}&minPlayers={minPlayers}&maxPlayers={maxPlayers}&spectatingAllowed={spectatingAllowed}")]
         Task<dynamic> CreateGame(
-            [Header("token")] string token,
+            [Header("username")] string username, 
+            [Header("password")] string password,
 
-            string gameName,
             int gameType,
             int buyin,
             int initialChips,
@@ -32,26 +31,30 @@ namespace TexasHoldemClient.BusinessLayer.api
 
         [Get("/joinGame?gameId={gameId}")]
         Task JoinGame(
-            [Header("token")] string token,
+            [Header("username")] string username, 
+            [Header("password")] string password, 
 
             int gameId);
 
         
         [Get("/spectateGame?gameId={gameId}")]
         Task SpectateGame(
-            [Header("token")] string token,
+            [Header("username")] string username, 
+            [Header("password")] string password, 
 
             int gameId);
 
         [Get("/leaveGame?gameId={gameId}")]
         Task LeaveGame(
-            [Header("token")] string token,
+            [Header("username")] string username,
+            [Header("password")] string password,
 
             int gameId);
 
         [Get("/playerAction?playerId={playerId}&gameId={gameId}&newStatus={newStatus}&newBet={newBet}&")]
         Task PlayerAction(
-            [Header("token")] string token,
+            [Header("username")] string username,
+            [Header("password")] string password,
 
             int playerId,
             int gameId,

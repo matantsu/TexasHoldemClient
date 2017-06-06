@@ -50,5 +50,19 @@
                 }
             }
         }
+
+        private int bet;
+        public int Bet
+        {
+            get { return bet; }
+            set
+            {
+                if (bet != value)
+                {
+                    bet = value;
+                    OnPropertyChanged("Bet");
+                }
+            }
+        }
     }
 }

@@ -22,21 +22,11 @@ namespace TexasHoldemClient.BusinessLayer.Models
             }
         }
 
-        private string photoURL;
-        public string PhotoURL
-        {
-            get { return photoURL; }
-            set
-            {
-                if (photoURL != value)
-                {
-                    photoURL = value;
-                    OnPropertyChanged("PhotoURL");
-                }
-            }
-        }
+        public string UID { get; private set; }
 
-        public string Username = "test1";
-        public string Password = "123456";
+        public User(string uid)
+        {
+            this.UID = uid;
+        }
     }
 }
