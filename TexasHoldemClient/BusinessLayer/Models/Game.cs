@@ -73,28 +73,17 @@ namespace TexasHoldemClient.BusinessLayer.Models
 
     public class Game : Changing
     {
-        
-        private string key;
-        public string Key
-        {
-            get { return key; }
-            set
-            {
-                if (key != value)
-                {
-                    key = value;
-                    OnPropertyChanged("Key");
-                    OnPropertyChanged("ID");
-                }
-            }
-        }
-        
+        private int id;
         public int ID
         {
-            get {
-                int i;
-                int.TryParse(key.Split('/').Last(), out i);
-                return i;
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged("ID");
+                }
             }
         }
 
@@ -338,6 +327,7 @@ namespace TexasHoldemClient.BusinessLayer.Models
 
         public void Patch(Game x)
         {
+            this.ID = x.ID;
             this.Stage = x.Stage;
             this.OpenCards = x.OpenCards;
             this.Bet = x.Bet;

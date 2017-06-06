@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace TexasHoldemClient.BusinessLayer
     /// </summary>
     public partial class TestWindow : Window
     {
+        private Game g;
+
         public TestWindow()
         {
             InitializeComponent();
@@ -28,8 +31,15 @@ namespace TexasHoldemClient.BusinessLayer
 
         private async void s(){
             await BL.UserManager.Login(null, null);
-            int i = await BL.GameManager.Create(GameType.Limit, 0, 0, 0, 0, 0, true);
-            MessageBox.Show("" + i);
+            g = BL.GameManager.Listen(1);
+            MessageBox.Show("" + g);
+
+            g.PropertyChanged += G_PropertyChanged;
+        }
+
+        private void G_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            MessageBox.Show(JsonConvert.SerializeObject(g));
         }
     }
 }
