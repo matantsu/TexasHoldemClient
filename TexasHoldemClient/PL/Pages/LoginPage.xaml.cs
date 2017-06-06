@@ -22,7 +22,7 @@ namespace TexasHoldemClient.PL.Pages
     public partial class LoginPage : Page
     {
 
-        UserManager um = BL.UserManager;
+        IUserManager um = BL.UserManager;
 
 
 

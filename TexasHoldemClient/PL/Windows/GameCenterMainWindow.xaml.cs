@@ -21,7 +21,7 @@ namespace TexasHoldemClient.PL.Windows
     /// </summary>
     public partial class GameCenterMainWindow : Window
     {
-        UserManager um = BL.UserManager;
+        IUserManager um = BL.UserManager;
 
         public GameCenterMainWindow()
         {

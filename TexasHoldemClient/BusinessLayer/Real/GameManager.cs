@@ -17,7 +17,7 @@ using System.Windows.Documents;
 
 namespace TexasHoldemClient.BusinessLayer
 {
-    public class GameManager : Changing
+    public class GameManager : Changing, IGameManager
     {
         private IEnumerable<Game> games;
         public IEnumerable<Game> Games
@@ -61,10 +61,10 @@ namespace TexasHoldemClient.BusinessLayer
             }
         }
 
-        private UserManager userManager;
+        private IUserManager userManager;
         private IFirebaseClient fb;
-        private ServerApi api;
-        public GameManager(UserManager userManager, IFirebaseClient fb, ServerApi api)
+        private ApiManager api;
+        public GameManager(IUserManager userManager, IFirebaseClient fb, ApiManager api)
         {
             this.userManager = userManager;
             this.fb = fb;
@@ -73,7 +73,7 @@ namespace TexasHoldemClient.BusinessLayer
             userManager.PropertyChanged += UserManager_PropertyChanged;
 
             RxFirebase.FromPath<List<dynamic>>(fb, "games")
-                .Select(xs => xs.Select((x, i) => new KeyValuePair<int, dynamic>(i, x)).Where(x => x.Value != null).Select(ToGame))
+                .Select(xs => xs == null ? new List<Game>() : xs.Select((x, i) => new KeyValuePair<int, dynamic>(i, x.publics)).Where(x => x.Value != null).Select(ToGame))
                 .Subscribe(games => Games = games);
         }
 
@@ -84,18 +84,18 @@ namespace TexasHoldemClient.BusinessLayer
                 if (userManager.CurrentUser != null)
                 {
 
-                    IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/activeGamesIds").Select(x => x != null ? x : new List<int>());
-                    IObservable<IDictionary<string, dynamic>> activeGamesOb = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(x => x.Select(id => "games/" + id)));
-                    activeGamesOb.Select(xs => xs.Select(x => new KeyValuePair<int, dynamic>(Int32.Parse(x.Key),x.Value)).Select(ToGame))
+                    IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.UID + "/activeGamesIds").Select(x => x != null ? x : new List<int>());
+                    IObservable<IDictionary<string, dynamic>> activeGamesOb = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(x => x.Select(id => "games/" + id + "/publics")));
+                    activeGamesOb.Select(xs => xs.Select(x => new KeyValuePair<int, dynamic>(Int32.Parse(x.Key.Split('/').Last()),x.Value)).Select(ToGame))
                         .SubscribeOn(Dispatcher.CurrentDispatcher)
                         .Subscribe(ls =>
                         {
                             ActiveGames = ls;
                         });
 
-                    IObservable<IEnumerable<int>> spectatingIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.Username + "/spectatingGamesIds").Select(x => x != null ? x : new List<int>());
-                    IObservable<IDictionary<string, dynamic>> spectatingGamesOb = RxFirebase.FromPaths<dynamic>(fb, spectatingIds.Select(x => x.Select(id => "games/" + id)));
-                    spectatingGamesOb.Select(xs => xs.Select(x => new KeyValuePair<int, dynamic>(Int32.Parse(x.Key), x.Value)).Select(ToGame))
+                    IObservable<IEnumerable<int>> spectatingIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.UID + "/spectatingGamesIds").Select(x => x != null ? x : new List<int>());
+                    IObservable<IDictionary<string, dynamic>> spectatingGamesOb = RxFirebase.FromPaths<dynamic>(fb, spectatingIds.Select(x => x.Select(id => "games/" + id + "/publics")));
+                    spectatingGamesOb.Select(xs => xs.Select(x => new KeyValuePair<int, dynamic>(Int32.Parse(x.Key.Split('/').Last()), x.Value)).Select(ToGame))
                         .SubscribeOn(Dispatcher.CurrentDispatcher)
                         .Subscribe(ls =>
                         {
@@ -149,6 +149,7 @@ namespace TexasHoldemClient.BusinessLayer
 
         public async Task<int> Create(
             GameType gametype,
+            string gameName,
             int buyin,
             int initialChips,
             int minBet,
@@ -157,8 +158,7 @@ namespace TexasHoldemClient.BusinessLayer
             bool spectatingAllowed)
         {
             var r = await api.CreateGame(
-                userManager.CurrentUser.Username,
-                userManager.CurrentUser.Password,
+                gameName,
                 (int)gametype,
                 buyin,
                 initialChips,
@@ -171,42 +171,42 @@ namespace TexasHoldemClient.BusinessLayer
 
         public async Task Join(Game game)
         {
-            await api.JoinGame(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID);
+            await api.JoinGame(game.ID);
         }
 
         public async Task Leave(Game game)
         {
-            await api.LeaveGame(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID);
+            await api.LeaveGame(game.ID);
         }
 
         public async Task Spectate(Game game)
         {
-            await api.SpectateGame(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID);
+            await api.SpectateGame(game.ID);
         }
 
         public async Task Check(Game game)
         {
-            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.Username).ID;
-            await api.PlayerAction(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID, playerId, PlayerStatus.Check, null);
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.UID).ID;
+            await api.PlayerAction(game.ID, playerId, PlayerStatus.Check, null);
         }
 
         public async Task Raise(Game game, int bet)
         {
-            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.Username).ID;
-            await api.PlayerAction(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID, playerId, PlayerStatus.Raise, bet);
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.UID).ID;
+            await api.PlayerAction(game.ID, playerId, PlayerStatus.Raise, bet);
         }
 
         public async Task Fold(Game game)
         {
-            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.Username).ID;
-            await api.PlayerAction(userManager.CurrentUser.Username, userManager.CurrentUser.Password, game.ID, playerId, PlayerStatus.Fold, null);
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.UID).ID;
+            await api.PlayerAction(game.ID, playerId, PlayerStatus.Fold, null);
         }
 
         private IDictionary<Game, IDisposable> gameListeners = new Dictionary<Game, IDisposable>(); 
         public Game Listen(int gameId)
         {
             Game g = new Game();
-            var sub = RxFirebase.FromPath<dynamic>(fb,"games/" + gameId).Subscribe(x => g.Patch(ToGame(new KeyValuePair<int, dynamic>(gameId, x))));
+            var sub = RxFirebase.FromPath<dynamic>(fb,"games/" + gameId + "/publics").Subscribe(x => g.Patch(ToGame(new KeyValuePair<int, dynamic>(gameId, x))));
             gameListeners.Add(g, sub);
             return g;
         }
