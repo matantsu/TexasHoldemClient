@@ -64,6 +64,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
                 IsSpectatingAllowed = true,
                 Players = new List<Player>
                 {
+                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "one"},
                     new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "two"},
                     new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Fold, Username = "three"},
                 }
@@ -111,7 +112,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
 
         private Player getMe(Game game)
         {
-            return game.Players.First(x => x.Username == "one");
+            return game.Players.FirstOrDefault(x => x.Username == "one");
         }
         
         public async Task<int> Create(GameType gametype, string gameName, int buyin, int initialChips, int minBet, int minPlayers, int maxPlayers, bool spectatingAllowed)

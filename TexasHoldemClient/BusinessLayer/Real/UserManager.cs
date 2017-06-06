@@ -29,6 +29,7 @@ namespace TexasHoldemClient.BusinessLayer
                 {
                     currentUser = value;
                     OnPropertyChanged("CurrentUser");
+                    OnPropertyChanged("Token");
                 }
             }
         }

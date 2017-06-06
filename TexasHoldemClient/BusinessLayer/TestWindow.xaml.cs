@@ -25,10 +25,16 @@ namespace TexasHoldemClient.BusinessLayer
         public TestWindow()
         {
             InitializeComponent();
-            s();
+            BL.GameManager.PropertyChanged += GameManager_PropertyChanged;
         }
 
-        private async void s(){
+        private void GameManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            MessageBox.Show(e.PropertyName);
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
             var user = await BL.UserManager.Login("newnewone1@gmail.com", "newnewone1123");
             var gid = await BL.GameManager.Create(GameType.PotLimit, "newnewone1's new game", 1, 2, 3, 4, 5, true);
         }
