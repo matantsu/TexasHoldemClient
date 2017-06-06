@@ -159,11 +159,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLayer\ApiManager.cs" />
     <Compile Include="BusinessLayer\api\RxFirebase.cs" />
     <Compile Include="BusinessLayer\api\ServerApi.cs" />
+    <Compile Include="BusinessLayer\api\TestApi.cs" />
     <Compile Include="BusinessLayer\BL.cs" />
     <Compile Include="BusinessLayer\Config.cs" />
-    <Compile Include="BusinessLayer\GameManager.cs" />
+    <Compile Include="BusinessLayer\Fake\GameManager.cs" />
+    <Compile Include="BusinessLayer\Fake\UserManager.cs" />
+    <Compile Include="BusinessLayer\Real\GameManager.cs" />
     <Compile Include="BusinessLayer\Models\Game.cs" />
     <Compile Include="BusinessLayer\Models\Player.cs" />
     <Compile Include="BusinessLayer\Models\User.cs" />
@@ -171,7 +175,7 @@
     <Compile Include="BusinessLayer\TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BusinessLayer\UserManager.cs" />
+    <Compile Include="BusinessLayer\Real\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PL\Pages\GameCenterPage.xaml.cs">

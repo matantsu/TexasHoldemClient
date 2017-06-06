@@ -62,8 +62,8 @@ namespace TexasHoldemClient.BusinessLayer.Models
     // Value Object
     public class Card
     {
-        public CardType type { get; set; }
-        public CardRank number { get; set; }
+        public CardType type { get; }
+        public CardRank number { get; }
         public Card(CardType type, CardRank number)
         {
             this.type = type;
@@ -125,6 +125,20 @@ namespace TexasHoldemClient.BusinessLayer.Models
                 {
                     bet = value;
                     OnPropertyChanged("Bet");
+                }
+            }
+        }
+
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if (name != value)
+                {
+                    name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -329,6 +343,7 @@ namespace TexasHoldemClient.BusinessLayer.Models
         {
             this.ID = x.ID;
             this.Stage = x.Stage;
+            this.Name = x.Name;
             this.OpenCards = x.OpenCards;
             this.Bet = x.Bet;
             this.Type = x.Type;
