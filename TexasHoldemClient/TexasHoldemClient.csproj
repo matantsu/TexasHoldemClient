@@ -183,7 +183,6 @@
     <Compile Include="BusinessLayer\ApiManager.cs" />
     <Compile Include="BusinessLayer\api\RxFirebase.cs" />
     <Compile Include="BusinessLayer\api\ServerApi.cs" />
-    <Compile Include="BusinessLayer\api\TestApi.cs" />
     <Compile Include="BusinessLayer\BL.cs" />
     <Compile Include="BusinessLayer\Config.cs" />
     <Compile Include="BusinessLayer\Fake\GameManager.cs" />

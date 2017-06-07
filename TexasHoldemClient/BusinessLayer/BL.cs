@@ -32,6 +32,7 @@ namespace TexasHoldemClient.BusinessLayer
         Task Join(Game game);
         Task Leave(Game game);
         Task Spectate(Game game);
+        Task StartRound(Game game);
         Task Check(Game game);
         Task Raise(Game game, int bet);
         Task Fold(Game game);

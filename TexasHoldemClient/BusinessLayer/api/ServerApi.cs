@@ -57,5 +57,11 @@ namespace TexasHoldemClient.BusinessLayer.api
             int gameId,
             int newStatus,
             int newBet);
+
+        [Get("/startRound?gameId={gameId}")]
+        Task StartRound(
+            [Header("token")] string token,
+            
+            int gameId);
     }
 }
