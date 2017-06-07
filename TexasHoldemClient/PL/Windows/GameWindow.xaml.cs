@@ -46,25 +46,10 @@ namespace TexasHoldemClient.PL.Windows
                 pc.Visibility = Visibility.Hidden;
             }
 
-            game.CurrentPlayer.PropertyChanged += CurrentPlayerHandler;
             game.PropertyChanged += GameChangeHandler;
         }
 
-        private void CurrentPlayerHandler(object sender, PropertyChangedEventArgs e)
-        {
-            if (game.CurrentPlayer.UserID == ((Me)game.Players.First(x => x is Me)).UserID)
-            {
-                Button_Check.IsEnabled = false;
-                Button_Fold.IsEnabled = false;
-                Button_Raise.IsEnabled = false;
-            }
-            else
-            {
-                Button_Check.IsEnabled = true;
-                Button_Fold.IsEnabled = true;
-                Button_Raise.IsEnabled = true;
-            }
-        }
+
 
         private void GameChangeHandler(object sender, PropertyChangedEventArgs e)
         {
@@ -74,7 +59,6 @@ namespace TexasHoldemClient.PL.Windows
 
                 if (e.PropertyName == "Players")
                 {
-
                     for (int i = 0; i < playerControls.Count; i++)
                     {
                         if (i < game.Players.Where(x => !(x is Me)).Count())
@@ -106,6 +90,22 @@ namespace TexasHoldemClient.PL.Windows
                 if(e.PropertyName == "OpenCards")
                 {
                     OpenCardsControl.Cards = IEnumerableToLinkedList(game.OpenCards);
+                }
+
+                if(e.PropertyName == "CurrentPlayer")
+                {
+                    if (game.CurrentPlayer.UserID == ((Me)game.Players.First(x => x is Me)).UserID)
+                    {
+                        Button_Check.IsEnabled = false;
+                        Button_Fold.IsEnabled = false;
+                        Button_Raise.IsEnabled = false;
+                    }
+                    else
+                    {
+                        Button_Check.IsEnabled = true;
+                        Button_Fold.IsEnabled = true;
+                        Button_Raise.IsEnabled = true;
+                    }
                 }
             });
             
