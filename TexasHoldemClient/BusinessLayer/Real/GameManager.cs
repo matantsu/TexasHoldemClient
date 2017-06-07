@@ -222,6 +222,7 @@ namespace TexasHoldemClient.BusinessLayer
         {
             int playerId = game.Players.ToList().FindIndex(x => x.UserID == userManager.CurrentUser.UID);
             await api.PlayerAction(playerId, game.ID, PlayerStatus.Raise, bet);
+
         }
 
         public async Task Fold(Game game)
