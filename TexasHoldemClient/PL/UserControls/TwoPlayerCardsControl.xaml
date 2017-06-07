@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="TexasHoldemClient.PL.UserControls.TwoPlayerCardsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TexasHoldemClient.PL.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="144" d:DesignWidth="224">
+    
+    <Grid>
+        <StackPanel Orientation="Horizontal" >
+            <Grid  Margin="2,0,0,0">
+                <local:CardControl  x:Name="Card0" Height="144" Width="108"/>
+            </Grid>
+            
+            <Grid  Margin="2,0,0,0">
+                <local:CardControl  x:Name="Card1" Height="144" Width="108"/>
+            </Grid>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

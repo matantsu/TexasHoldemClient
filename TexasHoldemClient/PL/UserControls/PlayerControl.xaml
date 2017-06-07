@@ -5,8 +5,45 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TexasHoldemClient.PL.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="40" d:DesignWidth="200">
+    
+    <Border Opacity="0.7" BorderBrush="White" Background="Black" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
+        <Grid>
+        
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="ColFor_Photo" Width="2*"/>
+                <ColumnDefinition Name="ColFor_PlayerDetails" Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0"  Source="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png"></Image>
+
+                <StackPanel Orientation="Vertical" Grid.Column="1">
+                    <TextBlock Foreground="White">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" ID: {0}">
+                                <Binding Path="UserID"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    
+                     <TextBlock Foreground="White">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" STATUS: {0}">
+                                    <Binding Path="PlayerStatus"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                     </TextBlock>
+
+                <TextBlock Foreground="White">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat=" Money: {0}">
+                            <Binding Path="Money"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        
+        </Grid>
+    </Border>
+
 </UserControl>

@@ -4,6 +4,20 @@
     <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup>
     <SSDTPath Condition="'$(SSDTPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\130</SSDTPath>
@@ -29,21 +43,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -154,6 +154,24 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Zlib.Portable, Version=1.11.0.0, Culture=neutral, PublicKeyToken=431cba815f6a8b5b, processorArchitecture=MSIL">
       <HintPath>..\packages\Zlib.Portable.Signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
     </Reference>
@@ -188,11 +206,23 @@
     <Compile Include="PL\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PL\Pages\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\UserControls\CardControl.xaml.cs">
+      <DependentUpon>CardControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PL\UserControls\ChatControl.xaml.cs">
       <DependentUpon>ChatControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PL\UserControls\OpenCardsControl.xaml.cs">
+      <DependentUpon>OpenCardsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PL\UserControls\PlayerControl.xaml.cs">
       <DependentUpon>PlayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\UserControls\TwoPlayerCardsControl.xaml.cs">
+      <DependentUpon>TwoPlayerCardsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PL\Windows\CreateNewGameWindow.xaml.cs">
       <DependentUpon>CreateNewGameWindow.xaml</DependentUpon>
@@ -272,11 +302,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PL\Pages\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\UserControls\CardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PL\UserControls\ChatControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PL\UserControls\OpenCardsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PL\UserControls\PlayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\UserControls\TwoPlayerCardsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -294,9 +340,72 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="PL\Images\poker_table.jpg" />
+    <Resource Include="Resorces\poker_table.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resorces\1.png" />
+    <Resource Include="Resorces\10.png" />
+    <Resource Include="Resorces\11.png" />
+    <Resource Include="Resorces\12.png" />
+    <Resource Include="Resorces\13.png" />
+    <Resource Include="Resorces\14.png" />
+    <Resource Include="Resorces\15.png" />
+    <Resource Include="Resorces\16.png" />
+    <Resource Include="Resorces\17.png" />
+    <Resource Include="Resorces\18.png" />
+    <Resource Include="Resorces\19.png" />
+    <Resource Include="Resorces\2.png" />
+    <Resource Include="Resorces\20.png" />
+    <Resource Include="Resorces\21.png" />
+    <Resource Include="Resorces\22.png" />
+    <Resource Include="Resorces\23.png" />
+    <Resource Include="Resorces\24.png" />
+    <Resource Include="Resorces\25.png" />
+    <Resource Include="Resorces\26.png" />
+    <Resource Include="Resorces\27.png" />
+    <Resource Include="Resorces\28.png" />
+    <Resource Include="Resorces\29.png" />
+    <Resource Include="Resorces\3.png" />
+    <Resource Include="Resorces\30.png" />
+    <Resource Include="Resorces\31.png" />
+    <Resource Include="Resorces\32.png" />
+    <Resource Include="Resorces\33.png" />
+    <Resource Include="Resorces\34.png" />
+    <Resource Include="Resorces\35.png" />
+    <Resource Include="Resorces\36.png" />
+    <Resource Include="Resorces\37.png" />
+    <Resource Include="Resorces\38.png" />
+    <Resource Include="Resorces\39.png" />
+    <Resource Include="Resorces\4.png" />
+    <Resource Include="Resorces\40.png" />
+    <Resource Include="Resorces\41.png" />
+    <Resource Include="Resorces\42.png" />
+    <Resource Include="Resorces\43.png" />
+    <Resource Include="Resorces\44.png" />
+    <Resource Include="Resorces\45.png" />
+    <Resource Include="Resorces\46.png" />
+    <Resource Include="Resorces\47.png" />
+    <Resource Include="Resorces\48.png" />
+    <Resource Include="Resorces\49.png" />
+    <Resource Include="Resorces\5.png" />
+    <Resource Include="Resorces\50.png" />
+    <Resource Include="Resorces\51.png" />
+    <Resource Include="Resorces\52.png" />
+    <Resource Include="Resorces\6.png" />
+    <Resource Include="Resorces\7.png" />
+    <Resource Include="Resorces\8.png" />
+    <Resource Include="Resorces\9.png" />
+    <Resource Include="Resorces\b1fh.png" />
+    <Resource Include="Resorces\b1fv.png" />
+    <Resource Include="Resorces\b2fh.png" />
+    <Resource Include="Resorces\b2fv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resorces\login_image.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>

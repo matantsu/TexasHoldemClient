@@ -27,7 +27,9 @@ namespace TexasHoldemClient.PL.Windows
         {
             InitializeComponent();
 
-            _mainFrame.Navigate(new LoginPage());
+            _mainFrame.Navigate(new LoginPage(_mainFrame));
+            //_mainFrame.Navigate(new GameCenterPage());
+
 
             um.PropertyChanged += OnUserChange_PropertyChanged;
         }
@@ -42,7 +44,7 @@ namespace TexasHoldemClient.PL.Windows
                 }
                 else
                 {
-                    _mainFrame.Navigate(new LoginPage());
+                    _mainFrame.Navigate(new LoginPage(_mainFrame));
                 }
 
             }
