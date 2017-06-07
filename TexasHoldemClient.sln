@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TexasHoldemClient", "TexasHoldemClient\TexasHoldemClient.csproj", "{9BA31654-FABC-4A46-8465-4F8880D1DC87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{A2E2175E-7DA8-474D-BE69-3B148D39122E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9BA31654-FABC-4A46-8465-4F8880D1DC87} = {9BA31654-FABC-4A46-8465-4F8880D1DC87}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{9BA31654-FABC-4A46-8465-4F8880D1DC87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BA31654-FABC-4A46-8465-4F8880D1DC87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BA31654-FABC-4A46-8465-4F8880D1DC87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2E2175E-7DA8-474D-BE69-3B148D39122E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2E2175E-7DA8-474D-BE69-3B148D39122E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2E2175E-7DA8-474D-BE69-3B148D39122E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2E2175E-7DA8-474D-BE69-3B148D39122E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
