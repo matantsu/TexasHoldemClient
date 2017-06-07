@@ -64,9 +64,9 @@ namespace TexasHoldemClient.BusinessLayer.Fake
                 IsSpectatingAllowed = true,
                 Players = new List<Player>
                 {
-                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "one"},
-                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "two"},
-                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Fold, Username = "three"},
+                    new Player {PlayerStatus = PlayerStatus.Check, UserID = "one"},
+                    new Player {PlayerStatus = PlayerStatus.Check, UserID = "two"},
+                    new Player {PlayerStatus = PlayerStatus.Fold, UserID = "three"},
                 }
             });
 
@@ -83,9 +83,9 @@ namespace TexasHoldemClient.BusinessLayer.Fake
                 IsSpectatingAllowed = false,
                 Players = new List<Player>
                 {
-                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "two"},
-                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Raise, Username = "three"},
-                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Fold, Username = "four"},
+                    new Player { PlayerStatus = PlayerStatus.Check, UserID = "two"},
+                    new Player { PlayerStatus = PlayerStatus.Raise, UserID = "three"},
+                    new Player { PlayerStatus = PlayerStatus.Fold, UserID = "four"},
                 }
             });
 
@@ -102,8 +102,8 @@ namespace TexasHoldemClient.BusinessLayer.Fake
                 IsSpectatingAllowed = false,
                 Players = new List<Player>
                 {
-                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "four"},
-                    new Player {ID = lastPlayerId++, PlayerStatus = PlayerStatus.Fold, Username = "three"},
+                    new Player { PlayerStatus = PlayerStatus.Check, UserID = "four"},
+                    new Player { PlayerStatus = PlayerStatus.Fold, UserID = "three"},
                 }
             });
 
@@ -112,7 +112,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
 
         private Player getMe(Game game)
         {
-            return game.Players.FirstOrDefault(x => x.Username == "one");
+            return game.Players.FirstOrDefault(x => x.UserID == "one");
         }
         
         public async Task<int> Create(GameType gametype, string gameName, int buyin, int initialChips, int minBet, int minPlayers, int maxPlayers, bool spectatingAllowed)
@@ -133,7 +133,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
             };
 
             List<Player> players = new List<Player>();
-            players.Add(new Player() { ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username="one" });
+            players.Add(new Player() { PlayerStatus = PlayerStatus.Check, UserID = "one" });
             newGame.Players = players;
             newGames.Add(newGame);
 
@@ -159,7 +159,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
         {
             Thread.Sleep(1000);
             getMe(game).PlayerStatus = PlayerStatus.Raise;
-            getMe(game).Bet = bet;
+            getMe(game).Money = bet;
             Games = Games;
         }
 
@@ -167,7 +167,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
         {
             Thread.Sleep(1000);
             List<Player> newPlayers = new List<Player>(Games.First(x => x.ID == game.ID).Players);
-            newPlayers.Add(new Player() { ID = lastPlayerId++, PlayerStatus = PlayerStatus.Check, Username = "one" });
+            newPlayers.Add(new Player() { PlayerStatus = PlayerStatus.Check, UserID = "one" });
             Games.First(x => x.ID == game.ID).Players = newPlayers;
             Games = Games;
         }
