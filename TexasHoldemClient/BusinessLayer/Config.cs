@@ -10,7 +10,5 @@ namespace TexasHoldemClient.BusinessLayer
 
         public static readonly string GoogleClientId = "989213145723-78seudgbebld842o21up0t7nml3fffhu.apps.googleusercontent.com"; // https://console.developers.google.com/apis/credentials
         public static readonly string GoogleClientSecret = "K9n32CzRfQeOXZX-miDWxrde";
-
-        public static string ProjectID { get; internal set; }
     }
 }

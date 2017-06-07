@@ -9,6 +9,20 @@
 
     public class Player : Changing
     {
+        private int id;
+        public int ID
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged("ID");
+                }
+            }
+        }
+
         private PlayerStatus playerStatus;
         public PlayerStatus PlayerStatus
         {
@@ -23,72 +37,30 @@
             }
         }
 
-        private bool isActive;
-        public bool IsActive
+        private string username;
+        public string Username
         {
-            get { return isActive; }
+            get { return username; }
             set
             {
-                if (isActive != value)
+                if (username != value)
                 {
-                    isActive = value;
-                    OnPropertyChanged("IsActive");
+                    username = value;
+                    OnPropertyChanged("Username");
                 }
             }
         }
 
-        private int money;
-        public int Money
+        private int bet;
+        public int Bet
         {
-            get { return money; }
+            get { return bet; }
             set
             {
-                if (money != value)
+                if (bet != value)
                 {
-                    money = value;
-                    OnPropertyChanged("Money");
-                }
-            }
-        }
-
-        private int points;
-        public int Points
-        {
-            get { return points; }
-            set
-            {
-                if (points != value)
-                {
-                    points = value;
-                    OnPropertyChanged("Points");
-                }
-            }
-        }
-
-        private string userID;
-        public string UserID
-        {
-            get { return userID; }
-            set
-            {
-                if (userID != value)
-                {
-                    userID = value;
-                    OnPropertyChanged("UserID");
-                }
-            }
-        }
-
-        private int lastBet;
-        public int LastBet
-        {
-            get { return lastBet; }
-            set
-            {
-                if (lastBet != value)
-                {
-                    lastBet = value;
-                    OnPropertyChanged("LastBet");
+                    bet = value;
+                    OnPropertyChanged("Bet");
                 }
             }
         }

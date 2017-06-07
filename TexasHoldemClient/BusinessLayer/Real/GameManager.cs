@@ -19,11 +19,11 @@ namespace TexasHoldemClient.BusinessLayer
 {
     public class GameManager : Changing, IGameManager
     {
-        private IEnumerable<Game> games = new List<Game>();
+        private IEnumerable<Game> games;
         public IEnumerable<Game> Games
         {
             get { return games; }
-            private set
+            set
             {
                 if (games != value)
                 {
@@ -37,7 +37,7 @@ namespace TexasHoldemClient.BusinessLayer
         public IEnumerable<Game> ActiveGames
         {
             get { return activeGames; }
-            private set
+            set
             {
                 if (activeGames != value)
                 {
@@ -51,7 +51,7 @@ namespace TexasHoldemClient.BusinessLayer
         public IEnumerable<Game> SpectatingGames
         {
             get { return spectatingGames; }
-            private set
+            set
             {
                 if (spectatingGames != value)
                 {
@@ -72,41 +72,9 @@ namespace TexasHoldemClient.BusinessLayer
 
             userManager.PropertyChanged += UserManager_PropertyChanged;
 
-            IObservable<int> gameCount = RxFirebase.FromPath<int>(fb, "lastsGameId");
-
-            /*
-            IObservable<IEnumerable<Game>> gamesOb = RxFirebase.FromPath<List<dynamic>>(fb, "games")
-            .Select(xs => xs == null ? new List<Game>() :
-                xs.Select((x, i) => new KeyValuePair<int, dynamic>(i, x))
-                    .Where(x => x.Value != null)
-                    .Select(pair => new KeyValuePair<int, dynamic>(pair.Key, pair.Value.publics))
-                    .Select(ToGame));
-
-            gamesOb.Subscribe(games => Games = games);
-            */
-        }
-
-        private IObservable<IEnumerable<Game>> FillGames(IObservable<IEnumerable<Game>> o)
-        {
-            return o.Select(gs => Observable.CombineLatest(gs.Select(g => FillGame(g.ID, g.PlayersCount).Select(players => 
-                {
-                    g.Players = players;
-                    return g;
-                })))).Switch();
-        }
-
-        private IObservable<IEnumerable<Player>> FillGame(int gameid, int players)
-        {
-            var paths = Observable.Return(Enumerable.Range(0, players)).Select(range => range.Select(i => "games/" + gameid + "/privates/allPlayers/" + i + "/publics"));
-            return RxFirebase.FromPaths<dynamic>(fb, RxFirebase.Trace("pathsasd",paths))
-                .Select(xs => xs.Where(x => x != null).Select(ToPlayer))
-                .SelectMany(ps => Observable.CombineLatest(ps.Select(p => {
-                    return userManager.CurrentUser == null || p.UserID != userManager.CurrentUser.UID ?
-                        Observable.Return(p) :
-                        RxFirebase.FromPath<dynamic>(fb, "games/" + gameid + "/privates/allPlayers/" + ps.ToList().FindIndex(x => x.UserID == p.UserID) + "/privates")
-                        .Select(x => new Me { Hand = x.hand != null ? x.hand : new List<Card>() }.Patch(p));
-                }
-                    )));
+            RxFirebase.FromPath<List<dynamic>>(fb, "games")
+                .Select(xs => xs == null ? new List<Game>() : xs.Select((x, i) => new KeyValuePair<int, dynamic>(i, x)).Where(x => x.Value != null).Select(pair => new KeyValuePair<int, dynamic>(pair.Key,pair.Value.publics)).Select(ToGame))
+                .Subscribe(games => Games = games);
         }
 
         private void UserManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -115,21 +83,22 @@ namespace TexasHoldemClient.BusinessLayer
             {
                 if (userManager.CurrentUser != null)
                 {
-                    IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.UID + "/publics/activeGamesIds").Select(x => x != null ? x : new List<int>());
-                    IObservable<IEnumerable<Game>> activeGames = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(i => "games/" + i + "/publics"))).Select(gs => gs.Where(g => g != null).Select(ToGame));
 
-                    FillGames(activeGames).Subscribe(gs =>
-                    {
-                        ActiveGames = gs;
-                    });
+                    IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.UID + "/publics/activeGamesIds").Select(x => x != null ? x : new List<int>());
+                    IObservable<IDictionary<string, dynamic>> activeGamesDict = RxFirebase.Trace("activeGames", RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(id => "games/" + id + "/publics"))));
+                    IObservable<IEnumerable<Game>> activeGamesOb = activeGamesDict.Select(d => d.Select(x => {
+                        int i = Int32.Parse(x.Key.Split('/')[x.Key.Split('/').Count() - 2]);
+                        return ToGame(new KeyValuePair<int, dynamic>(i, x.Value));
+                    }));
+                    activeGamesOb.Subscribe(games => ActiveGames = games);
 
                     IObservable<IEnumerable<int>> spectatingIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.UID + "/publics/spectatingGamesIds").Select(x => x != null ? x : new List<int>());
-                    IObservable<IEnumerable<Game>> spectatingGames = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(i => "games/" + i + "/publics"))).Select(gs => gs.Where(g => g != null).Select(ToGame));
-
-                    FillGames(spectatingGames).Subscribe(gs =>
-                    {
-                        SpectatingGames = gs;
-                    });
+                    IObservable<IDictionary<string, dynamic>> spectatingGamesDict = RxFirebase.Trace("activeGames", RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(id => "games/" + id + "/publics"))));
+                    IObservable<IEnumerable<Game>> spectatingGamesOb = activeGamesDict.Select(d => d.Select(x => {
+                        int i = Int32.Parse(x.Key.Split('/')[x.Key.Split('/').Count() - 2]);
+                        return ToGame(new KeyValuePair<int, dynamic>(i, x.Value));
+                    }));
+                    spectatingGamesOb.Subscribe(games => SpectatingGames = games);
                 }
                 else
                 {
@@ -139,14 +108,17 @@ namespace TexasHoldemClient.BusinessLayer
             }
         }
 
-        private Game ToGame(dynamic json)
+        private Game ToGame(KeyValuePair<int, dynamic> pair)
         {
+            var json = pair.Value;
+            List<dynamic> p = json.openCards != null ? json.allPlayers.ToObject<List<dynamic>>() : new List<dynamic>();
+            List<Player> allPlayers = new List<Player>(p.FindAll(x => x != null).Select(ToPlayer));
+            List<int> activeIds = json.activePlayers != null ? json.activePlayers.ToObject<List<int>>() : new List<int>();
             return new Game
             {
-                ID = json.gameId,
+                ID = pair.Key,
                 Bet = json.bet,
                 Buyin = json.buyin,
-                PlayersCount = json.playerAmount != null ? json.playerAmount : 0,
                 InitialChips = json.initialChips,
                 MaxPlayers = json.maxPlayers,
                 MinBet = json.minBet,
@@ -156,7 +128,10 @@ namespace TexasHoldemClient.BusinessLayer
                 League = json.league,
                 OpenCards = json.openCards != null ? json.openCards.ToObject<List<Card>>() : new List<Card>(),
                 Stage = json.stage,
+                Players = allPlayers,
                 BigBlind = json.bigBlind != null ? json.bigBlind : 0,
+                CurrentPlayer = allPlayers.Find(x => x.ID == json.currentPlayer),
+                ActivePlayers = allPlayers.FindAll(x => activeIds.Contains(x.ID)),
                 Pot = json.pot,
                 SmallBet = json.smallBet != null ? json.smallBet : 0
             };
@@ -166,12 +141,7 @@ namespace TexasHoldemClient.BusinessLayer
         {
             return new Player
             {
-                IsActive = json.isActive,
-                Money = json.money,
-                PlayerStatus = json.status != null ? json.status : PlayerStatus.Check,
-                LastBet = json.lastBet != null ? json.lastBet : 0,
-                Points = json.points,
-                UserID = json.userId
+                ID = json.playerId,
             };
         }
 
@@ -214,33 +184,29 @@ namespace TexasHoldemClient.BusinessLayer
 
         public async Task Check(Game game)
         {
-            int playerId = game.Players.ToList().FindIndex(x => x.UserID == userManager.CurrentUser.UID);
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.UID).ID;
             await api.PlayerAction(game.ID, playerId, PlayerStatus.Check, null);
         }
 
         public async Task Raise(Game game, int bet)
         {
-            int playerId = game.Players.ToList().FindIndex(x => x.UserID == userManager.CurrentUser.UID);
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.UID).ID;
             await api.PlayerAction(game.ID, playerId, PlayerStatus.Raise, bet);
         }
 
         public async Task Fold(Game game)
         {
-            int playerId = game.Players.ToList().FindIndex(x => x.UserID == userManager.CurrentUser.UID);
+            int playerId = game.Players.First(x => x.Username == userManager.CurrentUser.UID).ID;
             await api.PlayerAction(game.ID, playerId, PlayerStatus.Fold, null);
         }
 
         private IDictionary<Game, IDisposable> gameListeners = new Dictionary<Game, IDisposable>(); 
         public Game Listen(int gameId)
         {
-            Game game = new Game();
-            var sub = RxFirebase.FromPath<dynamic>(fb,"games/" + gameId + "/publics")
-                .Select(ToGame)
-                .SelectMany(g => FillGame(g.ID,g.PlayersCount)
-                    .Select(players => { g.Players = players; return g; }))
-                .Subscribe(g => game.Patch(g));
-            gameListeners.Add(game, sub);
-            return game;
+            Game g = new Game();
+            var sub = RxFirebase.FromPath<dynamic>(fb,"games/" + gameId + "/publics").Subscribe(x => g.Patch(ToGame(new KeyValuePair<int, dynamic>(gameId, x))));
+            gameListeners.Add(g, sub);
+            return g;
         }
 
         public void Dispose(Game game)
