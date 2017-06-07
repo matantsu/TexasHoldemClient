@@ -26,6 +26,7 @@
                 <RowDefinition Height="Auto" Name="RowFor_MinPlayersSpace"/>
                 <RowDefinition Height="Auto" Name="RowFor_MaxPlayersSpace"/>
                 <RowDefinition Height="Auto" Name="RowFor_SpectatingAllowedSpace"/>
+                <RowDefinition Height="Auto" Name="RowFor_GameNameSpace"/>
 
             </Grid.RowDefinitions>
 
@@ -62,6 +63,11 @@
             <StackPanel Name="spectatingAllowed" Orientation="Horizontal" Grid.Row="6">
                 <TextBlock Text="spectatingAllowed:"/>
                 <CheckBox Name="spectatingAllowed_CheckBox" />
+            </StackPanel>
+
+            <StackPanel Name="GameName" Orientation="Horizontal" Grid.Row="7">
+                <TextBlock Text="GameName:"/>
+                <TextBox Name="GameName_TextBox" Width="39"/>
             </StackPanel>
         </Grid>
 

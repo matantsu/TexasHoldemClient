@@ -55,7 +55,7 @@ namespace TexasHoldemClient.BusinessLayer.api
 
             int playerId,
             int gameId,
-            PlayerStatus newStatus,
-            int? newBet);
+            int newStatus,
+            int newBet);
     }
 }

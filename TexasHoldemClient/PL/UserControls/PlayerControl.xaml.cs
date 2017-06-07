@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient.PL.UserControls
 {
@@ -20,9 +21,29 @@ namespace TexasHoldemClient.PL.UserControls
     /// </summary>
     public partial class PlayerControl : UserControl
     {
+
+        
+
+        public Player Player
+        {
+            get { return (Player)GetValue(PlayerProperty); }
+            set
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    SetValue(PlayerProperty, value); DataContext = value;
+                });
+            }
+        }
+
+        public static DependencyProperty PlayerProperty = DependencyProperty.Register("Player", typeof(Player), typeof(PlayerControl));
+
         public PlayerControl()
         {
+            DataContext = Player;
             InitializeComponent();
         }
+
+
     }
 }

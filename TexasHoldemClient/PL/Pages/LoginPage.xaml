@@ -6,14 +6,18 @@
       xmlns:local="clr-namespace:TexasHoldemClient.PL.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="LoginPage">
+      Title="LoginPage"
+      >
 
     <Grid>
 
-        <Button Content="Login" Name="LoginButton" IsEnabled="True" HorizontalAlignment="Left" Margin="107,133,0,0" VerticalAlignment="Top" Width="75" Click="Login_Click">
-
-         </Button>
-        <Label Content="Please Login To Continue" HorizontalAlignment="Left" Margin="75,102,0,0" VerticalAlignment="Top"/>
-
+        
+        <Button Content="Login" Name="LoginButton" IsEnabled="True" HorizontalAlignment="Left" Margin="44,208,0,0" VerticalAlignment="Top" Width="75" Click="Login_Click"/>
+        <Label Content="Login" FontSize="30" HorizontalAlignment="Left" Margin="105,24,0,0" VerticalAlignment="Top" Height="50" Width="84"/>
+            <TextBox x:Name="Email_TextBox" HorizontalAlignment="Left" Height="23" Margin="113,94,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180"/>
+            <PasswordBox Name="Password_TextBox" HorizontalAlignment="Left" Margin="113,133,0,0" VerticalAlignment="Top" Width="180" Height="18"/>
+            <TextBlock HorizontalAlignment="Left" Width="75" Margin="10,101,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top" Height="16"/>
+            <TextBlock HorizontalAlignment="Left" Width="75" Margin="10,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="P"/><Run Text="assword:"/></TextBlock>
+            <Button Content="Register" IsEnabled="True" HorizontalAlignment="Left" Margin="184,208,0,0" VerticalAlignment="Top" Width="75" Click="Register_Click"/>
     </Grid>
 </Page>

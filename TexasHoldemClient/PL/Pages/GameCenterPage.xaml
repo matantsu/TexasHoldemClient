@@ -27,14 +27,32 @@
 
             </Grid.RowDefinitions>
 
-            <Grid Name="MainBar" Grid.Row="0" Background="LightGray">
+            <Grid Name="MainBar"  Grid.Row="0" Background="LightGray">
                 <StackPanel Margin="8" Orientation="Horizontal">
-                    <Button Name="RegisterButton" IsEnabled="True" Background="Bisque" Click="Logout_Click">Logout</Button>
-                    <TextBlock Text="Hi - {BindingNeeded}"></TextBlock>
+                    <!-- logout button -->
+                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                        <Button Name="RegisterButton" FontSize="15" IsEnabled="True" Background="Bisque" Click="Logout_Click">Logout</Button>
+                    </Viewbox>
+                    
                     <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />
-                    <Button>Settings</Button>
+                    
+                    <!-- hi - username-->
+                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                        <TextBlock Text="Hi - " HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                    </Viewbox>
+                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                        <TextBlock Text="{Binding DisplayName}" HorizontalAlignment="Center" FontSize="15"></TextBlock>
+                    </Viewbox>
+
                     <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />
-                    <TextBlock Text="Wallet - {BindingNeeded}"></TextBlock>
+
+                    <!-- setting button -->
+                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                        <Button  Name="SettingrButton" FontSize="20" IsEnabled="True" Background="DarkSalmon" Click="Setting_Click">⚙</Button>
+                    </Viewbox>
+
+                    <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />
+                    <TextBlock Text="Wallet - {BindingNeeded}" Margin="0,-2,0,2"></TextBlock>
                     <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />
                     <TextBlock Text="league - {BindingNeeded}"></TextBlock>
                 </StackPanel>
@@ -42,25 +60,63 @@
 
             <Grid Name="CurrentActiveGamesBar" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Name="ColFor_Title"  Width="Auto" />
+                    <ColumnDefinition Name="ColFor_SearchBar" Width="1*" />
+                    <ColumnDefinition Name="ColFor_CreateGameButton" Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid Name="CurrentGamesTitle" Grid.Column="0" >
                     <StackPanel Orientation="Horizontal">
                         <Viewbox>
-                            <TextBlock  TextWrapping="Wrap" >Current Active Games:</TextBlock>
+                            <TextBlock  TextWrapping="Wrap" >Current Games:</TextBlock>
                         </Viewbox>
                     </StackPanel>
                 </Grid>
-                <Grid Name="CreateNewGameButtom" Grid.Column="1" >
+                <Grid Name="SearchBar" Grid.Column="1" >
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Name="ColFor_SearchByPot" Width="1*"/>
+                            <ColumnDefinition Name="ColFor_SearchByPlayerName" Width="1*"/>
+                            <ColumnDefinition Name="ColFor_SearchByGamePreferences" Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Border BorderThickness="1" BorderBrush="Black">
+                                <DockPanel Height="Auto" Name="stackPanel1" Width="Auto" LastChildFill="True">
+                                    <Button Click="SearchByPot_Click">Pot Size 🔍</Button>
+                                    <TextBox Name="SearchByPot_TextBox" ></TextBox>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                        
+                        <Grid Grid.Column="1">
+                            <Border BorderThickness="1" BorderBrush="Black">
+                                <DockPanel Height="Auto" Name="stackPanel2" Width="Auto" LastChildFill="True">
+                                    <Button Click="SearchByPlayerName_Click">Player Name 🔍</Button>
+                                    <TextBox Name="SearchByPlayerName_TextBox" ></TextBox>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Border BorderThickness="1" BorderBrush="Black">
+                                <DockPanel Height="Auto" Name="stackPanel3" Width="Auto" LastChildFill="True">
+                                    <Button Click="SearchByGamePreferences_Click">Game Preferences🔍</Button>
+                                    <TextBox Name="SearchByGamePreferences_TextBox" ></TextBox>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                        
+                    </Grid>
+                </Grid>
+                <Grid Name="CreateNewGameButtom" Grid.Column="2" >
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Click="CreateNewGame_Click">+ Create new game</Button>
                     </StackPanel>
                 </Grid>
 
             </Grid>
-            <Grid Name="TableOfActiveGames" Grid.Row="2" >
-                <DataGrid Name="ActiveGamesDataGrid" IsReadOnly="True" >
+            <Grid Name="TableOfGames" Grid.Row="2" >
+                <DataGrid Name="GamesDataGrid" ItemsSource="{Binding Games}" IsReadOnly="True" >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
@@ -72,7 +128,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button>Join</Button>
+                                    <Button Click="Join_Click">Join</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -90,12 +146,12 @@
                 </Grid>
             </Grid>
             <Grid Name="TableOfJoinedGames" Grid.Row="4" >
-                <DataGrid Name="JoidGamesDataGrid" IsReadOnly="True"   >
+                <DataGrid Name="JoidGamesDataGrid" ItemsSource="{Binding ActiveGames}"   IsReadOnly="True"   >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button>returnToGame</Button>
+                                    <Button Click="returnToGame_Click">returnToGame</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -113,7 +169,7 @@
                 </Grid>
             </Grid>
             <Grid Name="TableOfReplayGames" Grid.Row="6" >
-                <DataGrid Name="ReplayGamesDataGrid" IsReadOnly="True"   >
+                <DataGrid Name="ReplayGamesDataGrid" ItemsSource="{Binding SpectatingGames}"   IsReadOnly="True"   >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>

@@ -23,19 +23,24 @@ namespace TexasHoldemClient.PL.Pages
     {
 
         IUserManager um = BL.UserManager;
+        private Frame _mainFrame;
 
-
-
-        public LoginPage()
+        public LoginPage(Frame mainFrame)
         {
+            _mainFrame = mainFrame;
+            InitializeComponent();
 
-            InitializeComponent();            
         }
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
             LoginButton.IsEnabled = false;
-            await um.Login(null, null);
+            await um.Login("barakmen@post.bgu.ac.il", "mz*+1TY7"/*Email_TextBox.Text , Password_TextBox.Password*/);
+        }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            _mainFrame.Navigate(new RegisterPage(_mainFrame));
         }
     }
 }

@@ -215,19 +215,20 @@ namespace TexasHoldemClient.BusinessLayer
         public async Task Check(Game game)
         {
             int playerId = game.Players.ToList().FindIndex(x => x.UserID == userManager.CurrentUser.UID);
-            await api.PlayerAction(game.ID, playerId, PlayerStatus.Check, null);
+            await api.PlayerAction(playerId, game.ID, PlayerStatus.Check, 0);
         }
 
         public async Task Raise(Game game, int bet)
         {
             int playerId = game.Players.ToList().FindIndex(x => x.UserID == userManager.CurrentUser.UID);
-            await api.PlayerAction(game.ID, playerId, PlayerStatus.Raise, bet);
+            await api.PlayerAction(playerId, game.ID, PlayerStatus.Raise, bet);
+
         }
 
         public async Task Fold(Game game)
         {
             int playerId = game.Players.ToList().FindIndex(x => x.UserID == userManager.CurrentUser.UID);
-            await api.PlayerAction(game.ID, playerId, PlayerStatus.Fold, null);
+            await api.PlayerAction(playerId, game.ID, PlayerStatus.Fold, 0);
         }
 
         private IDictionary<Game, IDisposable> gameListeners = new Dictionary<Game, IDisposable>(); 
