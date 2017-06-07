@@ -27,9 +27,8 @@ namespace TexasHoldemClient.BusinessLayer
             InitializeComponent();
             BL.GameManager.PropertyChanged += GameManager_PropertyChanged;
 
-            g = BL.GameManager.Listen(31);
+            g = BL.GameManager.Listen(37);
             g.PropertyChanged += G_PropertyChanged;
-            BL.GameManager.Dispose(g);
         }
 
         private void G_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
