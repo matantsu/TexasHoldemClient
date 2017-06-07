@@ -146,6 +146,7 @@ namespace TexasHoldemClient.BusinessLayer
                 ID = json.gameId,
                 Bet = json.bet,
                 Buyin = json.buyin,
+                IsOnRound = json.isPlaying,
                 PlayersCount = json.playerAmount != null ? json.playerAmount : 0,
                 InitialChips = json.initialChips,
                 MaxPlayers = json.maxPlayers,
@@ -210,6 +211,11 @@ namespace TexasHoldemClient.BusinessLayer
         public async Task Spectate(Game game)
         {
             await api.SpectateGame(game.ID);
+        }
+
+        public async Task StartRound(Game game)
+        {
+            await api.StartRound(game.ID);
         }
 
         public async Task Check(Game game)

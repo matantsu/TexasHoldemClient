@@ -35,6 +35,11 @@ namespace TexasHoldemClient.BusinessLayer
             return api.LeaveGame(um.Token, gameId);
         }
 
+        public Task StartRound(int gameId)
+        {
+            return api.StartRound(um.Token, gameId);
+        }
+
         public Task PlayerAction(int playerId, int gameId, PlayerStatus newStatus, int newBet)
         {
             return api.PlayerAction(um.Token, playerId, gameId, (int)newStatus, newBet);

@@ -353,6 +353,20 @@ namespace TexasHoldemClient.BusinessLayer.Models
             }
         }
 
+        private bool isOnRound;
+        public bool IsOnRound
+        {
+            get { return isOnRound; }
+            set
+            {
+                if (isOnRound != value)
+                {
+                    isOnRound = value;
+                    OnPropertyChanged("IsOnRound");
+                }
+            }
+        }
+
         public void Patch(Game x)
         {
             this.ID = x.ID;
