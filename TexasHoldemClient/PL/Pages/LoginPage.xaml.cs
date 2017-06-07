@@ -34,8 +34,10 @@ namespace TexasHoldemClient.PL.Pages
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
+            LoadingAnimation.Visibility = Visibility.Visible;
             LoginButton.IsEnabled = false;
             await um.Login("barakmen@post.bgu.ac.il", "mz*+1TY7"/*Email_TextBox.Text , Password_TextBox.Password*/);
+            LoadingAnimation.Visibility = Visibility.Hidden;
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)

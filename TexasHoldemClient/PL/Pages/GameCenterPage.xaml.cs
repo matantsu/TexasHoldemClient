@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,15 @@ namespace TexasHoldemClient.PL.Pages
             MainBar.DataContext = um.CurrentUser;
             TableOfGames.DataContext = gm;
             TableOfJoinedGames.DataContext = gm;
+
+            gm.PropertyChanged += GmChanedHandler;
+        }
+
+        private void GmChanedHandler(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "ActiveGames"){
+                LoadingAnimation_CurrentJoinedGame.Visibility = Visibility.Hidden;
+            }
         }
 
         private async void Logout_Click(object sender, RoutedEventArgs e)

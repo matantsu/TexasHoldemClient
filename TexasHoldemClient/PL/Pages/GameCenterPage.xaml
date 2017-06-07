@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       xmlns:local="clr-namespace:TexasHoldemClient.PL.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1600"
@@ -146,6 +147,7 @@
                 </Grid>
             </Grid>
             <Grid Name="TableOfJoinedGames" Grid.Row="4" >
+
                 <DataGrid Name="JoidGamesDataGrid" ItemsSource="{Binding ActiveGames}"   IsReadOnly="True"   >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
@@ -157,6 +159,9 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Grid  Margin="20">
+                    <fa:ImageAwesome x:Name="LoadingAnimation_CurrentJoinedGame" Icon="Refresh" Spin="True" Height="48" Width="48" />
+                </Grid>
             </Grid>
 
             <Grid Name="ReplayGamesBar" Grid.Row="5" >

@@ -92,7 +92,7 @@ namespace TexasHoldemClient.PL.Windows
                     OpenCardsControl.Cards = IEnumerableToLinkedList(game.OpenCards);
                 }
 
-                if(e.PropertyName == "CurrentPlayer")
+                if (e.PropertyName == "CurrentPlayer")
                 {
                     if (game.CurrentPlayer.UserID == ((Me)game.Players.First(x => x is Me)).UserID)
                     {
@@ -106,6 +106,11 @@ namespace TexasHoldemClient.PL.Windows
                         Button_Fold.IsEnabled = true;
                         Button_Raise.IsEnabled = true;
                     }
+                }
+
+                if(e.PropertyName == "IsOnRound")
+                {
+                    Button_StartRound.IsEnabled = game.IsOnRound;
                 }
             });
             
@@ -139,5 +144,11 @@ namespace TexasHoldemClient.PL.Windows
         {
            await gm.Raise(game, Int32.Parse(BetTextBox.Text));
         }
+
+        private async void StartRound_Click(object sender, RoutedEventArgs e)
+        {
+            await gm.StartRound(game);
+        }
+
     }
 }

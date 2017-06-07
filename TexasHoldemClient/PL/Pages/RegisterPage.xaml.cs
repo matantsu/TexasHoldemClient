@@ -33,8 +33,10 @@ namespace TexasHoldemClient.PL.Pages
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
-            
+            Button_Submit.IsEnabled = false;
+            LoadingAnimation_SubmitLoading.Visibility = Visibility.Visible;
             await um.Register(Email_TextBox.Text, Username_TextBox.Text, Password_TextBox.Password);
+            LoadingAnimation_SubmitLoading.Visibility = Visibility.Hidden;
             _mainFrame.GoBack();
         }
     }

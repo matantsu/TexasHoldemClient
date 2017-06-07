@@ -216,5 +216,10 @@ namespace TexasHoldemClient.BusinessLayer.Fake
             if(handler != null)
                 this.PropertyChanged -= handler;
         }
+
+        public Task StartRound(Game game)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
