@@ -18,15 +18,30 @@
             <Image Grid.Column="0"  Source="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png"></Image>
 
                 <StackPanel Orientation="Vertical" Grid.Column="1">
-                    <TextBlock Foreground="White" Text="NAME: {BindingNeeded}"/>
                     <TextBlock Foreground="White">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat=" ID: {0}">
+                                <Binding Path="UserID"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    
+                     <TextBlock Foreground="White">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat=" STATUS: {0}">
                                     <Binding Path="PlayerStatus"/>
                                 </MultiBinding>
                             </TextBlock.Text>
-                        </TextBlock>
-                    </StackPanel>
+                     </TextBlock>
+
+                <TextBlock Foreground="White">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat=" Money: {0}">
+                            <Binding Path="Money"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
         
         </Grid>
     </Border>

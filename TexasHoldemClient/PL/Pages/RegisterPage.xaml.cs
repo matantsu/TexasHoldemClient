@@ -33,6 +33,7 @@ namespace TexasHoldemClient.PL.Pages
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
+            
             await um.Register(Email_TextBox.Text, Username_TextBox.Text, Password_TextBox.Password);
             _mainFrame.GoBack();
         }

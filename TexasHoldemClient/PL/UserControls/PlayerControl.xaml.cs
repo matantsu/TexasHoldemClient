@@ -21,6 +21,9 @@ namespace TexasHoldemClient.PL.UserControls
     /// </summary>
     public partial class PlayerControl : UserControl
     {
+
+        
+
         public Player Player
         {
             get { return (Player)GetValue(PlayerProperty); }

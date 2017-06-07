@@ -34,7 +34,6 @@ namespace TexasHoldemClient.PL.Windows
             InitializeComponent();
             DataContext = game;
 
-
             playerControls.AddFirst(Player0);
             playerControls.AddFirst(Player1);
             playerControls.AddFirst(Player2);
@@ -47,14 +46,31 @@ namespace TexasHoldemClient.PL.Windows
                 pc.Visibility = Visibility.Hidden;
             }
 
+            game.CurrentPlayer.PropertyChanged += CurrentPlayerHandler;
             game.PropertyChanged += GameChangeHandler;
+        }
+
+        private void CurrentPlayerHandler(object sender, PropertyChangedEventArgs e)
+        {
+            if (game.CurrentPlayer.UserID == ((Me)game.Players.First(x => x is Me)).UserID)
+            {
+                Button_Check.IsEnabled = false;
+                Button_Fold.IsEnabled = false;
+                Button_Raise.IsEnabled = false;
+            }
+            else
+            {
+                Button_Check.IsEnabled = true;
+                Button_Fold.IsEnabled = true;
+                Button_Raise.IsEnabled = true;
+            }
         }
 
         private void GameChangeHandler(object sender, PropertyChangedEventArgs e)
         {
             this.Dispatcher.Invoke(() =>
             {
-                
+                Console.WriteLine("" + e.PropertyName);
 
                 if (e.PropertyName == "Players")
                 {
@@ -64,6 +80,7 @@ namespace TexasHoldemClient.PL.Windows
                         if (i < game.Players.Where(x => !(x is Me)).Count())
                         {
                             playerControls.ElementAt(i).Player = game.Players.Where(x => !(x is Me)).ElementAt(i);
+
                             playerControls.ElementAt(i).Visibility = Visibility.Visible;
                         }
                         else
@@ -73,11 +90,40 @@ namespace TexasHoldemClient.PL.Windows
                     }
 
                     MyPlayer.DataContext = (Me)game.Players.First(x => x is Me);
+
+                    #region add cards manualy
+                    LinkedList<Card> Cardslst = new LinkedList<Card>();
+                    Card c0 = new Card(CardType.Club, CardRank.Ace);
+                    Card c1 = new Card(CardType.Spade, CardRank.Ace);
+                    Cardslst.AddFirst(c0);
+                    Cardslst.AddFirst(c1);
+                    ((Me)game.Players.First(x => x is Me)).Hand = Cardslst;
+#endregion
+
+                    TwoPlayerCardsControl.Cards = IEnumerableToLinkedList(((Me)game.Players.First(x => x is Me)).Hand);
                 }
 
+                if(e.PropertyName == "OpenCards")
+                {
+                    OpenCardsControl.Cards = IEnumerableToLinkedList(game.OpenCards);
+                }
             });
             
         }
+        
+
+        private LinkedList<T> IEnumerableToLinkedList<T>(IEnumerable<T> lst)
+        {
+            LinkedList<T> newLst = new LinkedList<T>();
+          
+            foreach (T t in lst)
+            {
+                newLst.AddFirst(t);
+            }
+
+            return newLst;
+        }
+
 
         private async void Check_Click(object sender, RoutedEventArgs e)
         {

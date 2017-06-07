@@ -21,21 +21,43 @@ namespace TexasHoldemClient.PL.UserControls
     /// </summary>
     public partial class TwoPlayerCardsControl : UserControl
     {
+        LinkedList<CardControl> cardControls = new LinkedList<CardControl>();
 
+        public LinkedList<Card> Cards
+        {
+            get { return (LinkedList<Card>)GetValue(CardsProperty); }
+            set {
+                SetValue(CardsProperty, value);
+                DataContext = value;
+                for (int i = 0; i < cardControls.Count; i++)
+                {
+                    if (i < value.Count())
+                    {
+                        cardControls.ElementAt(i).Card = value.ElementAt(i);
+                        cardControls.ElementAt(i).Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        cardControls.ElementAt(i).Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+
+        public static DependencyProperty CardsProperty = DependencyProperty.Register("Cards", typeof(LinkedList<Card>), typeof(TwoPlayerCardsControl));
 
         public TwoPlayerCardsControl()
         {
             InitializeComponent();
-            
-            Card c0 = new Card(CardType.Club, CardRank.Ace);
-            Card c1 = new Card(CardType.Spade, CardRank.Ace);
 
-            Card0.Card = c0;
-            Card1.Card = c1;
-            
+            cardControls.AddFirst(Card0);
+            cardControls.AddFirst(Card1);
+
+            foreach (CardControl cc in cardControls)
+            {
+                cc.Visibility = Visibility.Hidden;
+            }
+
         }
-
-      
-
     }
 }

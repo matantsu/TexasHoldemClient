@@ -58,5 +58,26 @@ namespace TexasHoldemClient.PL.Pages
             Game g = (Game)JoidGamesDataGrid.SelectedItem;
             new GameWindow(g.ID).Show();
         }
+
+        private void Setting_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not Implemented");
+        }
+        private void SearchByPot_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not Implemented");
+        }
+
+        private void SearchByGamePreferences_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not Implemented");
+        }
+
+        private void SearchByPlayerName_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not Implemented");
+        }
+
+
     }
 }
