@@ -24,7 +24,13 @@ namespace TexasHoldemClient.PL.UserControls
         public Player Player
         {
             get { return (Player)GetValue(PlayerProperty); }
-            set { SetValue(PlayerProperty, value); DataContext = value; }
+            set
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    SetValue(PlayerProperty, value); DataContext = value;
+                });
+            }
         }
 
         public static DependencyProperty PlayerProperty = DependencyProperty.Register("Player", typeof(Player), typeof(PlayerControl));

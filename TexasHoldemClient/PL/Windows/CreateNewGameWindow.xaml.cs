@@ -36,7 +36,7 @@ namespace TexasHoldemClient.PL.Windows
             await gm.Create(
 
                         (GameType)Enum.GetValues(typeof(GameType)).GetValue(gametype_ComboBox.SelectedIndex),
-                        null,
+                        GameName_TextBox.Text,
                         Int32.Parse(buyin_TextBox.Text),
                         Int32.Parse(initialChips_TextBox.Text),
                         Int32.Parse(minBet_TextBox.Text),

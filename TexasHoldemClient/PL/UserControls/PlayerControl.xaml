@@ -19,10 +19,9 @@
 
                 <StackPanel Orientation="Vertical" Grid.Column="1">
                     <TextBlock Foreground="White" Text="NAME: {BindingNeeded}"/>
-                    <TextBlock Foreground="White" Text="{Binding PlayerStatus}"/>
                     <TextBlock Foreground="White">
                             <TextBlock.Text>
-                                <MultiBinding StringFormat=" STATUS: - {0}">
+                                <MultiBinding StringFormat=" STATUS: {0}">
                                     <Binding Path="PlayerStatus"/>
                                 </MultiBinding>
                             </TextBlock.Text>

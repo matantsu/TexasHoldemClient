@@ -23,8 +23,6 @@ namespace TexasHoldemClient.PL.Windows
     /// </summary>
     public partial class GameWindow : Window
     {
-
-
         Game game = new Game();
         IGameManager gm = BL.GameManager;
         LinkedList<PlayerControl> playerControls = new LinkedList<PlayerControl>();
@@ -50,56 +48,35 @@ namespace TexasHoldemClient.PL.Windows
             }
 
             game.PropertyChanged += GameChangeHandler;
-
-
-
-            LinkedList<Player> playerslst = new LinkedList<Player>();
-
-            Player p0 = new Player();
-            p0.PlayerStatus = PlayerStatus.Check;
-            Player p1 = new Player();
-            p1.PlayerStatus = PlayerStatus.Check;
-            Player p2 = new Player();
-            p2.PlayerStatus = PlayerStatus.Check;
-            Player p3 = new Player();
-            p3.PlayerStatus = PlayerStatus.Check;
-            Player p4 = new Player();
-            p4.PlayerStatus = PlayerStatus.Check;
-            Player p5 = new Player();
-            p5.PlayerStatus = PlayerStatus.Check;
-
-            playerslst.AddFirst(p0);
-            playerslst.AddFirst(p1);
-            playerslst.AddFirst(p2);
-            playerslst.AddFirst(p3);
-            playerslst.AddFirst(p4);
-            playerslst.AddFirst(p5);
-            game.Players = playerslst;
-
-
-
-
         }
 
         private void GameChangeHandler(object sender, PropertyChangedEventArgs e)
         {
-            
-            if (e.PropertyName == "Players")
+            this.Dispatcher.Invoke(() =>
             {
+                
 
-                for(int i = 0; i < playerControls.Count; i++)
+                if (e.PropertyName == "Players")
                 {
-                    if(i < game.Players.Count())
+
+                    for (int i = 0; i < playerControls.Count; i++)
                     {
-                        playerControls.ElementAt(i).Player = game.Players.ElementAt(i);
-                        playerControls.ElementAt(i).Visibility = Visibility.Visible;
+                        if (i < game.Players.Where(x => !(x is Me)).Count())
+                        {
+                            playerControls.ElementAt(i).Player = game.Players.Where(x => !(x is Me)).ElementAt(i);
+                            playerControls.ElementAt(i).Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            playerControls.ElementAt(i).Visibility = Visibility.Collapsed;
+                        }
                     }
-                    else
-                    {
-                        playerControls.ElementAt(i).Visibility = Visibility.Collapsed;
-                    }
+
+                    MyPlayer.DataContext = (Me)game.Players.First(x => x is Me);
                 }
-            }
+
+            });
+            
         }
 
         private async void Check_Click(object sender, RoutedEventArgs e)
