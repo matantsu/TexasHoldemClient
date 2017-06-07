@@ -7,6 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="96" d:DesignWidth="72">
     <Grid>
-        <TextBlock Text="{Binding Path=number}" Height="Auto" Width="72"/>
+        <DockPanel Margin="4" x:Name="PhotoSpace">
+            <Image Source="{Binding ImageSource}" />
+        </DockPanel>
+        <!--Border  Margin="4" BorderBrush="White" Background="LightGray" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Path=number}" Height="Auto" Width="72"/>
+                <TextBlock Text="{Binding Path=type}" Height="Auto" Width="72"/>
+            </StackPanel>
+        </Border-->
+        
+
     </Grid>
 </UserControl>

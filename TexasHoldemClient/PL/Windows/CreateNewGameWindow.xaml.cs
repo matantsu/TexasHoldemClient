@@ -28,7 +28,6 @@ namespace TexasHoldemClient.PL.Windows
         {
             InitializeComponent();
             gametype_ComboBox.ItemsSource = Enum.GetValues(typeof(GameType)).Cast<GameType>();
-
         }
 
         private async void Submit_Click(object sender, RoutedEventArgs e)

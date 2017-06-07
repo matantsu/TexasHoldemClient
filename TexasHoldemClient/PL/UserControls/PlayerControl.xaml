@@ -6,30 +6,30 @@
              xmlns:local="clr-namespace:TexasHoldemClient.PL.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="200">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="ColFor_Photo" Width="2*"/>
-            <ColumnDefinition Name="ColFor_PlayerDetails" Width="4*"/>
-        </Grid.ColumnDefinitions>
+    
+    <Border Opacity="0.7" BorderBrush="White" Background="Black" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
+        <Grid>
+        
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="ColFor_Photo" Width="2*"/>
+                <ColumnDefinition Name="ColFor_PlayerDetails" Width="4*"/>
+            </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0"  Source="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png"></Image>
+            <Image Grid.Column="0"  Source="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png"></Image>
+
+                <StackPanel Orientation="Vertical" Grid.Column="1">
+                    <TextBlock Foreground="White" Text="NAME: {BindingNeeded}"/>
+                    <TextBlock Foreground="White" Text="{Binding PlayerStatus}"/>
+                    <TextBlock Foreground="White">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" STATUS: - {0}">
+                                    <Binding Path="PlayerStatus"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
         
-        
-        <StackPanel Orientation="Vertical" Grid.Column="1">
-            <TextBlock Text="NAME: {BindingNeeded}"/>
-            <TextBlock Text="{Binding PlayerStatus}"/>
-            <TextBlock>
-                <TextBlock.Text>
-                    <MultiBinding StringFormat=" STATUS: - {0}">
-                        <Binding Path="PlayerStatus"/>
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            
-            
-            
-        </StackPanel>
-        
-        
-    </Grid>
+        </Grid>
+    </Border>
+
 </UserControl>

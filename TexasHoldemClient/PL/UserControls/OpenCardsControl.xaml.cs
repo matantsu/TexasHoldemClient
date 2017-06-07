@@ -64,9 +64,9 @@ namespace TexasHoldemClient.PL.UserControls
             LinkedList<Card> Cardslst = new LinkedList<Card>();
 
             Card c0 = new Card(CardType.Club, CardRank.Ace);
-            Card c1 = new Card(CardType.Club, CardRank.Ace);
-            Card c2 = new Card(CardType.Club, CardRank.Ace);
-            Card c3 = new Card(CardType.Club, CardRank.Ace);
+            Card c1 = new Card(CardType.Spade, CardRank.Ace);
+            Card c2 = new Card(CardType.Heart, CardRank.Ace);
+            Card c3 = new Card(CardType.Diamond, CardRank.Ace);
             Card c4 = new Card(CardType.Club, CardRank.Ace);
 
             Cardslst.AddFirst(c0);

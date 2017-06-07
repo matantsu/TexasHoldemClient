@@ -24,17 +24,18 @@ namespace TexasHoldemClient.PL.Windows
     public partial class GameWindow : Window
     {
 
+
         Game game = new Game();
-       // GameManager gm = BL.GameManager;
+        IGameManager gm = BL.GameManager;
         LinkedList<PlayerControl> playerControls = new LinkedList<PlayerControl>();
         LinkedList<Player> currentPlayers = new LinkedList<Player>();
 
-        public GameWindow(/*int gameID*/)
+        public GameWindow(int gameID)
         {
-            //this.game = gm.Listen(gameID);
-
-            
+            this.game = gm.Listen(gameID);
             InitializeComponent();
+            DataContext = game;
+
 
             playerControls.AddFirst(Player0);
             playerControls.AddFirst(Player1);
@@ -76,13 +77,7 @@ namespace TexasHoldemClient.PL.Windows
             game.Players = playerslst;
 
 
-            /*string directory = "C:\\Users\\Barakmen\\Desktop\\אוניסרביטאת בן גוריון שנה א\\שנה ג\\סמסטר ב\\סנדא ליישום פרוייקטי תכנה\\newClient_2\\TexasHoldemClient\\PL\\Images\\";
-            foreach (var file in Directory.GetFiles(directory).Where(f => f.EndsWith(".png")))
-            {
-                // list.Items.Add(new BitmapImage(new Uri(file)));
-                // or just add the filename, a default type converter will convert it into an ImageSource
-                list.Items.Add(file);
-            }*/
+
 
         }
 
@@ -109,17 +104,17 @@ namespace TexasHoldemClient.PL.Windows
 
         private async void Check_Click(object sender, RoutedEventArgs e)
         {
-            //await gm.Check(game);
+            await gm.Check(game);
         }
 
         private async void Fold_Click(object sender, RoutedEventArgs e)
         {
-           // await gm.Fold(game);
+           await gm.Fold(game);
         }
 
         private async void Raise_Click(object sender, RoutedEventArgs e)
         {
-           // await gm.Raise(game, Int32.Parse(BetTextBox.Text));
+           await gm.Raise(game, Int32.Parse(BetTextBox.Text));
         }
     }
 }

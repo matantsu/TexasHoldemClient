@@ -111,7 +111,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
 
         private Player getMe(Game game)
         {
-            return game.Players.First(x => x.Username == "one");
+            return game.Players.FirstOrDefault(x => x.Username == "one");
         }
         
         public async Task<int> Create(GameType gametype, string gameName, int buyin, int initialChips, int minBet, int minPlayers, int maxPlayers, bool spectatingAllowed)

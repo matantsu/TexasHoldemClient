@@ -17,30 +17,24 @@ using TexasHoldemClient.BusinessLayer;
 namespace TexasHoldemClient.PL.Pages
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for RegisterPage.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class RegisterPage : Page
     {
-
         IUserManager um = BL.UserManager;
+
         private Frame _mainFrame;
 
-        public LoginPage(Frame mainFrame)
+        public RegisterPage(Frame mainFrame)
         {
             _mainFrame = mainFrame;
             InitializeComponent();
-
         }
 
-        private async void Login_Click(object sender, RoutedEventArgs e)
+        private async void Submit_Click(object sender, RoutedEventArgs e)
         {
-            LoginButton.IsEnabled = false;
-            await um.Login(Email_TextBox.Text , Password_TextBox.Password);
-        }
-
-        private void Register_Click(object sender, RoutedEventArgs e)
-        {
-            _mainFrame.Navigate(new RegisterPage(_mainFrame));
+            await um.Register(Email_TextBox.Text, Username_TextBox.Text, Password_TextBox.Password);
+            _mainFrame.GoBack();
         }
     }
 }

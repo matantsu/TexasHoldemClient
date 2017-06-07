@@ -6,8 +6,11 @@
         xmlns:local="clr-namespace:TexasHoldemClient.PL.Windows"
         xmlns:UserControls="clr-namespace:TexasHoldemClient.PL.UserControls" x:Class="TexasHoldemClient.PL.Windows.GameWindow"
         mc:Ignorable="d"
-        Title="GameWindow"  WindowState="Maximized"
-        WindowStyle="SingleBorderWindow">
+        Title="GameWindow" 
+        Width="1300"
+        Height="800"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition x:Name="RowFor_ToolsBarSpace"  Height="1*" />
@@ -44,72 +47,59 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                <Grid.Background>
+                    <Grid.Background>
                         <ImageBrush ImageSource="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\poker_table.jpg"/>
                     </Grid.Background>
 
-                    <UserControls:OpenCardsControl Grid.Row="1" Grid.Column="1"></UserControls:OpenCardsControl>
-                </Grid>
-                <Grid Name="placeUserControls" Grid.Row="0">
+                    <Grid Name="PotSpace" Grid.Row="0" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Name="RowFor_EmptyMarginsSpace" Height="1*"/>
-                            <RowDefinition Name="RowFor_Players01Space" Height="1*"/>
-                            <RowDefinition Name="RowFor_Players23Space" Height="1*"/>
-                            <RowDefinition Name="RowFor_Players45Space" Height="1*"/>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-
-                        <Grid Name="Players01Space" Grid.Row="1" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Name="Player0Space" Grid.Column="0" >
-                                <StackPanel Orientation="Horizontal" Margin="150,0,0,0" HorizontalAlignment="Left">
-                                    <UserControls:PlayerControl x:Name="Player0" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Canvas.Left="44" Canvas.Top="176"/>
-                                </StackPanel>
-                            </Grid>
-                            <Grid Name="Player1Space" Grid.Column="1" >
-                                <StackPanel Orientation="Horizontal" Margin="190,0,0,0" HorizontalAlignment="Left">
-                                    <UserControls:PlayerControl x:Name="Player1" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-
-                        <Grid Name="Players23Space" Grid.Row="2" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Name="Player2Space" Grid.Column="0" >
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <UserControls:PlayerControl Margin="100,0,0,0" x:Name="Player2" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Canvas.Left="44" Canvas.Top="176"/>
-                                </StackPanel>
-                            </Grid>
-                            <Grid Name="Player3Space" Grid.Column="1" >
-                                <StackPanel Orientation="Horizontal" Margin="230,0,0,0" HorizontalAlignment="Left">
-                                    <UserControls:PlayerControl x:Name="Player3" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Canvas.Left="44" Canvas.Top="176"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-
-                        <Grid Name="Players45Space" Grid.Row="3" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Name="Player4Space" Grid.Column="0" >
-                                <StackPanel Orientation="Horizontal" Margin="150,0,0,0" HorizontalAlignment="Left">
-                                    <UserControls:PlayerControl x:Name="Player4" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto"/>
-                                </StackPanel>
-                            </Grid>
-                            <Grid Name="Player5Space" Grid.Column="1" >
-                                <StackPanel Orientation="Horizontal" Margin="150,0,0,0" HorizontalAlignment="Left">
-                                    <UserControls:PlayerControl x:Name="Player5" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Canvas.Left="44" Canvas.Top="176"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                        
+                        <StackPanel  Grid.Column="1" Grid.Row="2"  Orientation="Horizontal">
+                            <TextBlock Name="pot_text">
+                                <TextBlock.Inlines>
+                                    <Run FontWeight="Bold" FontSize="20" Text="Current Pot: " />
+                                    <Run FontWeight="Bold" FontSize="20" Text="{Binding Pot}" Foreground="Red"/>
+                                    <Run FontWeight="Bold" FontSize="20" Text="$" Foreground="Red"/>
+                                </TextBlock.Inlines>
+                            </TextBlock>
+                        </StackPanel>
                     </Grid>
+                    
+                    <UserControls:OpenCardsControl Grid.Row="1" Grid.Column="1"></UserControls:OpenCardsControl>
+                    
+                    
+                    <Grid Name="TwoPlayerCards_Space" Grid.Row="2" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <UserControls:TwoPlayerCardsControl Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="2" VerticalAlignment="Top"/>
+                    </Grid>
+                </Grid>
+
+                <Grid Name="placePlayerControls" Grid.Row="0">
+                    <UserControls:PlayerControl x:Name="Player0" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="808,305,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player1" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="748,142,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player2" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="164,142,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player3" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="94,318,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player4" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="164,468,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player5" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="748,468,0,0"/>
+                    <UserControls:PlayerControl x:Name="MyPlayer"  HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="450,597,0,0"/>
+
+                </Grid>
 
                 <Grid Name="UserActionsSpace" Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -123,14 +113,10 @@
                     <Button Click="Fold_Click" Grid.Column="1" Background="Aquamarine">Fold</Button>
                     <Grid Grid.Column="2" >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5*"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Button Click="Raise_Click"  Background="Beige">Raise</Button>
-                            <Grid/>
-                        </Grid>
-                        <Grid Grid.Row="1" >
+                        <Grid Grid.Row="0" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="4*"/>
@@ -139,7 +125,10 @@
                             <TextBlock Grid.Column="0" Text="Enter Bet:"/>
                             <TextBox Name="BetTextBox" Grid.Column="1" />
                         </Grid>
-
+                        <Grid Grid.Row="1">
+                            <Button Click="Raise_Click"  Background="Beige">Raise</Button>
+                            <Grid/>
+                        </Grid>
 
 
                     </Grid>

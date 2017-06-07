@@ -30,7 +30,8 @@
             <Grid Name="MainBar" Grid.Row="0" Background="LightGray">
                 <StackPanel Margin="8" Orientation="Horizontal">
                     <Button Name="RegisterButton" IsEnabled="True" Background="Bisque" Click="Logout_Click">Logout</Button>
-                    <TextBlock Text="Hi - {BindingNeeded}"></TextBlock>
+                    <TextBlock Text="Hi - "></TextBlock>
+                    <TextBlock Text="{Binding DisplayName}"></TextBlock>
                     <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />
                     <Button>Settings</Button>
                     <Separator Margin="5" Foreground="Black" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" FontWeight="Bold" />

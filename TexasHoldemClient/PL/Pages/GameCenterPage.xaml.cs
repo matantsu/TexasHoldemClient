@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TexasHoldemClient.BusinessLayer;
+using TexasHoldemClient.BusinessLayer.Models;
 using TexasHoldemClient.PL.Windows;
 
 namespace TexasHoldemClient.PL.Pages
@@ -23,10 +24,14 @@ namespace TexasHoldemClient.PL.Pages
     public partial class GameCenterPage : Page
     {
         IUserManager um = BL.UserManager;
+        IGameManager gm = BL.GameManager;
 
         public GameCenterPage()
         {
             InitializeComponent();
+            MainBar.DataContext = um.CurrentUser;
+            TableOfGames.DataContext = gm;
+            TableOfJoinedGames.DataContext = gm;
         }
 
         private async void Logout_Click(object sender, RoutedEventArgs e)
@@ -38,6 +43,20 @@ namespace TexasHoldemClient.PL.Pages
         private void CreateNewGame_Click(object sender, RoutedEventArgs e)
         {
             new CreateNewGameWindow().Show();
+        }
+
+        private async void Join_Click(object sender, RoutedEventArgs e)
+        {
+            Game g = (Game)GamesDataGrid.SelectedItem;
+            await gm.Join(g);
+            new GameWindow(g.ID).Show();
+        }
+
+
+        private void returnToGame_Click(object sender, RoutedEventArgs e)
+        {
+            Game g = (Game)JoidGamesDataGrid.SelectedItem;
+            new GameWindow(g.ID).Show();
         }
     }
 }
