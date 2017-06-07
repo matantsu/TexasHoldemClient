@@ -217,9 +217,10 @@ namespace TexasHoldemClient.BusinessLayer.Fake
                 this.PropertyChanged -= handler;
         }
 
-        public Task StartRound(Game game)
+        public async Task StartRound(Game game)
         {
-            throw new NotImplementedException();
+            game.IsOnRound = true;
+            game.CurrentPlayer = game.Players.ElementAt(0);
         }
     }
 }
