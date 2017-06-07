@@ -29,13 +29,9 @@ namespace TexasHoldemClient.BusinessLayer.api
             return oba.SelectMany(f);
         }
 
-        public static IObservable<IDictionary<string,T>> FromPaths<T>(IFirebaseClient fb, IObservable<IEnumerable<string>> ob)
+        public static IObservable<IEnumerable<T>> FromPaths<T>(IFirebaseClient fb, IObservable<IEnumerable<string>> ob)
         {
-            return Observable.Switch(ob.Select(x => 
-                Observable.CombineLatest(x.Select(path => 
-                    FromPath<T>(fb, path).Select(t => 
-                        new KeyValuePair<string,T>(path,t)))).Select(ts => ts.ToDictionary(k => k.Key, k => k.Value))
-                        ));
+            return Observable.Switch(ob.Select(xs => Observable.CombineLatest(xs.Select(path => FromPath<T>(fb, path)))));
         }
 
         public static IObservable<T> Trace<T>(string tag, IObservable<T> o)

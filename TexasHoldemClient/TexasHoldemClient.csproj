@@ -188,6 +188,7 @@
     <Compile Include="BusinessLayer\Config.cs" />
     <Compile Include="BusinessLayer\Fake\GameManager.cs" />
     <Compile Include="BusinessLayer\Fake\UserManager.cs" />
+    <Compile Include="BusinessLayer\Models\Me.cs" />
     <Compile Include="BusinessLayer\Real\GameManager.cs" />
     <Compile Include="BusinessLayer\Models\Game.cs" />
     <Compile Include="BusinessLayer\Models\Player.cs" />

@@ -6,7 +6,7 @@ using System.Text;
 namespace Tests.BusinessLayer
 {
     [TestClass]
-    class UserManager
+    public class UserManager
     {
         [TestMethod]
         public void TestMethod1()

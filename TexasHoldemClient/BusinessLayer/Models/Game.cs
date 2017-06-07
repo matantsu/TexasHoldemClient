@@ -241,6 +241,20 @@ namespace TexasHoldemClient.BusinessLayer.Models
             }
         }
 
+        private int playersCount;
+        public int PlayersCount
+        {
+            get { return playersCount; }
+            set
+            {
+                if (playersCount != value)
+                {
+                    playersCount = value;
+                    OnPropertyChanged("PlayersCount");
+                }
+            }
+        }
+
         private bool isSpectatingAllowed;
         public bool IsSpectatingAllowed
         {
