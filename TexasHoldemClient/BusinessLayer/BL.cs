@@ -5,12 +5,14 @@ using FireSharp.Interfaces;
 using Refit;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TexasHoldemClient.BusinessLayer.api;
 using TexasHoldemClient.BusinessLayer.Models;
+using TexasHoldemClient.BusinessLayer.Real;
 
 namespace TexasHoldemClient.BusinessLayer
 {
@@ -49,10 +51,22 @@ namespace TexasHoldemClient.BusinessLayer
         Task Logout(string username, string password);
     }
 
+    public interface IChatManager
+    {
+        ObservableCollection<ChatMessage> Messages { get; }
+
+        ObservableCollection<ChatMessage> Subscribe(Game game);
+        void Dispose(Game game);
+
+        Task Send(ChatMessage message);
+        Task Send(Game game, ChatMessage message);
+    }
+
     public class BL
     {
         public static IUserManager UserManager { get; private set; }
         public static IGameManager GameManager { get; private set; }
+        public static IChatManager ChatManager { get; private set; }
 
         static BL()
         {
@@ -80,6 +94,7 @@ namespace TexasHoldemClient.BusinessLayer
             UserManager = new UserManager(sapi, authProvider, fb);
             ApiManager api = new ApiManager(sapi, UserManager);
             GameManager = new GameManager(UserManager, fb, api);
+            ChatManager = new ChatManager();
         }
     }
 }

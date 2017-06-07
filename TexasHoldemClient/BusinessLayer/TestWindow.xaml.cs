@@ -21,22 +21,21 @@ namespace TexasHoldemClient.BusinessLayer
     /// </summary>
     public partial class TestWindow : Window
     {
-       
+        Game g;
         public TestWindow()
         {
             InitializeComponent();
-            BL.GameManager.PropertyChanged += GameManager_PropertyChanged;
+            BL.ChatManager.Messages.CollectionChanged += Messages_CollectionChanged;
         }
 
-        private void GameManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Messages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            MessageBox.Show(e.PropertyName);
+            MessageBox.Show("Messages changed");
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var user = await BL.UserManager.Login("newnewone1@gmail.com", "newnewone1123");
-            var gid = await BL.GameManager.Create(GameType.PotLimit, "newnewone1's new game", 1, 2, 3, 4, 5, true);
+            await BL.ChatManager.Send(new ChatMessage());
         }
     }
 }

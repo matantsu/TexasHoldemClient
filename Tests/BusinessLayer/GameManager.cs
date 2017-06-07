@@ -7,7 +7,7 @@ using TexasHoldemClient.BusinessLayer;
 namespace Tests.BusinessLayer
 {
     [TestClass]
-    class GameManager
+    public class GameManager
     {
         [TestMethod]
         public void TestMethod1()
