@@ -1,0 +1,38 @@
+﻿<Application x:Class="NewDesignClient.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NewDesignClient"
+             StartupUri="Windows/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--https://github.com/ButchersBoy/MaterialDesignInXamlToolkit-->
+                <!--http://mahapps.com/ not istalled yet-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+          
+            <ControlTemplate x:Key="validationError_Email">
+                <StackPanel>
+                    <AdornedElementPlaceholder  x:Name="ErrorAdorner" ></AdornedElementPlaceholder>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <Grid Width="12" Height="12">
+                            <Ellipse Width="12" Height="12" Fill="Red" HorizontalAlignment="Center"  VerticalAlignment="Center" ></Ellipse>
+                            <TextBlock Foreground="White" FontWeight="Heavy" FontSize="8" HorizontalAlignment="Center"  VerticalAlignment="Center" TextAlignment="Center" ToolTip="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" >X</TextBlock>
+                        </Grid>
+                        <TextBlock Foreground="Red" FontSize="12" Margin="2,0,0,0"  Text="{Binding ElementName=ErrorAdorner,  Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" ></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </ControlTemplate>
+
+
+        </ResourceDictionary>
+        
+        
+    </Application.Resources>
+    
+    
+</Application>

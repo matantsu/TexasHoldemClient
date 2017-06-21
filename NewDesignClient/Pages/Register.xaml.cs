@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NewDesignClient.Binding;
+using NewDesignClient.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,32 +15,39 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TexasHoldemClient.BusinessLayer;
-using TexasHoldemClient.Helpers;
 
-namespace TexasHoldemClient.PL.Pages
+namespace NewDesignClient.Pages
 {
-    /// <summary>
-    /// Interaction logic for RegisterPage.xaml
-    /// </summary>
-    public partial class RegisterPage : Page
-    {
-        IUserManager um = BL.UserManager;
+   
 
+
+    /// <summary>
+    /// Interaction logic for Register.xaml
+    /// </summary>
+    public partial class Register : Page
+    {
         private Frame _mainFrame;
 
-        public RegisterPage(Frame mainFrame)
+        public Bind<SolidColorBrush> TextBox_Email_Forground { get; } = new Bind<SolidColorBrush>(Brushes.Gray);
+        public Bind<SolidColorBrush> TextBox_Password_Forground { get; } = new Bind<SolidColorBrush>(Brushes.Gray);
+        public Bind<SolidColorBrush> TextBox_ConfrimPassword_Forground { get; } = new Bind<SolidColorBrush>(Brushes.Gray);
+        public Bind<SolidColorBrush> TextBox_Username_Forground { get; } = new Bind<SolidColorBrush>(Brushes.Gray);
+
+      
+
+        public Register(Frame mainFrame)
         {
             _mainFrame = mainFrame;
-            InitializeComponent();
 
+            InitializeComponent();
             DataContext = this;
+
+
             ProgressBar_RegisterPressed.Visibility = Visibility.Hidden;
             RegisterForm.IsEnabled = true;
-
         }
 
-        private async void Register_Click(object sender, RoutedEventArgs e)
+        private void Register_Click(object sender, RoutedEventArgs e)
         {
             bool isResterDataOk = true;
             isResterDataOk &= checkUsername(TextBox_Username.Text);
@@ -47,36 +56,64 @@ namespace TexasHoldemClient.PL.Pages
 
             if (isResterDataOk)
             {
-                try
-                {
-                    RegisterForm.IsEnabled = false;
-                    ProgressBar_RegisterPressed.Visibility = Visibility.Visible;
-                    await um.Register(TextBlock_Email.Text, TextBox_Username.Text, PasswordBox_Password.Password);
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show(exp.Message);
-                    ProgressBar_RegisterPressed.Visibility = Visibility.Hidden;
-                    RegisterForm.IsEnabled = true;
-                }
-
-                _mainFrame.GoBack();
+                RegisterForm.IsEnabled = false;
+                ProgressBar_RegisterPressed.Visibility = Visibility.Visible;
             }
+
         }
 
-
+      
         private void Cancle_Click(object sender, RoutedEventArgs e)
         {
             _mainFrame.GoBack();
         }
 
 
+        #region text boxs get and loss focus
+        private void TextBox_Email_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox_Email_Forground.Data = Brushes.Gray;
+        }
+        private void TextBox_Email_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox_Email_Forground.Data = Brushes.Blue;
+        }
+
+        private void PasswordBox_Password_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox_Password_Forground.Data = Brushes.Gray;
+        }
+        private void PasswordBox_Password_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox_Password_Forground.Data = Brushes.Blue;
+        }
+
+        private void TextBox_Username_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox_Username_Forground.Data = Brushes.Blue;
+        }
+
+        private void TextBox_Username_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox_Username_Forground.Data = Brushes.Gray;
+        }
+
+        private void PasswordBox_ConfrimPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox_ConfrimPassword_Forground.Data = Brushes.Gray;
+        }
+
+        private void PasswordBox_ConfrimPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox_ConfrimPassword_Forground.Data = Brushes.Blue;
+        }
+
+        #endregion
 
         #region textbox data validation and errors
-
         private bool checkPasswordEquals(string password1, string password2)
         {
-            if (!Validators.isPasswordConfirmValid(password1, password2))
+            if (password1 != password2 || password1 == null || password1 == "")
             {
                 TextBlock_PasswordEqualError.Visibility = Visibility.Visible;
                 return false;
@@ -100,7 +137,7 @@ namespace TexasHoldemClient.PL.Pages
                 TextBlock_EmailError.Visibility = Visibility.Collapsed;
                 return true;
             }
-
+            
         }
 
         private bool checkUsername(string text)
@@ -108,7 +145,7 @@ namespace TexasHoldemClient.PL.Pages
             if (!Validators.isUsaernameValid(text))
             {
                 TextBlock_UsernameError.Visibility = Visibility.Visible;
-                return false;
+                return false;   
             }
             else
             {
@@ -130,48 +167,6 @@ namespace TexasHoldemClient.PL.Pages
         private void PasswordBox_ConfrimPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             checkPasswordEquals(PasswordBox_Password.Password, PasswordBox_ConfrimPassword.Password);
-        }
-
-        #endregion
-
-
-        #region text boxs get and loss focus
-        private void TextBox_Email_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBlock_Email.Foreground = Brushes.Black;
-        }
-        private void TextBox_Email_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBlock_Email.Foreground = Brushes.Blue;
-        }
-
-        private void PasswordBox_Password_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBlock_Password.Foreground = Brushes.Black;
-        }
-        private void PasswordBox_Password_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBlock_Password.Foreground = Brushes.Blue;
-        }
-
-        private void TextBox_Username_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBlock_Username.Foreground = Brushes.Blue;
-        }
-
-        private void TextBox_Username_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBlock_Username.Foreground = Brushes.Black;
-        }
-
-        private void PasswordBox_ConfrimPassword_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBlock_ConfrimPassword.Foreground = Brushes.Black;
-        }
-
-        private void PasswordBox_ConfrimPassword_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBlock_ConfrimPassword.Foreground = Brushes.Blue;
         }
 
         #endregion

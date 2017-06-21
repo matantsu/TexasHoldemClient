@@ -135,6 +135,9 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Grid  Margin="20">
+                    <fa:ImageAwesome x:Name="LoadingAnimation_Games" Icon="Refresh" Spin="True" Height="48" Width="48" />
+                </Grid>
             </Grid>
 
             <Grid Name="JoinedGamesBar" Grid.Row="3" >

@@ -32,19 +32,27 @@ namespace TexasHoldemClient.PL.Windows
 
         private async void Submit_Click(object sender, RoutedEventArgs e)
         {
+            try {
+                LoadingAnimation.Visibility = Visibility.Visible;
+                await gm.Create(
 
-            await gm.Create(
+                            (GameType)Enum.GetValues(typeof(GameType)).GetValue(gametype_ComboBox.SelectedIndex),
+                            GameName_TextBox.Text,
+                            Int32.Parse(buyin_TextBox.Text),
+                            Int32.Parse(initialChips_TextBox.Text),
+                            Int32.Parse(minBet_TextBox.Text),
+                            Int32.Parse(minPlayers_TextBox.Text),
+                            Int32.Parse(maxPlayers_TextBox.Text),
+                            spectatingAllowed_CheckBox.IsChecked.GetValueOrDefault());
+                MessageBox.Show("Game Created Successfully !");
 
-                        (GameType)Enum.GetValues(typeof(GameType)).GetValue(gametype_ComboBox.SelectedIndex),
-                        GameName_TextBox.Text,
-                        Int32.Parse(buyin_TextBox.Text),
-                        Int32.Parse(initialChips_TextBox.Text),
-                        Int32.Parse(minBet_TextBox.Text),
-                        Int32.Parse(minPlayers_TextBox.Text),
-                        Int32.Parse(maxPlayers_TextBox.Text),
-                        spectatingAllowed_CheckBox.IsChecked.GetValueOrDefault());
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            LoadingAnimation.Visibility = Visibility.Hidden;
             Close();
-            //new GameWindow().Show();
         }
     }
 

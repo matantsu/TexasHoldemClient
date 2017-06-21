@@ -18,6 +18,20 @@ using TexasHoldemClient.PL.UserControls;
 
 namespace TexasHoldemClient.PL.Windows
 {
+    public class booleaninverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return !(bool)value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return !(bool)value;
+        }
+    }
+
+
     /// <summary>
     /// Interaction logic for GameWindow.xaml
     /// </summary>
@@ -33,7 +47,7 @@ namespace TexasHoldemClient.PL.Windows
             this.game = gm.Listen(gameID);
             InitializeComponent();
             DataContext = game;
-
+            
             playerControls.AddFirst(Player0);
             playerControls.AddFirst(Player1);
             playerControls.AddFirst(Player2);
@@ -50,6 +64,7 @@ namespace TexasHoldemClient.PL.Windows
         }
 
 
+        
 
         private void GameChangeHandler(object sender, PropertyChangedEventArgs e)
         {
@@ -108,10 +123,6 @@ namespace TexasHoldemClient.PL.Windows
                     }
                 }
 
-                if(e.PropertyName == "IsOnRound")
-                {
-                    Button_StartRound.IsEnabled = game.IsOnRound;
-                }
             });
             
         }
@@ -147,6 +158,7 @@ namespace TexasHoldemClient.PL.Windows
 
         private async void StartRound_Click(object sender, RoutedEventArgs e)
         {
+            
             await gm.StartRound(game);
         }
 

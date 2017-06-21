@@ -2,11 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TexasHoldemClient.PL.Windows"
         mc:Ignorable="d"
         Title="CreateNewGameWindow" Height="500" Width="300">
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" Name="RowFor_Title"/>
             <RowDefinition Height="Auto" Name="RowFor_CollectData" />
@@ -16,7 +18,7 @@
         <StackPanel Name="TitleSpace" HorizontalAlignment="Center" Grid.Row="0">
             <Label Content="Set Game Preferences For New Game" FontSize="15" />
         </StackPanel>
-
+        
         <Grid Name="CollectDataSpace" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" Name="RowFor_GameTypeSpace"/>
@@ -73,6 +75,8 @@
 
         <Grid Name="SubmitSpace" Grid.Row="2">
             <Button Content="Submit" Click="Submit_Click"/>
+            <fa:ImageAwesome Visibility="Hidden" x:Name="LoadingAnimation" Icon="Refresh" Spin="True" Height="48" Width="48" />
         </Grid>
+        
     </Grid>
 </Window>
