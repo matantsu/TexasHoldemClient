@@ -8,9 +8,9 @@
         xmlns:local="clr-namespace:TexasHoldemClient.PL.Windows"
           
 
-           xmlns:uc="clr-namespace:TexasHoldemClient.PL.UserControls"
+        xmlns:uc="clr-namespace:TexasHoldemClient.PL.UserControls"
 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
@@ -27,7 +27,7 @@
 
     <materialDesign:Card x:Name="loginCard" Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" >
         <Grid>
-            
+
             <StackPanel>
                 <ProgressBar Name="ProgressBar_LoginPressed" IsIndeterminate="True" Orientation="Horizontal" Margin="0,0,0,50"/>
 
@@ -39,7 +39,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition/> 
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Create New Game" Style="{DynamicResource MaterialDesignTitleTextBlock}" Margin="0,0,0,20" FontSize="25" Grid.Row="0"/>
                     <StackPanel  x:Name="CreateGameFormLeft" Orientation="Vertical" Grid.Column="0" Grid.Row="1" Margin="0 0 0 20">
@@ -94,9 +94,9 @@
                         </StackPanel>
                     </StackPanel>
                 </Grid>
-                
-           
-            
+
+
+
             </StackPanel>
 
         </Grid>
