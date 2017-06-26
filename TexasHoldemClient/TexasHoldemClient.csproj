@@ -95,6 +95,9 @@
     <Reference Include="Google.Apis.PlatformServices, Version=1.27.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.27.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -151,6 +154,10 @@
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -163,6 +170,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.14\lib\net\WpfAnimatedGif.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
@@ -208,13 +218,32 @@
     <Compile Include="BusinessLayer\Real\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PL\Helpers\Bind.cs" />
+    <Compile Include="PL\Helpers\NameValidator.cs" />
     <Compile Include="PL\Helpers\Validators.cs" />
+    <Compile Include="PL\Models\DemoItem.cs" />
+    <Compile Include="PL\Models\NotifyPropertyChangedExtension.cs" />
     <Compile Include="PL\Models\RegisterInfo.cs" />
+    <Compile Include="PL\Pages\AfterLoginPages\ActiveGamesPage.xaml.cs">
+      <DependentUpon>ActiveGamesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\Pages\AfterLoginPages\AvaliableGamesPage.xaml.cs">
+      <DependentUpon>AvaliableGamesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\Pages\AfterLoginPages\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\Pages\AfterLoginPages\ReplayGamesPage.xaml.cs">
+      <DependentUpon>ReplayGamesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PL\Pages\GameCenterPage.xaml.cs">
       <DependentUpon>GameCenterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PL\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\Pages\MDGameCenterPage.xaml.cs">
+      <DependentUpon>MDGameCenterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PL\Pages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
@@ -225,11 +254,20 @@
     <Compile Include="PL\UserControls\ChatControl.xaml.cs">
       <DependentUpon>ChatControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PL\UserControls\LoadingAnimationControl.xaml.cs">
+      <DependentUpon>LoadingAnimationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PL\UserControls\OpenCardsControl.xaml.cs">
       <DependentUpon>OpenCardsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PL\UserControls\PlayerControl.xaml.cs">
       <DependentUpon>PlayerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\UserControls\SampleMessageDialog.xaml.cs">
+      <DependentUpon>SampleMessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PL\UserControls\TextBoxExtention.xaml.cs">
+      <DependentUpon>TextBoxExtention.xaml</DependentUpon>
     </Compile>
     <Compile Include="PL\UserControls\TwoPlayerCardsControl.xaml.cs">
       <DependentUpon>TwoPlayerCardsControl.xaml</DependentUpon>
@@ -304,11 +342,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PL\Pages\AfterLoginPages\ActiveGamesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Pages\AfterLoginPages\AvaliableGamesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Pages\AfterLoginPages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Pages\AfterLoginPages\ReplayGamesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PL\Pages\GameCenterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PL\Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Pages\MDGameCenterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -324,11 +382,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PL\UserControls\LoadingAnimationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PL\UserControls\OpenCardsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PL\UserControls\PlayerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\UserControls\SampleMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\UserControls\TextBoxExtention.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -415,6 +485,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resorces\login_image.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resorces\thumb-1920-41814.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resorces\animated-playing-card-image-0071.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -4,10 +4,13 @@
              xmlns:local="clr-namespace:TexasHoldemClient"
               xmlns:src="clr-namespace:TexasHoldemClient.PL.Windows"
              StartupUri="PL/Windows/GameCenterMainWindow.xaml">
+    <!--CreateNewGameWindow-->
 
     <Application.Resources>
- 
+
         <ResourceDictionary>
+
+
             <src:booleaninverter x:Key="booleaninverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />

@@ -28,7 +28,10 @@
 
             </Grid.RowDefinitions>
 
-            <Grid Name="MainBar"  Grid.Row="0" Background="LightGray">
+            
+            
+            
+            <Grid Name="MainBar"  Grid.Row="0" Background="LightGray" >
                 <StackPanel Margin="8" Orientation="Horizontal">
                     <!-- logout button -->
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
@@ -72,7 +75,7 @@
                         </Viewbox>
                     </StackPanel>
                 </Grid>
-                <Grid Name="SearchBar" Grid.Column="1" >
+                <!--Grid Name="SearchBar" Grid.Column="1" >
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -108,7 +111,7 @@
                         </Grid>
                         
                     </Grid>
-                </Grid>
+                </Grid-->
                 <Grid Name="CreateNewGameButtom" Grid.Column="2" >
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Click="CreateNewGame_Click">+ Create new game</Button>

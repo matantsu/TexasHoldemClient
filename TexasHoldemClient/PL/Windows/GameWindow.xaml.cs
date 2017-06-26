@@ -158,7 +158,6 @@ namespace TexasHoldemClient.PL.Windows
 
         private async void StartRound_Click(object sender, RoutedEventArgs e)
         {
-            
             await gm.StartRound(game);
         }
 

@@ -23,6 +23,8 @@
     <Grid>
         <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
 
+        
+        
         <Grid.Background>
             <ImageBrush ImageSource="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\login_image.jpg"/>
         </Grid.Background>

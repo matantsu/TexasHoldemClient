@@ -7,7 +7,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:fa="http://schemas.fontawesome.io/icons/"
       xmlns:local="clr-namespace:TexasHoldemClient.PL.Pages"
-       
+      xmlns:uc="clr-namespace:TexasHoldemClient.PL.UserControls"
+    
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -31,7 +32,8 @@
 
                     <TextBlock x:Name="TextBlock_Password"  Margin="0,20,0,0"  Text="Password:" Foreground="{Binding TextBox_Password_Forground.Data}"/>
                     <PasswordBox x:Name="PasswordBox_Password" GotFocus="PasswordBox_Password_GotFocus" LostFocus="PasswordBox_Password_LostFocus" />
-
+                    
+                    
                     <StackPanel Name="StackPanel_LoginAndRegisterButtons" Orientation="Horizontal" HorizontalAlignment="Right"   Margin="0,30,0,0">
                         <Button x:Name="Button_Register" Content="Register" Click="Register_Click"  Width="100" Margin="10"/>
                         <Button x:Name="Button_Login" Content="Login" Click="Login_Click"  Width="100" Margin="10"/>
