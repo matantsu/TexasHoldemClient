@@ -22,7 +22,7 @@
         mc:Ignorable="d"
         Title="CreateNewGameWindow">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\thumb-1920-41814.jpg"/>
+        <ImageBrush ImageSource="/Resorces/thumb-1920-41814.jpg"/>
     </Window.Background>
 
     <materialDesign:Card x:Name="loginCard" Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" >

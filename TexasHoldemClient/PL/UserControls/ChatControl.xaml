@@ -5,9 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TexasHoldemClient.PL.UserControls"
              mc:Ignorable="d" 
-            d:DesignHeight="1000" d:DesignWidth="400"
-             xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf">
+            d:DesignHeight="1000" d:DesignWidth="400">
     <Grid>
-        <wpf:ChromiumWebBrowser x:Name="Browser" Address="http://www.google.com" />
     </Grid>
 </UserControl>
