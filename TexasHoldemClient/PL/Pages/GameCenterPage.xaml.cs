@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,28 @@ namespace TexasHoldemClient.PL.Pages
 
         public GameCenterPage()
         {
+
             InitializeComponent();
             MainBar.DataContext = um.CurrentUser;
             TableOfGames.DataContext = gm;
             TableOfJoinedGames.DataContext = gm;
+            //JoidGamesDataGrid.DataContext = gm;
+
+            gm.PropertyChanged += GmChanedHandler;
+        }
+
+        private void GmChanedHandler(object sender, PropertyChangedEventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                if (e.PropertyName == "ActiveGames"){
+                    LoadingAnimation_CurrentJoinedGame.Visibility = Visibility.Hidden;
+                }
+                if (e.PropertyName == "Games")
+                {
+                    LoadingAnimation_Games.Visibility = Visibility.Hidden;
+                }
+            });
         }
 
         private async void Logout_Click(object sender, RoutedEventArgs e)
@@ -47,16 +66,31 @@ namespace TexasHoldemClient.PL.Pages
 
         private async void Join_Click(object sender, RoutedEventArgs e)
         {
-            Game g = (Game)GamesDataGrid.SelectedItem;
-            await gm.Join(g);
-            new GameWindow(g.ID).Show();
+            try
+            {
+                Game g = (Game)GamesDataGrid.SelectedItem;
+                await gm.Join(g);
+                new GameWindow(g.ID).Show();
+            }catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            
         }
 
 
         private void returnToGame_Click(object sender, RoutedEventArgs e)
         {
-            Game g = (Game)JoidGamesDataGrid.SelectedItem;
-            new GameWindow(g.ID).Show();
+            try
+            {
+                Game g = (Game)JoidGamesDataGrid.SelectedItem;
+                new GameWindow(g.ID).Show();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            
         }
 
         private void Setting_Click(object sender, RoutedEventArgs e)

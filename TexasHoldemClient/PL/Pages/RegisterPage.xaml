@@ -3,26 +3,87 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       xmlns:local="clr-namespace:TexasHoldemClient.PL.Pages"
+    
+      
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="Transparent"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="500"
-      Title="RegisterPage">
+      d:DesignHeight="600" d:DesignWidth="600"
+      Title="Register">
 
-    <Grid>
+    <materialDesign:Card Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid>
+            <StackPanel Height="500" Width="400">
+                <ProgressBar Name="ProgressBar_RegisterPressed" IsIndeterminate="True" Orientation="Horizontal" Margin="0,0,0,50"/>
+                <StackPanel x:Name="RegisterForm" Orientation="Vertical" Width="300" Margin="50,0" >
+                    <TextBlock Text="Register" Style="{DynamicResource MaterialDesignTitleTextBlock}" Margin="0,0,0,20" FontSize="25"/>
+
+                    <TextBlock x:Name="TextBlock_Username"  Margin="0,20,0,0" Text="Username:" Foreground="{Binding TextBox_Username_Forground.Data}"/>
+                    <TextBox  x:Name="TextBox_Username" TextChanged="TextBox_Username_TextChanged" GotFocus="TextBox_Username_GotFocus" LostFocus="TextBox_Username_LostFocus"/>
+                    <TextBlock x:Name="TextBlock_UsernameError" Visibility="Collapsed" Text="⚠ username missing." FontSize="12" Foreground="Red"/>
+
+                    <TextBlock x:Name="TextBlock_Email"  Margin="0,20,0,0" Text="Email:" Foreground="{Binding TextBox_Email_Forground.Data}"/>
+                    <TextBox  x:Name="TextBox_Email" TextChanged="TextBox_Email_TextChanged"  GotFocus="TextBox_Email_GotFocus" LostFocus="TextBox_Email_LostFocus"/>
+                    <TextBlock x:Name="TextBlock_EmailError" Visibility="Collapsed" Text="⚠ invalid email format." FontSize="12" Foreground="Red"/>
+
+
+                    <TextBlock x:Name="TextBlock_Password"  Margin="0,20,0,0"  Text="Password:" Foreground="{Binding TextBox_Password_Forground.Data}"/>
+                    <PasswordBox x:Name="PasswordBox_Password" GotFocus="PasswordBox_Password_GotFocus" LostFocus="PasswordBox_Password_LostFocus" />
+
+                    <TextBlock x:Name="TextBlock_ConfrimPassword"  Margin="0,20,0,0"  Text="Confrim Password:" Foreground="{Binding TextBox_ConfrimPassword_Forground.Data}"/>
+                    <PasswordBox x:Name="PasswordBox_ConfrimPassword"  PasswordChanged="PasswordBox_ConfrimPassword_PasswordChanged" GotFocus="PasswordBox_ConfrimPassword_GotFocus" LostFocus="PasswordBox_ConfrimPassword_LostFocus"/>
+                    <TextBlock x:Name="TextBlock_PasswordEqualError" Visibility="Collapsed" Text="⚠ passwords are not equals or missing." FontSize="12" Foreground="Red"/>
+
+                    <StackPanel Name="StackPanel_LoginAndRegisterButtons" Orientation="Horizontal" HorizontalAlignment="Right"   Margin="0,15,0,0">
+                        <Button x:Name="Button_Cancel" Content="Cancel" Click="Cancle_Click"  Width="100" Margin="10"/>
+                        <Button x:Name="Button_Register" Content="Register" Click="Register_Click"  Width="100" Margin="10"/>
+                    </StackPanel>
+
+                    <TextBlock Name="HyperLink_ForgotPassword">
+                        <Hyperlink>
+                           <Hyperlink.Inlines>
+                                <Run Foreground="CornflowerBlue" Text="Forgot password? We Don't Care."/>
+                           </Hyperlink.Inlines>
+                        </Hyperlink>
+                    </TextBlock>
+
+
+                </StackPanel>
+
+
+            </StackPanel>
+
+        </Grid>
+    </materialDesign:Card>
+
+    <!--Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="131*"/>
-            <ColumnDefinition Width="369*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Content="Register" FontSize="30" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Grid.Column="1" Height="50" Width="117"/>
-        <TextBox x:Name="Username_TextBox" HorizontalAlignment="Left" Height="23" Margin="0,94,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="211" Grid.Column="1"/>
-        <TextBox x:Name="Email_TextBox" HorizontalAlignment="Left" Height="23" Margin="0,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" Grid.Column="1"/>
-        <PasswordBox x:Name="Password_TextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="211" Height="18"/>
-        <PasswordBox x:Name="ConfirmPassword_TextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="0,173,0,0" VerticalAlignment="Top" Width="211" Height="18"/>
+        
+        <Label Content="Register" FontSize="30" HorizontalAlignment="Left" Margin="141,26,0,0" VerticalAlignment="Top" Height="50" Width="117"/>
+        <TextBox x:Name="Username_TextBox" HorizontalAlignment="Left" Height="23" Margin="131,94,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="211" TextChanged="Validation_Username"/>
+        <TextBox x:Name="Email_TextBox" HorizontalAlignment="Left" Height="23" Margin="131,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" TextChanged="Validation_Email"/>
+        <PasswordBox x:Name="Password_TextBox" HorizontalAlignment="Left" Margin="131,150,0,0" VerticalAlignment="Top" Width="211" Height="18"/>
+        <PasswordBox x:Name="ConfirmPassword_TextBox" HorizontalAlignment="Left" Margin="131,173,0,0" VerticalAlignment="Top" Width="211" Height="18"/>
         <TextBlock HorizontalAlignment="Left" Width="56" Margin="10,101,0,0" TextWrapping="Wrap" Text="Username:" VerticalAlignment="Top" Height="16"/>
         <TextBlock HorizontalAlignment="Left" Width="31" Margin="10,129,0,0" TextWrapping="Wrap" Text="Email:" VerticalAlignment="Top" Height="16"/>
         <TextBlock HorizontalAlignment="Left" Width="52" Margin="10,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="P"/><Run Text="assword:"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Width="98" Margin="10,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="Confirm P"/><Run Text="assword:"/></TextBlock>
-        <Button Content="Submit" Grid.Column="1" HorizontalAlignment="Left" Margin="52,257,0,0" VerticalAlignment="Top" Width="75" Click="Submit_Click"/>
+        <Button Name="Button_Submit" Content="Submit" HorizontalAlignment="Left" Margin="183,232,0,0" VerticalAlignment="Top" Width="75" Click="Submit_Click"/>
+        <Grid  Margin="20">
+            <fa:ImageAwesome x:Name="LoadingAnimation_SubmitLoading" Visibility="Collapsed" Icon="Refresh" Spin="True" Height="48" Width="48" />
+        </Grid>
+    </Grid-->
 
-    </Grid>
+    
+
 </Page>

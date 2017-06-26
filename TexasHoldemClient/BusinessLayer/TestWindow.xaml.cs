@@ -26,10 +26,14 @@ namespace TexasHoldemClient.BusinessLayer
         public TestWindow()
         {
             InitializeComponent();
-            Browser.Address = System.AppDomain.CurrentDomain.BaseDirectory + "chat\\dist\\index.html";
-            Browser.LoadError += Browser_LoadError;
-            Browser.ConsoleMessage += Browser_ConsoleMessage;
-            //Browser.JsDialogHandler = new JsDialogHandler();
+            BL.GameManager.PropertyChanged += GameManager_PropertyChanged;
+
+            g = BL.GameManager.Listen(37);
+            g.PropertyChanged += G_PropertyChanged;
+        }
+
+        private void G_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
             
         }
 

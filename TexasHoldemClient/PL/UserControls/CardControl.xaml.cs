@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TexasHoldemClient.BusinessLayer.Models;
 using System.IO;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace TexasHoldemClient.PL.UserControls
 {
@@ -32,10 +33,11 @@ namespace TexasHoldemClient.PL.UserControls
                 adapterList.AddLast(CardType.Spade);
                 adapterList.AddLast(CardType.Heart);
                 adapterList.AddLast(CardType.Diamond);
-                string path = "C:\\Users\\Barakmen\\Desktop\\אוניסרביטאת בן גוריון שנה א\\שנה ג\\סמסטר ב\\סנדא ליישום פרוייקטי תכנה\\newClient_2\\TexasHoldemClient\\Resorces\\"
+                string path = System.AppDomain.CurrentDomain.BaseDirectory + "Resorces/"
                     + ((int)value.number
                     + LinkedListExt.IndexOf(adapterList, value.type) + 1)
                     + ".png";
+
                 model.SetImageData(File.ReadAllBytes(path));
                 SetValue(CardProperty, value); DataContext = value; }
         }

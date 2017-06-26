@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       xmlns:local="clr-namespace:TexasHoldemClient.PL.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1600"
@@ -27,7 +28,10 @@
 
             </Grid.RowDefinitions>
 
-            <Grid Name="MainBar"  Grid.Row="0" Background="LightGray">
+            
+            
+            
+            <Grid Name="MainBar"  Grid.Row="0" Background="LightGray" >
                 <StackPanel Margin="8" Orientation="Horizontal">
                     <!-- logout button -->
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
@@ -71,7 +75,7 @@
                         </Viewbox>
                     </StackPanel>
                 </Grid>
-                <Grid Name="SearchBar" Grid.Column="1" >
+                <!--Grid Name="SearchBar" Grid.Column="1" >
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -107,7 +111,7 @@
                         </Grid>
                         
                     </Grid>
-                </Grid>
+                </Grid-->
                 <Grid Name="CreateNewGameButtom" Grid.Column="2" >
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Click="CreateNewGame_Click">+ Create new game</Button>
@@ -134,6 +138,9 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Grid  Margin="20">
+                    <fa:ImageAwesome x:Name="LoadingAnimation_Games" Icon="Refresh" Spin="True" Height="48" Width="48" />
+                </Grid>
             </Grid>
 
             <Grid Name="JoinedGamesBar" Grid.Row="3" >
@@ -146,6 +153,7 @@
                 </Grid>
             </Grid>
             <Grid Name="TableOfJoinedGames" Grid.Row="4" >
+
                 <DataGrid Name="JoidGamesDataGrid" ItemsSource="{Binding ActiveGames}"   IsReadOnly="True"   >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
@@ -157,6 +165,9 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Grid  Margin="20">
+                    <fa:ImageAwesome x:Name="LoadingAnimation_CurrentJoinedGame" Icon="Refresh" Spin="True" Height="48" Width="48" />
+                </Grid>
             </Grid>
 
             <Grid Name="ReplayGamesBar" Grid.Row="5" >

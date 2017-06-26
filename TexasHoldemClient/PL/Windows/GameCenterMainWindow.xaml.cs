@@ -40,7 +40,7 @@ namespace TexasHoldemClient.PL.Windows
             {
                 if (um.CurrentUser != null)
                 {
-                    _mainFrame.Navigate(new GameCenterPage());
+                    _mainFrame.Navigate(new MDGameCenterPage());
                 }
                 else
                 {
@@ -48,10 +48,10 @@ namespace TexasHoldemClient.PL.Windows
                 }
 
             }
-            
+
+
 
             
-
         }
     }
 }

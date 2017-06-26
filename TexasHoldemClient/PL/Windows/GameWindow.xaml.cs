@@ -18,6 +18,20 @@ using TexasHoldemClient.PL.UserControls;
 
 namespace TexasHoldemClient.PL.Windows
 {
+    public class booleaninverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return !(bool)value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return !(bool)value;
+        }
+    }
+
+
     /// <summary>
     /// Interaction logic for GameWindow.xaml
     /// </summary>
@@ -33,7 +47,7 @@ namespace TexasHoldemClient.PL.Windows
             this.game = gm.Listen(gameID);
             InitializeComponent();
             DataContext = game;
-
+            
             playerControls.AddFirst(Player0);
             playerControls.AddFirst(Player1);
             playerControls.AddFirst(Player2);
@@ -46,25 +60,11 @@ namespace TexasHoldemClient.PL.Windows
                 pc.Visibility = Visibility.Hidden;
             }
 
-            game.CurrentPlayer.PropertyChanged += CurrentPlayerHandler;
             game.PropertyChanged += GameChangeHandler;
         }
 
-        private void CurrentPlayerHandler(object sender, PropertyChangedEventArgs e)
-        {
-            if (game.CurrentPlayer.UserID == ((Me)game.Players.First(x => x is Me)).UserID)
-            {
-                Button_Check.IsEnabled = false;
-                Button_Fold.IsEnabled = false;
-                Button_Raise.IsEnabled = false;
-            }
-            else
-            {
-                Button_Check.IsEnabled = true;
-                Button_Fold.IsEnabled = true;
-                Button_Raise.IsEnabled = true;
-            }
-        }
+
+        
 
         private void GameChangeHandler(object sender, PropertyChangedEventArgs e)
         {
@@ -74,7 +74,6 @@ namespace TexasHoldemClient.PL.Windows
 
                 if (e.PropertyName == "Players")
                 {
-
                     for (int i = 0; i < playerControls.Count; i++)
                     {
                         if (i < game.Players.Where(x => !(x is Me)).Count())
@@ -107,6 +106,23 @@ namespace TexasHoldemClient.PL.Windows
                 {
                     OpenCardsControl.Cards = IEnumerableToLinkedList(game.OpenCards);
                 }
+
+                if (e.PropertyName == "CurrentPlayer")
+                {
+                    if (game.CurrentPlayer.UserID == ((Me)game.Players.First(x => x is Me)).UserID)
+                    {
+                        Button_Check.IsEnabled = false;
+                        Button_Fold.IsEnabled = false;
+                        Button_Raise.IsEnabled = false;
+                    }
+                    else
+                    {
+                        Button_Check.IsEnabled = true;
+                        Button_Fold.IsEnabled = true;
+                        Button_Raise.IsEnabled = true;
+                    }
+                }
+
             });
             
         }
@@ -139,5 +155,11 @@ namespace TexasHoldemClient.PL.Windows
         {
            await gm.Raise(game, Int32.Parse(BetTextBox.Text));
         }
+
+        private async void StartRound_Click(object sender, RoutedEventArgs e)
+        {
+            await gm.StartRound(game);
+        }
+
     }
 }

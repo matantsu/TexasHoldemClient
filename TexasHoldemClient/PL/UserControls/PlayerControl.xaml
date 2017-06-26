@@ -15,7 +15,7 @@
                 <ColumnDefinition Name="ColFor_PlayerDetails" Width="4*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0"  Source="Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png"></Image>
+            <Image Grid.Column="0"  Source="/Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png"></Image>
 
                 <StackPanel Orientation="Vertical" Grid.Column="1">
                     <TextBlock Foreground="White">
