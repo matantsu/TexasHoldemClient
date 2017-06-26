@@ -5,7 +5,6 @@
               xmlns:src="clr-namespace:TexasHoldemClient.PL.Windows"
              StartupUri="PL/Windows/GameCenterMainWindow.xaml">
     <!--CreateNewGameWindow-->
-
     <Application.Resources>
 
         <ResourceDictionary>

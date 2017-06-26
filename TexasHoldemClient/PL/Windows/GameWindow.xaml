@@ -52,7 +52,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid.Background>
-                        <ImageBrush ImageSource="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\poker_table.jpg"/>
+                        <ImageBrush ImageSource="Resorces\poker_table.jpg"/>
                     </Grid.Background>
 
                     <Grid Name="PotSpace" Grid.Row="0" Grid.Column="1">

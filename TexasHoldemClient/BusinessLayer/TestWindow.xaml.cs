@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CefSharp;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,12 @@ using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient.BusinessLayer
 {
+
     /// <summary>
     /// Interaction logic for TestWindow.xaml
     /// </summary>
     public partial class TestWindow : Window
     {
-        Game g;
         public TestWindow()
         {
             InitializeComponent();
@@ -36,16 +37,14 @@ namespace TexasHoldemClient.BusinessLayer
             
         }
 
-        private void GameManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Browser_ConsoleMessage(object sender, ConsoleMessageEventArgs e)
         {
-            
+            MessageBox.Show(e.Line + e.Message + e.Source);
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Browser_LoadError(object sender, CefSharp.LoadErrorEventArgs e)
         {
-            //await BL.UserManager.Register("x@gmail.com", "xxx", "zaq1xsw2");
-            await BL.UserManager.Login("x@gmail.com", "zaq1xsw2");
-            
+            MessageBox.Show(e.ErrorText + e.FailedUrl);
         }
     }
 }
