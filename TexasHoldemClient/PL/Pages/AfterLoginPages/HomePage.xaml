@@ -20,21 +20,19 @@
       Title="HomePage">
 
     <Grid>
-        <StackPanel>
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="40" Margin="20">Home</TextBlock>
-            <Separator/>
-        </StackPanel>
-        
-        <Grid  Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" >
+
+            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" Margin="10">Home</TextBlock>
+
+            <Grid  Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <DockPanel>
-                <materialDesign:Card Padding="32" Margin="16" >
+                <materialDesign:Card Padding="32" Margin="16" Height="200"  >
                     <DockPanel>
                         <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
-                            <materialDesign:PackIcon Kind="Information" VerticalAlignment="Center" Height="40" Width="40" />
-                            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="40" FontStyle="Italic">Global Statistics</TextBlock>
+                            <materialDesign:PackIcon Kind="Information" Height="30" Width="30" />
+                            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" FontStyle="Italic">Global Statistics</TextBlock>
                         </StackPanel>
 
-                        <TextBlock FontSize="20">           
+                        <TextBlock FontSize="18">           
                             <Hyperlink NavigateUri="https://texasholdem-7ff59.firebaseapp.com" RequestNavigate="Hyperlink_RequestNavigate">
                                 Visit our site
                             </Hyperlink>            
@@ -42,20 +40,20 @@
                     </DockPanel>
                 </materialDesign:Card>
 
-                <materialDesign:Card Padding="32" Margin="16" >
+                <materialDesign:Card Padding="32" Margin="16" Height="200" >
                     <DockPanel>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="40" FontStyle="Italic" DockPanel.Dock="Top">Wallet</TextBlock>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30">Total:</TextBlock>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="25" Text="Binding needed"></TextBlock>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="25"> $</TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" FontStyle="Italic" DockPanel.Dock="Top">Wallet</TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18">Total: </TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Foreground="Green" FontSize="18" Text="Binding needed"></TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18"> $</TextBlock>
                     </DockPanel>
                 </materialDesign:Card>
 
-                <materialDesign:Card Padding="32" Margin="16" >
+                <materialDesign:Card Padding="32" Margin="16" Height="200">
                     <DockPanel>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="40" FontStyle="Italic" DockPanel.Dock="Top">League</TextBlock>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30">Current League:</TextBlock>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="25" Text="Binding needed"></TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" FontStyle="Italic" DockPanel.Dock="Top">League</TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18">Current League: </TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18" Foreground="Green" Text="Binding needed"></TextBlock>
                     </DockPanel>
                 </materialDesign:Card>
 

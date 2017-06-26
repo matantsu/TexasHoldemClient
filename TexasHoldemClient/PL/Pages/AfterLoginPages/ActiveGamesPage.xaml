@@ -22,12 +22,10 @@
 
 
     <Grid>
-        <StackPanel>
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="40" Margin="20">Active Games</TextBlock>
-            <Separator/>
-        </StackPanel>
+        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" Margin="10">Active Games</TextBlock>
+        
 
-        <Grid Name="TableOfJoinedGames"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Grid Name="TableOfJoinedGames"  HorizontalAlignment="Center" VerticalAlignment="Center" >
 
             <DataGrid Name="JoidGamesDataGrid" ItemsSource="{Binding ActiveGames}"   IsReadOnly="True"   >
                 <DataGrid.Columns>

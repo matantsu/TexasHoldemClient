@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel  Margin="20"  Name="LoadingAnimation_Games" >
-        <Image Height="90" gif:ImageBehavior.AnimatedSource="C:\Users\Barakmen\Desktop\אוניסרביטאת בן גוריון שנה א\שנה ג\סמסטר ב\סנדא ליישום פרוייקטי תכנה\newClient_2\TexasHoldemClient\Resorces\animated-playing-card-image-0071.gif" />
+        <Image Height="90" gif:ImageBehavior.AnimatedSource="/Resorces\animated-playing-card-image-0071.gif" />
         <TextBlock Margin="10" FontSize="15" HorizontalAlignment="Center">Loading...</TextBlock>
     </StackPanel>
 </UserControl>

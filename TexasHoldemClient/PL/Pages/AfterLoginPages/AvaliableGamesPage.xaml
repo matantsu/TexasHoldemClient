@@ -25,14 +25,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="40" Margin="20">Avaliable Games</TextBlock>
-            <Separator/>
+
+        <StackPanel >
+            <TextBlock Grid.Row="0" Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" Margin="10">Avaliable Games</TextBlock>
         </StackPanel>
         <Button Content="+" FontSize="25" Style="{DynamicResource MaterialDesignFloatingActionAccentButton}" Grid.Row="1" HorizontalAlignment="Right" Click="CreateNewGame_Click" Margin="30 0"/>
         <Grid  Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">
