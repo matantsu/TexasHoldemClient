@@ -61,7 +61,19 @@ namespace TexasHoldemClient.BusinessLayer.api
         [Get("/startRound?gameId={gameId}")]
         Task StartRound(
             [Header("token")] string token,
-            
+
             int gameId);
+
+        [Get("/startRound?newPassword={newPassword}")]
+        Task ChangePassword(
+            [Header("token")] string token,
+
+            string newPassword);
+
+        [Get("/startRound?newEmail={newEmail}")]
+        Task ChangeEmail(
+            [Header("token")] string token,
+
+            string newEmail);
     }
 }

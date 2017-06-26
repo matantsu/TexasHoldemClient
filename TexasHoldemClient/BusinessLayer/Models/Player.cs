@@ -92,5 +92,19 @@
                 }
             }
         }
+
+        private bool iSCurrentPlayer;
+        public bool ISCurrentPlayer
+        {
+            get { return iSCurrentPlayer; }
+            set
+            {
+                if (iSCurrentPlayer != value)
+                {
+                    iSCurrentPlayer = value;
+                    OnPropertyChanged("ISCurrentPlayer");
+                }
+            }
+        }
     }
 }

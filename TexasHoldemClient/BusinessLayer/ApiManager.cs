@@ -54,5 +54,15 @@ namespace TexasHoldemClient.BusinessLayer
         {
             return api.SpectateGame(um.Token, gameId);
         }
+
+        public Task ChangePassword(string newPassword)
+        {
+            return api.ChangePassword(um.Token, newPassword);
+        }
+
+        public Task ChangeEmail(string newEmail)
+        {
+            return api.ChangeEmail(um.Token, newEmail);
+        }
     }
 }

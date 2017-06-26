@@ -19,6 +19,9 @@ namespace TexasHoldemClient.BusinessLayer
 {
     public class UserManager : Changing, IUserManager
     {
+        private string email;
+        private string password;
+
         private Models.User currentUser = null;
         public Models.User CurrentUser
         {
@@ -58,9 +61,11 @@ namespace TexasHoldemClient.BusinessLayer
 
         public async Task<Models.User> Login(string email, string password)
         {
-            var data =  await authProvider.SignInWithEmailAndPasswordAsync(email, password);
+            var data = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
             CurrentUser = ToUser(data);
             Token = data.FirebaseToken;
+            this.email = email;
+            this.password = password;
             return CurrentUser;
         }
 
@@ -68,6 +73,8 @@ namespace TexasHoldemClient.BusinessLayer
         {
             CurrentUser = null;
             Token = null;
+            email = null;
+            password = null;
         }
 
         private Models.User ToUser(FirebaseAuthLink l)

@@ -92,17 +92,19 @@ namespace TexasHoldemClient.BusinessLayer
 
         private IObservable<IEnumerable<Player>> FillGame(int gameid, int players)
         {
-            var paths = Observable.Return(Enumerable.Range(0, players)).Select(range => range.Select(i => "games/" + gameid + "/privates/allPlayers/" + i + "/publics")).StartWith(new List<string>());
-            paths = RxFirebase.Trace("------------- paths",paths);
-            return RxFirebase.Trace("FillGame",RxFirebase.FromPaths<dynamic>(fb, paths)
+            var paths = Observable.Return(Enumerable.Range(0, players)).Select(range => range.Select(i => "games/" + gameid + "/privates/allPlayers/" + i + "/publics"));
+            var currentPlayer = RxFirebase.FromPath<dynamic>(fb, "games/" + gameid + "/privates");
+            return Observable.CombineLatest(currentPlayer, RxFirebase.FromPaths<dynamic>(fb, paths)
                 .Select(xs => xs.Where(x => x != null).Select(ToPlayer))
                 .SelectMany(ps => Observable.CombineLatest(ps.Select(p => {
                     return userManager.CurrentUser == null || p.UserID != userManager.CurrentUser.UID ?
                         Observable.Return(p) :
                         RxFirebase.FromPath<dynamic>(fb, "games/" + gameid + "/privates/allPlayers/" + ps.ToList().FindIndex(x => x.UserID == p.UserID) + "/privates")
-                        .Select(x => new Me { Hand = x.hand != null ? JsonConvert.DeserializeObject<IEnumerable<Card>>(x.hand.ToString()) : new List<Card>() }.Patch(p));
-                }
-                    ))));
+                        .Select(x => new Me { Hand = x.hand != null ? JsonConvert.DeserializeObject<IEnumerable<Card>>(x.hand.ToString()) : new List<Card>() }.Patch(p));}
+                    ))), (cp,ps) => ps.Select((p,i) => {
+                        p.ISCurrentPlayer = i == (int)cp.currentPlayer;
+                        return p;
+                    }));
         }
 
         private void UserManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
