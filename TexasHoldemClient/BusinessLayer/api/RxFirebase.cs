@@ -13,15 +13,25 @@ namespace TexasHoldemClient.BusinessLayer.api
 {
     public static class RxFirebase
     {
+
+        private static Dictionary<string, IObservable<object>> cache = new Dictionary<string, IObservable<object>>();
+
         public static IObservable<T> FromPath<T>(IFirebaseClient fb, string path)
         {
-            return Observable.Create<T>(async s =>
-            {
-                var sub = await fb.OnChangeGetAsync<T>(path, (_, x) => s.OnNext(x));
-                return Disposable.Create(() => {
-                    sub.Dispose();
-                });
-            });
+            if (cache.ContainsKey(path))
+                return cache[path] as IObservable<T>;
+            else { 
+                IObservable<T> o = Observable.Create<T>(async s =>
+                {
+                    var sub = await fb.OnChangeGetAsync<T>(path, (_, x) => s.OnNext(x));
+                    return Disposable.Create(() =>
+                    {
+                        sub.Dispose();
+                    });
+                }).Replay(1).RefCount();
+                cache[path] = o as IObservable<object>;
+                return o; 
+            }
         }
 
         public static IObservable<B> FlatMap<A, B>(IFirebaseClient fb, IObservable<A> oba, Func<A, IObservable<B>> f)

@@ -72,8 +72,8 @@ namespace TexasHoldemClient.BusinessLayer
 
             userManager.PropertyChanged += UserManager_PropertyChanged;
 
-            IObservable<IEnumerable<int>> activeIds = RxFirebase.Trace("activeIds",RxFirebase.FromPath<List<int>>(fb, "activeGames").Select(x => x != null ? x : new List<int>()));
-            IObservable<IEnumerable<Game>> games = RxFirebase.Trace("games", RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(i => "games/" + i + "/publics"))).Select(gs => gs.Where(g => g != null).Select(ToGame)));
+            IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "activeGames").Select(x => x != null ? x : new List<int>());
+            IObservable<IEnumerable<Game>> games = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(i => "games/" + i + "/publics"))).Select(gs => gs.Where(g => g != null).Select(ToGame));
 
             FillGames(games).Subscribe(gs =>
             {
@@ -92,8 +92,9 @@ namespace TexasHoldemClient.BusinessLayer
 
         private IObservable<IEnumerable<Player>> FillGame(int gameid, int players)
         {
-            var paths = Observable.Return(Enumerable.Range(0, players)).Select(range => range.Select(i => "games/" + gameid + "/privates/allPlayers/" + i + "/publics"));
-            return RxFirebase.FromPaths<dynamic>(fb, paths)
+            var paths = Observable.Return(Enumerable.Range(0, players)).Select(range => range.Select(i => "games/" + gameid + "/privates/allPlayers/" + i + "/publics")).StartWith(new List<string>());
+            paths = RxFirebase.Trace("------------- paths",paths);
+            return RxFirebase.Trace("FillGame",RxFirebase.FromPaths<dynamic>(fb, paths)
                 .Select(xs => xs.Where(x => x != null).Select(ToPlayer))
                 .SelectMany(ps => Observable.CombineLatest(ps.Select(p => {
                     return userManager.CurrentUser == null || p.UserID != userManager.CurrentUser.UID ?
@@ -101,7 +102,7 @@ namespace TexasHoldemClient.BusinessLayer
                         RxFirebase.FromPath<dynamic>(fb, "games/" + gameid + "/privates/allPlayers/" + ps.ToList().FindIndex(x => x.UserID == p.UserID) + "/privates")
                         .Select(x => new Me { Hand = x.hand != null ? JsonConvert.DeserializeObject<IEnumerable<Card>>(x.hand.ToString()) : new List<Card>() }.Patch(p));
                 }
-                    )));
+                    ))));
         }
 
         private void UserManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
