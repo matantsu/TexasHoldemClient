@@ -60,7 +60,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
         {
             this.Dispatcher.Invoke(() =>
             {
-                Console.WriteLine("" + e.PropertyName);
+                //Console.WriteLine("" + e.PropertyName);
 
                 if (e.PropertyName == "Players")
                 {
