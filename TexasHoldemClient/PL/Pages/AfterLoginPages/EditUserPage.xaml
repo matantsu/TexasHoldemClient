@@ -24,27 +24,55 @@
 
         <TextBlock  Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" Margin="10" >Edit Profile</TextBlock>
 
-        <Grid  Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <DockPanel>
-                <materialDesign:Card Padding="32" Margin="16" Height="500" Width="400" >
+        <materialDesign:Card x:Name="UpdateCard" Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Grid>
+                <StackPanel Height="500" Width="400">
+                    <ProgressBar Name="ProgressBar_UpdatePressed" IsIndeterminate="True" Visibility="Hidden" Orientation="Horizontal" Margin="0,0,0,50"/>
+                    <StackPanel x:Name="UpdateForm" Orientation="Vertical" Width="300" >
+                        <StackPanel Orientation="Vertical"  DockPanel.Dock="Top" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Account" Height="100" Width="100" />
+                        </StackPanel>
+
+                        <TextBlock x:Name="TextBlock_Email"  Margin="0,20,0,0" Text="Email:" Foreground="{Binding TextBox_Email_Forground.Data}"/>
+                        <TextBox  x:Name="TextBox_Email" materialDesign:HintAssist.Hint="{Binding Email}" TextChanged="TextBox_Email_TextChanged"   GotFocus="TextBox_Email_GotFocus" LostFocus="TextBox_Email_LostFocus"/>
+                        <TextBlock x:Name="TextBlock_EmailError" Visibility="Collapsed" Text="⚠ invalid email format." FontSize="12" Foreground="Red"/>
+
+                        <TextBlock x:Name="TextBlock_Password"  Margin="0,20,0,0"  Text="Password:" Foreground="{Binding TextBox_Password_Forground.Data}"/>
+                        <PasswordBox x:Name="PasswordBox_Password" materialDesign:HintAssist.Hint="{Binding Password}"  GotFocus="PasswordBox_Password_GotFocus" LostFocus="PasswordBox_Password_LostFocus" />
+
+
+                        
+                            <Button x:Name="Button_Update" Content="Update" Background="GreenYellow" Foreground="Black" Click="Update_Click"  Width="100" Margin="50"/>
+                        
+
+                    </StackPanel>
+
+
+                </StackPanel>
+
+            </Grid>
+        </materialDesign:Card>
+        
+                
+                <!--materialDesign:Card Padding="32" Margin="16" Height="500" Width="400" >
                     <Grid>
                         <StackPanel Orientation="Vertical"  DockPanel.Dock="Top" HorizontalAlignment="Center">
                             <materialDesign:PackIcon Kind="Account" Height="100" Width="100" />
                         </StackPanel>
-                        <!--Grid>
+                        <Grid>
                             <TextBlock x:Name="TextBlock_Email"  Margin="0,20,0,0" Text="Email:" Foreground="{Binding TextBox_Email_Forground.Data}"/>
                             <TextBox  x:Name="TextBox_Email" TextChanged="TextBox_Email_TextChanged"   GotFocus="TextBox_Email_GotFocus" LostFocus="TextBox_Email_LostFocus"/>
                             <TextBlock x:Name="TextBlock_EmailError" Visibility="Collapsed" Text="⚠ invalid email format." FontSize="12" Foreground="Red"/>
-                        </Grid-->
+                        </Grid>
 
                     </Grid>
 
 
 
 
-                </materialDesign:Card>
-            </DockPanel>
-        </Grid>
+                </materialDesign:Card-->
+        
+        
     </Grid>
 
 </Page>

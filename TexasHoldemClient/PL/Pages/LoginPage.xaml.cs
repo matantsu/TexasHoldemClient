@@ -41,14 +41,13 @@ namespace TexasHoldemClient.PL.Pages
             bool isResterDataOk = true;
             isResterDataOk &= checkEmail(TextBox_Email.Text);
 
-            if (true/*isResterDataOk*/)
+            if (isResterDataOk)
             {
                 try
                 {
                     LoginForm.IsEnabled = false;
                     ProgressBar_LoginPressed.Visibility = Visibility.Visible;
                     await um.Login(TextBox_Email.Text, PasswordBox_Password.Password);
-                    //await um.Login("x@gmail.com", "zaq1xsw2");
                 }
                 catch (Exception exp)
                 {
