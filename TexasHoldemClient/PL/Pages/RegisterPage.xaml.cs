@@ -52,6 +52,7 @@ namespace TexasHoldemClient.PL.Pages
                     RegisterForm.IsEnabled = false;
                     ProgressBar_RegisterPressed.Visibility = Visibility.Visible;
                     await um.Register(TextBox_Email.Text, TextBox_Username.Text, PasswordBox_Password.Password);
+                    MessageBox.Show("Successfully Registred");
                 }
                 catch (Exception exp)
                 {
@@ -59,8 +60,6 @@ namespace TexasHoldemClient.PL.Pages
                     ProgressBar_RegisterPressed.Visibility = Visibility.Hidden;
                     RegisterForm.IsEnabled = true;
                 }
-                MessageBox.Show("Successfully Registred");
-                _mainFrame.GoBack();
             }
         }
 

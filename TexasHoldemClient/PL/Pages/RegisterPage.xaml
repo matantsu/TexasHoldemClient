@@ -47,15 +47,6 @@
                         <Button x:Name="Button_Register" Content="Register" Click="Register_Click"  Width="100" Margin="10"/>
                     </StackPanel>
 
-                    <TextBlock Name="HyperLink_ForgotPassword">
-                        <Hyperlink>
-                           <Hyperlink.Inlines>
-                                <Run Foreground="CornflowerBlue" Text="Forgot password? We Don't Care."/>
-                           </Hyperlink.Inlines>
-                        </Hyperlink>
-                    </TextBlock>
-
-
                 </StackPanel>
 
 
