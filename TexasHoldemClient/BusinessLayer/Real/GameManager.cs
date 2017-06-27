@@ -184,10 +184,10 @@ namespace TexasHoldemClient.BusinessLayer
                 SmallBlind = json.smallBlind != null ? json.smallBlind : 0,
                 Pot = json.pot,
                 SmallBet = json.smallBet != null ? json.smallBet : 0,
-                Chat = json.chat != null ? (json.chat.ToObject<List<dynamic>>() as List<dynamic>).Select(ToChatMessage) : new List<ChatMessage>(),
+                Chat = json.chat != null ? (json.chat.ToObject<IEnumerable<dynamic>>() as IEnumerable<dynamic>).Select(ToChatMessage) : new List<ChatMessage>(),
             };
         }
-
+        
         private Player ToPlayer(dynamic json)
         {
             return new Player

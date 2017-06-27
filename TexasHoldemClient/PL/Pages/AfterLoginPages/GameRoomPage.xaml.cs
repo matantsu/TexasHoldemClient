@@ -45,13 +45,14 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
         IGameManager gm = BL.GameManager;
         LinkedList<PlayerControl> playerControls = new LinkedList<PlayerControl>();
         LinkedList<Player> currentPlayers = new LinkedList<Player>();
+        Me myPlayer = new Me();
 
         public GameRoomPage(int gameID)
         {
             this.game = gm.Listen(gameID);
             InitializeComponent();
             DataContext = game;
-            chatControl.setChat(game.Chat);
+            chatControl.setGame(game);
             Button_StartRound.IsEnabled = !game.IsOnRound;
             UserActionsSpace.IsEnabled = true;
 
@@ -62,7 +63,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
             playerControls.AddFirst(Player2);
             playerControls.AddFirst(Player3);
             playerControls.AddFirst(Player4);
-
+            
             foreach (PlayerControl pc in playerControls)
             {
                 pc.Visibility = Visibility.Hidden;
@@ -79,7 +80,11 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
             this.Dispatcher.Invoke(() =>
             {
                 // Console.WriteLine("" + e.PropertyName);
+                if (e.PropertyName == "Chat")
+                {
+                    Console.Write("");
 
+                }
                 if (e.PropertyName == "Players")
                 {
                     for (int i = 0; i < playerControls.Count; i++)
@@ -98,7 +103,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
                     setActions();
 
                     MyPlayer.DataContext = (Me)game.Players.First(x => x is Me);
-
+                    //Player0.Player.ISCurrentPlayer
                     TwoPlayerCardsControl.Cards = IEnumerableToLinkedList(((Me)game.Players.First(x => x is Me)).Hand);
                 }
 

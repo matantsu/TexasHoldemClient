@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" Name="ChatMessagesDataGrid" ItemsSource="{Binding Path=ActiveGames.Data}"   IsReadOnly="True"></DataGrid>
+        <DataGrid Grid.Row="0" Name="ChatMessagesDataGrid" ItemsSource="{Binding Path=Chat}"   IsReadOnly="True"></DataGrid>
 
 
             <Grid Grid.Row="1">
@@ -38,7 +38,7 @@
                 Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
                         Margin="0 0 8 0" Width="50" Height="50" HorizontalAlignment="Left"
                         ToolTip="MaterialDesignFloatingActionMiniDarkButton">
-                <materialDesign:PackIcon Kind="Send" Height="24" Width="24" />
+                <materialDesign:PackIcon Kind="Send"  Height="24" Width="24" />
             </Button>
         </Grid>
         

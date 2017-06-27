@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
-
+using TexasHoldemClient.BusinessLayer;
 
 namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 {
@@ -22,9 +22,11 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
     /// </summary>
     public partial class HomePage : Page
     {
+        IUserManager um = BL.UserManager;
         public HomePage()
         {
             InitializeComponent();
+            //um.CurrentUser.
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

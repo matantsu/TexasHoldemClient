@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TexasHoldemClient.BusinessLayer;
 using TexasHoldemClient.BusinessLayer.Models;
+using TexasHoldemClient.PL.Helpers;
 
 namespace TexasHoldemClient.PL.UserControls
 {
@@ -24,21 +25,36 @@ namespace TexasHoldemClient.PL.UserControls
     {
         IGameManager gm = BL.GameManager;
 
-        IEnumerable<ChatMessage> chat;
+        
+        
+        Game game;
         public ChatControl()
         {
             InitializeComponent();
-            DataContext = chat;
         }
 
-        internal void setChat(IEnumerable<ChatMessage> chat)
+        internal void setGame(Game game)
         {
-            this.chat = chat;
+            this.game = game;
+            DataContext = game;
+        }
+
+        internal void setGameCenter()
+        {
+            DataContext = gm;
         }
 
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            
+            if(DataContext == gm)
+            {
+                gm.Send(MessageTextBox.Text);
+            }
+            else
+            {
+                gm.Send(game, MessageTextBox.Text);
+            }
+                
         }
     }
 }
