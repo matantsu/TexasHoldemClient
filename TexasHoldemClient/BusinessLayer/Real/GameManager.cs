@@ -251,8 +251,8 @@ namespace TexasHoldemClient.BusinessLayer
             Game game = new Game();
             var sub = RxFirebase.FromPath<dynamic>(fb,"games/" + gameId + "/publics")
                 .Select(ToGame)
-                .SelectMany(g => FillGame(g.ID,g.PlayersCount)
-                    .Select(players => { g.Players = players; return g; }))
+                .Select(g => FillGame(g.ID,g.PlayersCount)
+                    .Select(players => { g.Players = players; return g; })).Switch()
                 .Subscribe(g => game.Patch(g));
             gameListeners.Add(game, sub);
             return game;
