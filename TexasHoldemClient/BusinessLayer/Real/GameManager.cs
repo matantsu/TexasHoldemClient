@@ -75,7 +75,7 @@ namespace TexasHoldemClient.BusinessLayer
             IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "activeGames").Select(x => x != null ? x : new List<int>());
             IObservable<IEnumerable<Game>> games = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(i => "games/" + i + "/publics"))).Select(gs => gs.Where(g => g != null).Select(ToGame));
 
-            FillGames(games).Subscribe(gs =>
+            FillGames(games).Throttle(TimeSpan.FromSeconds(1)).Subscribe(gs =>
             {
                 Games = gs;
             });
@@ -116,7 +116,7 @@ namespace TexasHoldemClient.BusinessLayer
                     IObservable<IEnumerable<int>> activeIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.UID + "/publics/activeGamesIds").Select(x => x != null ? x : new List<int>());
                     IObservable<IEnumerable<Game>> activeGames = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(i => "games/" + i + "/publics"))).Select(gs => gs.Where(g => g != null).Select(ToGame));
 
-                    FillGames(activeGames).Subscribe(gs =>
+                    FillGames(activeGames).Throttle(TimeSpan.FromSeconds(1)).Subscribe(gs =>
                     {
                         ActiveGames = gs;
                     });
@@ -124,7 +124,7 @@ namespace TexasHoldemClient.BusinessLayer
                     IObservable<IEnumerable<int>> spectatingIds = RxFirebase.FromPath<List<int>>(fb, "users/" + userManager.CurrentUser.UID + "/publics/spectatingGamesIds").Select(x => x != null ? x : new List<int>());
                     IObservable<IEnumerable<Game>> spectatingGames = RxFirebase.FromPaths<dynamic>(fb, activeIds.Select(ids => ids.Select(i => "games/" + i + "/publics"))).Select(gs => gs.Where(g => g != null).Select(ToGame));
 
-                    FillGames(spectatingGames).Subscribe(gs =>
+                    FillGames(spectatingGames).Throttle(TimeSpan.FromSeconds(1)).Subscribe(gs =>
                     {
                         SpectatingGames = gs;
                     });
@@ -252,7 +252,7 @@ namespace TexasHoldemClient.BusinessLayer
             var sub = RxFirebase.FromPath<dynamic>(fb,"games/" + gameId + "/publics")
                 .Select(ToGame)
                 .Select(g => FillGame(g.ID,g.PlayersCount)
-                    .Select(players => { g.Players = players; return g; })).Switch()
+                    .Select(players => { g.Players = players; return g; })).Switch().Throttle(TimeSpan.FromSeconds(1))
                 .Subscribe(g => game.Patch(g));
             gameListeners.Add(game, sub);
             return game;
