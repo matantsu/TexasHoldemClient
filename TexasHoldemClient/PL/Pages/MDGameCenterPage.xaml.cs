@@ -74,7 +74,7 @@ namespace TexasHoldemClient.PL.Pages
 
         private async void EditProfile_OnClick(object sender, RoutedEventArgs e)
         {
-
+            _mainFrame.Navigate(new EditUserPage());
         }
 
         private async void Logout_OnClick(object sender, RoutedEventArgs e)

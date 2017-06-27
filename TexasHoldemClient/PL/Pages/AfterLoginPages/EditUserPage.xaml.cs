@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TexasHoldemClient.BusinessLayer;
 
 namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 {
@@ -20,9 +21,12 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
     /// </summary>
     public partial class EditUserPage : Page
     {
+        IUserManager um = BL.UserManager;
+
         public EditUserPage()
         {
             InitializeComponent();
+
         }
     }
 }

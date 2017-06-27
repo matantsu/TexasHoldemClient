@@ -4,14 +4,47 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TexasHoldemClient.PL.Pages.AfterLoginPages"
-       
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:domain1="clr-namespace:TexasHoldemClient.PL.Helpers"
+            xmlns:pages="clr-namespace:TexasHoldemClient.PL.Pages.AfterLoginPages"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      
+      
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="900" d:DesignWidth="1600"
       Title="EditUserPage">
 
-    <Grid>
-        
+    <Grid  Margin="16" >
+
+
+        <TextBlock  Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" Margin="10" >Edit Profile</TextBlock>
+
+        <Grid  Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <DockPanel>
+                <materialDesign:Card Padding="32" Margin="16" Height="500" Width="400" >
+                    <Grid>
+                        <StackPanel Orientation="Vertical"  DockPanel.Dock="Top" HorizontalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Account" Height="100" Width="100" />
+                        </StackPanel>
+                        <!--Grid>
+                            <TextBlock x:Name="TextBlock_Email"  Margin="0,20,0,0" Text="Email:" Foreground="{Binding TextBox_Email_Forground.Data}"/>
+                            <TextBox  x:Name="TextBox_Email" TextChanged="TextBox_Email_TextChanged"   GotFocus="TextBox_Email_GotFocus" LostFocus="TextBox_Email_LostFocus"/>
+                            <TextBlock x:Name="TextBlock_EmailError" Visibility="Collapsed" Text="⚠ invalid email format." FontSize="12" Foreground="Red"/>
+                        </Grid-->
+
+                    </Grid>
+
+
+
+
+                </materialDesign:Card>
+            </DockPanel>
+        </Grid>
     </Grid>
+
 </Page>
