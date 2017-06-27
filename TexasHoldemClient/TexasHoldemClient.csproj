@@ -296,6 +296,9 @@
     <Compile Include="PL\UserControls\PlayerControl.xaml.cs">
       <DependentUpon>PlayerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PL\UserControls\RuleUserControl.xaml.cs">
+      <DependentUpon>RuleUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PL\UserControls\SampleMessageDialog.xaml.cs">
       <DependentUpon>SampleMessageDialog.xaml</DependentUpon>
     </Compile>
@@ -432,6 +435,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PL\UserControls\RuleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PL\UserControls\SampleMessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -454,6 +461,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resorces\BigBlind.png" />
     <Content Include="Resorces\poker_table.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -639,6 +647,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resorces\smallblind400.png" />
     <Content Include="Resorces\thumb-1920-41814.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

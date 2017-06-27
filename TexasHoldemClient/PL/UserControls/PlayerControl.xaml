@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TexasHoldemClient.PL.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="200">
+             d:DesignHeight="90" d:DesignWidth="200">
     
     <Border Opacity="0.7" BorderBrush="White" Background="Black" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
         <Grid>
@@ -15,7 +15,8 @@
                 <ColumnDefinition Name="ColFor_PlayerDetails" Width="4*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0"  Source="/Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png"></Image>
+            <Image Name="photo" Source="{Binding Path=Data}" Grid.Column="0"></Image>
+            <!--Image Grid.Column="0"  Source="/Resorces\rewrite___magic_circle_2__no_background__by_darksaturn93-d7eu095.png"></Image-->
 
                 <StackPanel Orientation="Vertical" Grid.Column="1">
                     <TextBlock Foreground="White">

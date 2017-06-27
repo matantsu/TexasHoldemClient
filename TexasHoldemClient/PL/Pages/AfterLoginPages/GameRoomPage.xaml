@@ -108,13 +108,13 @@
                 </Grid>
 
                 <Grid Name="placePlayerControls" Grid.Row="0">
-                    <UserControls:PlayerControl x:Name="Player0" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="898,61,0,0"/>
-                    <UserControls:PlayerControl x:Name="Player1" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="898,468,0,0"/>
-                    <UserControls:PlayerControl x:Name="Player2" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="496,10,0,0"/>
-                    <UserControls:PlayerControl x:Name="Player3" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="92,61,0,0"/>
-                    <UserControls:PlayerControl x:Name="Player4" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="Auto" Margin="52,468,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player0" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="Auto" Margin="898,61,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player1" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="Auto" Margin="898,468,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player2" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="Auto" Margin="496,10,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player3" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="Auto" Margin="92,61,0,0"/>
+                    <UserControls:PlayerControl x:Name="Player4" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="Auto" Margin="52,468,0,0"/>
 
-                    <UserControls:PlayerControl Background="Black" Opacity="0.9" x:Name="MyPlayer"  HorizontalAlignment="Left" Height="65" VerticalAlignment="Top" Width="228" Margin="426,607,0,0"/>
+                    <UserControls:PlayerControl Background="Black" Opacity="0.9" x:Name="MyPlayer" Height="90" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="228" Margin="426,592,0,0"/>
 
                 </Grid>
 

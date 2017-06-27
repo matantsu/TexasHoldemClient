@@ -41,7 +41,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
     {
         public Bind<string> CurrentStatusMessage { get; } = new Bind<string>("You Are In Game");
         Game game = new Game();
-
+        
         IGameManager gm = BL.GameManager;
         LinkedList<PlayerControl> playerControls = new LinkedList<PlayerControl>();
         LinkedList<Player> currentPlayers = new LinkedList<Player>();
@@ -57,7 +57,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
 
             ToolsBarSpace.DataContext = this;
-            playerControls.AddFirst(Player0);
+            BindPath.Data.AddFirst(Player0);
             playerControls.AddFirst(Player1);
             playerControls.AddFirst(Player2);
             playerControls.AddFirst(Player3);
@@ -111,11 +111,45 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
                 {
                     setActions();
                 }
+                
+                if (e.PropertyName == "BigBlind")
+                {
+                    setBigBlind(game);
+                }
+
+                
 
             });
 
         }
 
+        private void setSmallBlind(Game game)
+        {
+            string smallBlindPath = "/Resorces/smallblind400.png"; ;
+            int i = 0;
+            foreach (PlayerControl p in playerControls)
+            {
+                if (i == game.BigBlind)
+                {
+                    p.setPhotoPath(smallBlindPath);
+                }
+                i++;
+            }
+        }
+
+        private void setBigBlind(Game game)
+        {
+            string bigBlindPath = "/Resorces/BigBlind.png";
+            int i = 0;
+            foreach (PlayerControl p in playerControls)
+            {
+                if (i == game.BigBlind)
+                {
+                    p.setPhotoPath(bigBlindPath);
+                }
+                i++;
+            }
+        }
 
         private void setActions()
         {
@@ -222,7 +256,5 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
         {
             return game;
         }
-
-
     }
 }
