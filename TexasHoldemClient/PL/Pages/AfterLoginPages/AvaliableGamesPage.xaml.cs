@@ -57,8 +57,11 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
         {
             try
             {
+
                 Game g = (Game)GamesDataGrid.SelectedItem;
+                ((Button)sender).IsEnabled = false;
                 await gm.Join(g);
+                MessageBox.Show("Join Succsess");
                 //new GameWindow(g.ID).Show();
             }
             catch (Exception exp)

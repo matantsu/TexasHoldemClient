@@ -41,7 +41,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
     {
         public Bind<string> CurrentStatusMessage { get; } = new Bind<string>("You Are In Game");
         Game game = new Game();
-        
+
         IGameManager gm = BL.GameManager;
         LinkedList<PlayerControl> playerControls = new LinkedList<PlayerControl>();
         LinkedList<Player> currentPlayers = new LinkedList<Player>();
@@ -51,7 +51,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
             this.game = gm.Listen(gameID);
             InitializeComponent();
             DataContext = game;
-            
+
             Button_StartRound.IsEnabled = !game.IsOnRound;
             UserActionsSpace.IsEnabled = true;
 
@@ -167,40 +167,68 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
         private async void Check_Click(object sender, RoutedEventArgs e)
         {
-            UserActionsSpace.IsEnabled = false;
-            CurrentStatusMessage.Data = "Starting Check...";
-            await gm.Check(game);
-            CurrentStatusMessage.Data = "Finish Check";
-            UserActionsSpace.IsEnabled = true;
+            try
+            {
+                UserActionsSpace.IsEnabled = false;
+                CurrentStatusMessage.Data = "Starting Check...";
+                await gm.Check(game);
+                CurrentStatusMessage.Data = "Finish Check";
+                UserActionsSpace.IsEnabled = true;
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+
         }
 
         private async void Fold_Click(object sender, RoutedEventArgs e)
         {
-            UserActionsSpace.IsEnabled = false;
-            CurrentStatusMessage.Data = "Starting Fold...";
-            await gm.Fold(game);
-            CurrentStatusMessage.Data = "Finish Fold";
-            UserActionsSpace.IsEnabled = true;
+            try
+            {
+                UserActionsSpace.IsEnabled = false;
+                CurrentStatusMessage.Data = "Starting Fold...";
+                await gm.Fold(game);
+                CurrentStatusMessage.Data = "Finish Fold";
+                UserActionsSpace.IsEnabled = true;
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
         private async void Raise_Click(object sender, RoutedEventArgs e)
         {
-            UserActionsSpace.IsEnabled = false;
-            CurrentStatusMessage.Data = "Starting Raise...";
-            await gm.Raise(game, Int32.Parse(BetTextBox.Text));
-            CurrentStatusMessage.Data = "Finish Raise";
-            UserActionsSpace.IsEnabled = true;
-
+            try
+            {
+                UserActionsSpace.IsEnabled = false;
+                CurrentStatusMessage.Data = "Starting Raise...";
+                await gm.Raise(game, Int32.Parse(BetTextBox.Text));
+                CurrentStatusMessage.Data = "Finish Raise";
+                UserActionsSpace.IsEnabled = true;
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
         private async void StartRound_Click(object sender, RoutedEventArgs e)
         {
-            UserActionsSpace.IsEnabled = false;
-            CurrentStatusMessage.Data = "Starting Round...";
-            await gm.StartRound(game);
-            CurrentStatusMessage.Data = "Finish Start Round";
-            UserActionsSpace.IsEnabled = true;
-            Button_StartRound.IsEnabled = false;
+            try
+            {
+                UserActionsSpace.IsEnabled = false;
+                CurrentStatusMessage.Data = "Starting Round...";
+                await gm.StartRound(game);
+                CurrentStatusMessage.Data = "Finish Start Round";
+                UserActionsSpace.IsEnabled = true;
+                Button_StartRound.IsEnabled = false;
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
 

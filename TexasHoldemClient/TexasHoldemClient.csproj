@@ -464,7 +464,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resorces\1.png">
+    <Content Include="Resorces\53.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resorces\10.png">
@@ -497,7 +497,7 @@
     <Content Include="Resorces\19.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resorces\2.png">
+    <Content Include="Resorces\54.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resorces\20.png">
@@ -530,7 +530,7 @@
     <Content Include="Resorces\29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resorces\3.png">
+    <Content Include="Resorces\55.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resorces\30.png">
@@ -563,7 +563,7 @@
     <Content Include="Resorces\39.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resorces\4.png">
+    <Content Include="Resorces\56.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resorces\40.png">

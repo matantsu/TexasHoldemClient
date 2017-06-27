@@ -55,5 +55,15 @@ namespace TexasHoldemClient.BusinessLayer.Fake
         {
             return Login(email, password);
         }
+
+        public Task ChangePassword(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ChangeEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

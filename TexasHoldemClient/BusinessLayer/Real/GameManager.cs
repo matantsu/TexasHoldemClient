@@ -153,7 +153,7 @@ namespace TexasHoldemClient.BusinessLayer
                 ID = json.gameId,
                 Bet = json.bet,
                 Buyin = json.buyin,
-                IsOnRound = json.isPlaying,
+                IsOnRound = json.isPlaying == null? false : json.isPlaying,
                 PlayersCount = json.playerAmount != null ? json.playerAmount : 0,
                 InitialChips = json.initialChips,
                 MaxPlayers = json.maxPlayers,
