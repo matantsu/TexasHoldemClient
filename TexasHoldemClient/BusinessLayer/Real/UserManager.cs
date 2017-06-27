@@ -54,7 +54,7 @@ namespace TexasHoldemClient.BusinessLayer
         {
             var data = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password, username, false);
             await api.Register(email, username, password,data.FirebaseToken);
-            CurrentUser = ToUser(data);
+            CurrentUser = ToUser(data, email, password);
             Token = data.FirebaseToken;
             return CurrentUser;
         }

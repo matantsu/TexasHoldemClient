@@ -26,8 +26,9 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
         public EditUserPage()
         {
-
+            
             InitializeComponent();
+            UpdateForm.DataContext = um.CurrentUser;
 
         }
 
