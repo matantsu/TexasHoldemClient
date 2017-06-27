@@ -57,7 +57,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
 
             ToolsBarSpace.DataContext = this;
-            BindPath.Data.AddFirst(Player0);
+            playerControls.AddFirst(Player0);
             playerControls.AddFirst(Player1);
             playerControls.AddFirst(Player2);
             playerControls.AddFirst(Player3);

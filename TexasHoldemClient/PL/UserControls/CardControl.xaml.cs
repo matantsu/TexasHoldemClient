@@ -34,7 +34,7 @@ namespace TexasHoldemClient.PL.UserControls
                 adapterList.AddLast(CardType.Heart);
                 adapterList.AddLast(CardType.Diamond);
                 string path = System.AppDomain.CurrentDomain.BaseDirectory + "Resorces/"
-                    + ((13-(int)value.number)*4
+                    + ((12-(int)value.number)*4
                     + LinkedListExt.IndexOf(adapterList, value.type) + 5)
                     + ".png";
 

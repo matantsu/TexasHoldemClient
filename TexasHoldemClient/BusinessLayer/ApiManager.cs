@@ -66,5 +66,10 @@ namespace TexasHoldemClient.BusinessLayer
         {
             return api.ChangeEmail(um.Token, newEmail);
         }
+
+        public Task Send(int gid, string msg)
+        {
+            return api.Send(um.Token, gid, msg);
+        }
     }
 }

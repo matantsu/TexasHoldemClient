@@ -246,6 +246,11 @@ namespace TexasHoldemClient.BusinessLayer
             await api.PlayerAction(playerId, game.ID, PlayerStatus.Fold, 0);
         }
 
+        public async Task Send(Game game, string message)
+        {
+            await api.Send(game.ID, message);
+        }
+
         private IDictionary<Game, IDisposable> gameListeners = new Dictionary<Game, IDisposable>(); 
         public Game Listen(int gameId)
         {
