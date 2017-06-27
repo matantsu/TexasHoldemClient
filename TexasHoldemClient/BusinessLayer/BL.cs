@@ -48,6 +48,8 @@ namespace TexasHoldemClient.BusinessLayer
         Task<Models.User> Register(string email, string username, string password);
         Task<Models.User> Login(string email, string password);
         Task Logout(string username, string password);
+        Task ChangePassword(string password);
+        Task ChangeEmail(string email);
     }
 
     public class BL

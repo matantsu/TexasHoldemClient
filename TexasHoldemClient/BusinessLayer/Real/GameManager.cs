@@ -162,7 +162,7 @@ namespace TexasHoldemClient.BusinessLayer
                 IsSpectatingAllowed = json.spectatingAllowed,
                 Type = json.type,
                 League = json.league,
-                OpenCards = json.openCards != null ? json.openCards.ToObject<List<Card>>() : new List<Card>(),
+                OpenCards = json.tableCards != null ? json.tableCards.ToObject<List<Card>>() : new List<Card>(),
                 Stage = json.stage,
                 BigBlind = json.bigBlind != null ? json.bigBlind : 0,
                 Pot = json.pot,
