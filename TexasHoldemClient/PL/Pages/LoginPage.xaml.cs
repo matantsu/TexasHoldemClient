@@ -47,8 +47,8 @@ namespace TexasHoldemClient.PL.Pages
                 {
                     LoginForm.IsEnabled = false;
                     ProgressBar_LoginPressed.Visibility = Visibility.Visible;
-                    //await um.Login(TextBox_Email.Text, PasswordBox_Password.Password);
-                    await um.Login("x@gmail.com", "zaq1xsw2");
+                    await um.Login(TextBox_Email.Text, PasswordBox_Password.Password);
+                    //await um.Login("x@gmail.com", "zaq1xsw2");
                 }
                 catch (Exception exp)
                 {
