@@ -70,8 +70,8 @@
 
                 <Grid>
                     <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
-                    <Expander HorizontalAlignment="Right" Content="Chat" Background="Bisque" VerticalAlignment="Bottom">
-                        <UserControls:ChatControl  x:Name="chatControl" Width="300" Height="400"></UserControls:ChatControl>
+                    <Expander HorizontalAlignment="Right" Background="Bisque" VerticalAlignment="Bottom">
+                        <UserControls:ChatControl x:Name="chatControl" Width="300" Height="400"></UserControls:ChatControl>
                     </Expander>
                 </Grid>
                 
