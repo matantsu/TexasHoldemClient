@@ -14,42 +14,43 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 {
+
+    public sealed class TabItem
+    {
+        public string Header { get; set; }
+        public Page Content { get; set; }
+    }
+
     /// <summary>
     /// Interaction logic for CurrentRooms.xaml
     /// </summary>
     public partial class CurrentRooms : Page
     {
-        public ObservableCollection<GameRoomPage>  gameRooms = new ObservableCollection<GameRoomPage>();
-        public ObservableCollection<GameRoomPage> GameRooms { get { return gameRooms; }}
-        
+        public ObservableCollection<TabItem> Tabs { get; set; }
+
+
         public CurrentRooms()
         {
             InitializeComponent();
             Tabs_ActiveRooms.DataContext = this;
-            GameRooms.Add(new GameRoomPage(37));
-            GameRooms.Add(new GameRoomPage(37));
-            GameRooms.Add(new GameRoomPage(37));
-            GameRooms.Add(new GameRoomPage(37));
 
-            
-                
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(10);
-                Application.Current.Dispatcher.Invoke((Action)delegate {
-                    a();
-                });
-            });
+            Tabs = new ObservableCollection<TabItem>();
+/*            Tabs.Add(new TabItem { Header = "One", Content = new GameRoomPage(37) });
+            Tabs.Add(new TabItem { Header = "Two", Content = new GameRoomPage(38) });*/
 
+
+          
         }
 
-        public void a()
-        {       
-            
+        public void addGame(Game g)
+        {
+            Tabs.Add(new TabItem { Header = "Game " + g.ID, Content = new GameRoomPage(g.ID)});
         }
+
 
     }
 }

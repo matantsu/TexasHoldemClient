@@ -42,7 +42,9 @@ namespace TexasHoldemClient.BusinessLayer
 
         public Task PlayerAction(int playerId, int gameId, PlayerStatus newStatus, int newBet)
         {
+            Console.WriteLine("Player ID: {0}, Game ID: {1}", playerId, gameId);
             return api.PlayerAction(um.Token, playerId, gameId, (int)newStatus, newBet);
+
         }
 
         public Task Register(string email, string username, string password, string token)

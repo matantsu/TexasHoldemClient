@@ -43,7 +43,6 @@ namespace TexasHoldemClient.PL.Pages
                 homeItem,
                 new DemoItem("Active Games", new ActiveGamesPage()),
                 new DemoItem("Avaliable Games", new AvaliableGamesPage()),
-                new DemoItem("Current Rooms", new CurrentRooms()),
             };
             
             _mainFrame.Navigate(homeItem.Content);

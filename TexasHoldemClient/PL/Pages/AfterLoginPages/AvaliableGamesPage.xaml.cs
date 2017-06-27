@@ -59,7 +59,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
             {
                 Game g = (Game)GamesDataGrid.SelectedItem;
                 await gm.Join(g);
-                new GameWindow(g.ID).Show();
+                //new GameWindow(g.ID).Show();
             }
             catch (Exception exp)
             {

@@ -49,7 +49,7 @@ namespace TexasHoldemClient.BusinessLayer.api
 
             int gameId);
 
-        [Get("/playerAction?playerId={playerId}&gameId={gameId}&newStatus={newStatus}&newBet={newBet}&")]
+        [Get("/playerAction?playerId={playerId}&gameId={gameId}&newStatus={newStatus}&newBet={newBet}")]
         Task PlayerAction(
             [Header("token")] string token,
 

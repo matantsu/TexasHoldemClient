@@ -102,7 +102,7 @@ namespace TexasHoldemClient.BusinessLayer
                         RxFirebase.FromPath<dynamic>(fb, "games/" + gameid + "/privates/allPlayers/" + ps.ToList().FindIndex(x => x.UserID == p.UserID) + "/privates")
                         .Select(x => new Me { Hand = x.hand != null ? JsonConvert.DeserializeObject<IEnumerable<Card>>(x.hand.ToString()) : new List<Card>() }.Patch(p));}
                     ))), (cp,ps) => ps.Select((p,i) => {
-                        p.ISCurrentPlayer = i == (int)cp.currentPlayer;
+                        p.ISCurrentPlayer = i == (cp.currentPlayer == null ? -1 : (int)cp.currentPlayer);
                         return p;
                     }));
         }

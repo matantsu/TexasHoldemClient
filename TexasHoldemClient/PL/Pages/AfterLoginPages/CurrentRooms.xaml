@@ -27,15 +27,19 @@
 
 
         <TextBlock Grid.Row="0" Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" Margin="10">Active Rooms</TextBlock>
-        <TabControl Grid.Row="1" Name="Tabs_ActiveRooms" ItemsSource="{Binding GameRooms}">
+        <TabControl Name="Tabs_ActiveRooms"  ItemsSource="{Binding Tabs}" Grid.Row="1">
             <TabControl.ItemTemplate>
+                <!-- this is the header template-->
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=RoomName.Data}"/>
+                    <TextBlock
+                    Text="{Binding Header}" />
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
+                <!-- this is the body of the TabItem template-->
                 <DataTemplate>
-                    
+                    <Frame 
+                    Content="{Binding Content}"/>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>

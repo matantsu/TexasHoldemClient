@@ -20,30 +20,48 @@ using TexasHoldemClient.PL.UserControls;
 
 namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 {
+    public class booleaninverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return !(bool)value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return !(bool)value;
+        }
+    }
+
+
     /// <summary>
     /// Interaction logic for GameRoomPage.xaml
     /// </summary>
     public partial class GameRoomPage : Page
     {
-        
+        public Bind<string> CurrentStatusMessage { get; } = new Bind<string>("You Are In Game");
         Game game = new Game();
+        
         IGameManager gm = BL.GameManager;
         LinkedList<PlayerControl> playerControls = new LinkedList<PlayerControl>();
         LinkedList<Player> currentPlayers = new LinkedList<Player>();
-        public Bind<string> RoomName { get; } = new Bind<string>();
 
         public GameRoomPage(int gameID)
         {
             this.game = gm.Listen(gameID);
             InitializeComponent();
             DataContext = game;
-            RoomName.Data = game.Name;
+            
+            Button_StartRound.IsEnabled = !game.IsOnRound;
+            UserActionsSpace.IsEnabled = true;
+
+
+            ToolsBarSpace.DataContext = this;
             playerControls.AddFirst(Player0);
             playerControls.AddFirst(Player1);
             playerControls.AddFirst(Player2);
             playerControls.AddFirst(Player3);
             playerControls.AddFirst(Player4);
-            playerControls.AddFirst(Player5);
 
             foreach (PlayerControl pc in playerControls)
             {
@@ -60,7 +78,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
         {
             this.Dispatcher.Invoke(() =>
             {
-                //Console.WriteLine("" + e.PropertyName);
+                // Console.WriteLine("" + e.PropertyName);
 
                 if (e.PropertyName == "Players")
                 {
@@ -77,16 +95,17 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
                             playerControls.ElementAt(i).Visibility = Visibility.Collapsed;
                         }
                     }
+                    setActions();
 
                     MyPlayer.DataContext = (Me)game.Players.First(x => x is Me);
 
                     #region add cards manualy
-                    LinkedList<Card> Cardslst = new LinkedList<Card>();
+                    /*LinkedList<Card> Cardslst = new LinkedList<Card>();
                     Card c0 = new Card(CardType.Club, CardRank.Ace);
                     Card c1 = new Card(CardType.Spade, CardRank.Ace);
                     Cardslst.AddFirst(c0);
                     Cardslst.AddFirst(c1);
-                    ((Me)game.Players.First(x => x is Me)).Hand = Cardslst;
+                    ((Me)game.Players.First(x => x is Me)).Hand = Cardslst;*/
                     #endregion
 
                     TwoPlayerCardsControl.Cards = IEnumerableToLinkedList(((Me)game.Players.First(x => x is Me)).Hand);
@@ -99,22 +118,29 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
                 if (e.PropertyName == "CurrentPlayer")
                 {
-                    if (game.CurrentPlayer.UserID == ((Me)game.Players.First(x => x is Me)).UserID)
-                    {
-                        Button_Check.IsEnabled = false;
-                        Button_Fold.IsEnabled = false;
-                        Button_Raise.IsEnabled = false;
-                    }
-                    else
-                    {
-                        Button_Check.IsEnabled = true;
-                        Button_Fold.IsEnabled = true;
-                        Button_Raise.IsEnabled = true;
-                    }
+                    setActions();
                 }
 
             });
 
+        }
+
+
+        private void setActions()
+        {
+            if (game.CurrentPlayer == null) { return; }
+            if (game.CurrentPlayer.UserID == ((Me)game.Players.First(x => x is Me)).UserID)
+            {
+                Button_Check.IsEnabled = false;
+                Button_Fold.IsEnabled = false;
+                Button_Raise.IsEnabled = false;
+            }
+            else
+            {
+                Button_Check.IsEnabled = true;
+                Button_Fold.IsEnabled = true;
+                Button_Raise.IsEnabled = true;
+            }
         }
 
 
@@ -133,23 +159,42 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
         private async void Check_Click(object sender, RoutedEventArgs e)
         {
+            UserActionsSpace.IsEnabled = false;
+            CurrentStatusMessage.Data = "Starting Check...";
             await gm.Check(game);
+            CurrentStatusMessage.Data = "Finish Check";
+            UserActionsSpace.IsEnabled = true;
         }
 
         private async void Fold_Click(object sender, RoutedEventArgs e)
         {
+            UserActionsSpace.IsEnabled = false;
+            CurrentStatusMessage.Data = "Starting Fold...";
             await gm.Fold(game);
+            CurrentStatusMessage.Data = "Finish Fold";
+            UserActionsSpace.IsEnabled = true;
         }
 
         private async void Raise_Click(object sender, RoutedEventArgs e)
         {
+            UserActionsSpace.IsEnabled = false;
+            CurrentStatusMessage.Data = "Starting Raise...";
             await gm.Raise(game, Int32.Parse(BetTextBox.Text));
+            CurrentStatusMessage.Data = "Finish Raise";
+            UserActionsSpace.IsEnabled = true;
+
         }
 
         private async void StartRound_Click(object sender, RoutedEventArgs e)
         {
+            UserActionsSpace.IsEnabled = false;
+            CurrentStatusMessage.Data = "Starting Round...";
             await gm.StartRound(game);
+            CurrentStatusMessage.Data = "Finish Start Round";
+            UserActionsSpace.IsEnabled = true;
+            Button_StartRound.IsEnabled = false;
         }
+
 
     }
 }

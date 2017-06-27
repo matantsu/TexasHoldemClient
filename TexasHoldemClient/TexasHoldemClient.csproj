@@ -269,9 +269,6 @@
     <Compile Include="PL\Pages\AfterLoginPages\ReplayGamesPage.xaml.cs">
       <DependentUpon>ReplayGamesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PL\Pages\GameCenterPage.xaml.cs">
-      <DependentUpon>GameCenterPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PL\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -310,9 +307,6 @@
     </Compile>
     <Compile Include="PL\Windows\GameCenterMainWindow.xaml.cs">
       <DependentUpon>GameCenterMainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PL\Windows\GameWindow.xaml.cs">
-      <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -399,10 +393,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PL\Pages\GameCenterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="PL\Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -452,10 +442,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PL\Windows\GameCenterMainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PL\Windows\GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
