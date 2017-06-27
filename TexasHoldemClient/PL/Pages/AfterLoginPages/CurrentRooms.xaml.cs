@@ -48,7 +48,26 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
         public void addGame(Game g)
         {
-            Tabs.Add(new TabItem { Header = "Game " + g.ID, Content = new GameRoomPage(g.ID)});
+            TabItem sametab = null;
+            foreach (TabItem tab in Tabs)
+            {
+                if(((GameRoomPage)tab.Content).getGame().ID == g.ID)
+                {
+                    sametab = tab;
+                    break;
+                }
+            }
+
+            if (sametab != null)
+            {
+                Tabs.Remove(sametab);
+                Tabs.Add(new TabItem { Header = "Game " + g.ID, Content = new GameRoomPage(g.ID) });
+            }
+            else
+            {
+                Tabs.Add(new TabItem { Header = "Game " + g.ID, Content = new GameRoomPage(g.ID) });
+            }
+            
         }
 
 

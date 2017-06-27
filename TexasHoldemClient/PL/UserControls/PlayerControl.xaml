@@ -41,6 +41,22 @@
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
+
+                <TextBlock Foreground="White">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat=" Is It My Turn: {0}">
+                            <Binding Path="ISCurrentPlayer"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <TextBlock Foreground="White">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat=" Last Bet: {0}">
+                            <Binding Path="LastBet"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
             </StackPanel>
         
         </Grid>
