@@ -224,5 +224,15 @@ namespace TexasHoldemClient.BusinessLayer.Fake
             game.IsOnRound = true;
             game.CurrentPlayer = game.Players.ElementAt(0);
         }
+
+        public Task Send(Game game, string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Send(string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

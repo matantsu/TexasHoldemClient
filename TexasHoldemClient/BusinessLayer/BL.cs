@@ -36,6 +36,8 @@ namespace TexasHoldemClient.BusinessLayer
         Task Spectate(Game game);
         Task StartRound(Game game);
         Task Check(Game game);
+        Task Send(Game game, string message);
+        Task Send(string message);
         Task Raise(Game game, int bet);
         Task Fold(Game game);
         Game Listen(int gameid);
