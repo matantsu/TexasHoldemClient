@@ -99,28 +99,11 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
                     MyPlayer.DataContext = (Me)game.Players.First(x => x is Me);
 
-                    #region add cards manualy
-                    /*LinkedList<Card> Cardslst = new LinkedList<Card>();
-                    Card c0 = new Card(CardType.Club, CardRank.Ace);
-                    Card c1 = new Card(CardType.Spade, CardRank.Ace);
-                    Cardslst.AddFirst(c0);
-                    Cardslst.AddFirst(c1);
-                    ((Me)game.Players.First(x => x is Me)).Hand = Cardslst;*/
-                    #endregion
-
                     TwoPlayerCardsControl.Cards = IEnumerableToLinkedList(((Me)game.Players.First(x => x is Me)).Hand);
                 }
 
                 if (e.PropertyName == "OpenCards")
                 {
-                    /*LinkedList<Card> Cardslst = new LinkedList<Card>();
-                    Card c0 = new Card(CardType.Club, CardRank.Ace);
-                    Card c1 = new Card(CardType.Spade, CardRank.Nine);
-                    Card c2 = new Card(CardType.Spade, CardRank.Two);
-                    Cardslst.AddFirst(c0);
-                    Cardslst.AddFirst(c1);
-                    Cardslst.AddFirst(c2);
-                    game.OpenCards = Cardslst;*/
                     OpenCardsControl.Cards = IEnumerableToLinkedList(game.OpenCards);
                 }
 
@@ -173,13 +156,13 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
                 CurrentStatusMessage.Data = "Starting Check...";
                 await gm.Check(game);
                 CurrentStatusMessage.Data = "Finish Check";
-                UserActionsSpace.IsEnabled = true;
             }
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
+                CurrentStatusMessage.Data = "Error Check";
             }
-
+            UserActionsSpace.IsEnabled = true;
         }
 
         private async void Fold_Click(object sender, RoutedEventArgs e)
@@ -189,13 +172,14 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
                 UserActionsSpace.IsEnabled = false;
                 CurrentStatusMessage.Data = "Starting Fold...";
                 await gm.Fold(game);
-                CurrentStatusMessage.Data = "Finish Fold";
-                UserActionsSpace.IsEnabled = true;
+                CurrentStatusMessage.Data = "Finish Fold";    
             }
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
+                CurrentStatusMessage.Data = "Error Fold";
             }
+            UserActionsSpace.IsEnabled = true;
         }
 
         private async void Raise_Click(object sender, RoutedEventArgs e)
@@ -206,12 +190,13 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
                 CurrentStatusMessage.Data = "Starting Raise...";
                 await gm.Raise(game, Int32.Parse(BetTextBox.Text));
                 CurrentStatusMessage.Data = "Finish Raise";
-                UserActionsSpace.IsEnabled = true;
             }
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
+                CurrentStatusMessage.Data = "Error Raise";
             }
+            UserActionsSpace.IsEnabled = true;
         }
 
         private async void StartRound_Click(object sender, RoutedEventArgs e)
@@ -222,13 +207,20 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
                 CurrentStatusMessage.Data = "Starting Round...";
                 await gm.StartRound(game);
                 CurrentStatusMessage.Data = "Finish Start Round";
-                UserActionsSpace.IsEnabled = true;
-                Button_StartRound.IsEnabled = false;
             }
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
+                CurrentStatusMessage.Data = "Error Start Round";
             }
+            UserActionsSpace.IsEnabled = true;
+            Button_StartRound.IsEnabled = false;
+        }
+
+
+        public Game getGame()
+        {
+            return game;
         }
 
 
