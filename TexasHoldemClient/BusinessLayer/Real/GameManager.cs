@@ -61,6 +61,20 @@ namespace TexasHoldemClient.BusinessLayer
             }
         }
 
+        private IEnumerable<ChatMessage> chat = new List<ChatMessage>();
+        public IEnumerable<ChatMessage> Chat
+        {
+            get { return chat; }
+            private set
+            {
+                if (chat != value)
+                {
+                    chat = value;
+                    OnPropertyChanged("Chat");
+                }
+            }
+        }
+
         private IUserManager userManager;
         private IFirebaseClient fb;
         private ApiManager api;
@@ -79,6 +93,8 @@ namespace TexasHoldemClient.BusinessLayer
             {
                 Games = gs;
             });
+
+            RxFirebase.FromPath<IEnumerable<ChatMessage>>(fb, "chat").Subscribe(chat => Chat = chat);
         }
 
         private IObservable<IEnumerable<Game>> FillGames(IObservable<IEnumerable<Game>> o)
@@ -249,6 +265,11 @@ namespace TexasHoldemClient.BusinessLayer
         public async Task Send(Game game, string message)
         {
             await api.Send(game.ID, message);
+        }
+
+        public async Task Send(string message)
+        {
+            await api.Send(-1, message);
         }
 
         private IDictionary<Game, IDisposable> gameListeners = new Dictionary<Game, IDisposable>(); 

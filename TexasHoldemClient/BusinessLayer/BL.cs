@@ -20,6 +20,8 @@ namespace TexasHoldemClient.BusinessLayer
         IEnumerable<Game> ActiveGames { get; }
         IEnumerable<Game> SpectatingGames { get; }
 
+        IEnumerable<ChatMessage> Chat { get; }
+
         Task<int> Create(
             GameType gametype,
             string gameName,

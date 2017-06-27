@@ -47,6 +47,8 @@ namespace TexasHoldemClient.BusinessLayer.Fake
             }
         }
 
+        public IEnumerable<ChatMessage> Chat => throw new NotImplementedException();
+
         public GameManager()
         {
 
