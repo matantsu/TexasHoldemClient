@@ -165,6 +165,7 @@ namespace TexasHoldemClient.BusinessLayer
                 OpenCards = json.tableCards != null ? json.tableCards.ToObject<List<Card>>() : new List<Card>(),
                 Stage = json.stage,
                 BigBlind = json.bigBlind != null ? json.bigBlind : 0,
+                SmallBlind = json.smallBlind != null ? json.smallBlind : 0,
                 Pot = json.pot,
                 SmallBet = json.smallBet != null ? json.smallBet : 0,
                 Chat = json.chat != null ? (json.chat.ToObject<List<dynamic>>() as List<dynamic>).Select(ToChatMessage) : new List<ChatMessage>(),

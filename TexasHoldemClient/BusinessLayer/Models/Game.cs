@@ -353,6 +353,20 @@ namespace TexasHoldemClient.BusinessLayer.Models
             }
         }
 
+        private int smallBlind;
+        public int SmallBlind
+        {
+            get { return smallBlind; }
+            set
+            {
+                if (smallBlind != value)
+                {
+                    smallBlind = value;
+                    OnPropertyChanged("SmallBlind");
+                }
+            }
+        }
+
         private bool isOnRound;
         public bool IsOnRound
         {
