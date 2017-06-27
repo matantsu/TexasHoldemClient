@@ -24,7 +24,7 @@
             <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" Margin="10">Home</TextBlock>
 
             <Grid  Margin="16" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <DockPanel>
+            <DockPanel Name="CardsPanel">
                 <materialDesign:Card Padding="32" Margin="16" Height="200"  >
                     <DockPanel>
                         <StackPanel Orientation="Horizontal"  DockPanel.Dock="Top">
@@ -44,7 +44,7 @@
                     <DockPanel>
                         <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" FontStyle="Italic" DockPanel.Dock="Top">Wallet</TextBlock>
                         <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18">Total: </TextBlock>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Foreground="Green" FontSize="18" Text="Binding needed"></TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Foreground="Green" FontSize="18" Text="{Binding Wallet}"></TextBlock>
                         <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18"> $</TextBlock>
                     </DockPanel>
                 </materialDesign:Card>
@@ -53,7 +53,7 @@
                     <DockPanel>
                         <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="30" FontStyle="Italic" DockPanel.Dock="Top">League</TextBlock>
                         <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18">Current League: </TextBlock>
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18" Foreground="Green" Text="Binding needed"></TextBlock>
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" FontSize="18" Foreground="Green" Text="{Binding League}"></TextBlock>
                     </DockPanel>
                 </materialDesign:Card>
 

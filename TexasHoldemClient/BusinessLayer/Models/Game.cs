@@ -419,6 +419,7 @@ namespace TexasHoldemClient.BusinessLayer.Models
             this.SmallBet = x.SmallBet;
             this.Pot = x.Pot;
             this.BigBlind = x.BigBlind;
+            this.Chat = x.Chat;
         }
     }
 }

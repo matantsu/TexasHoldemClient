@@ -14,7 +14,15 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" Name="ChatMessagesDataGrid" ItemsSource="{Binding Path=Chat}"   IsReadOnly="True"></DataGrid>
+        <DataGrid Grid.Row="0" Name="ChatMessagesDataGrid" ItemsSource="{Binding Path=Data.Chat}"   IsReadOnly="True">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Message" Binding="{Binding Message}" />
+
+            </DataGrid.Columns>
+
+
+        </DataGrid>
 
 
             <Grid Grid.Row="1">

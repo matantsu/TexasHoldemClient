@@ -26,7 +26,9 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
         public HomePage()
         {
             InitializeComponent();
-            //um.CurrentUser.
+            CardsPanel.DataContext = um.CurrentUser;
+            
+
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

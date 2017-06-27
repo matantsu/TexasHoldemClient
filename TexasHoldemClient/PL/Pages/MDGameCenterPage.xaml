@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:TexasHoldemClient.PL.Pages"
        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
        xmlns:system="clr-namespace:System;assembly=mscorlib"
+            xmlns:UserControls="clr-namespace:TexasHoldemClient.PL.UserControls" 
       Title="Poker"
        VerticalAlignment="Stretch" 
       HorizontalAlignment="Stretch"
@@ -16,6 +17,7 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
+      
         FontFamily="{StaticResource MaterialDesignFont}">
     <Page.Resources>
         <ResourceDictionary>
@@ -49,6 +51,7 @@
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel>
+                
                 <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="Dark" DockPanel.Dock="Top">
                     <DockPanel>
@@ -65,8 +68,13 @@
                     </DockPanel>
                 </materialDesign:ColorZone>
 
-                <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
-
+                <Grid>
+                    <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
+                    <Expander HorizontalAlignment="Right" Content="Chat" Background="Bisque" VerticalAlignment="Bottom">
+                        <UserControls:ChatControl  x:Name="chatControl" Width="300" Height="400"></UserControls:ChatControl>
+                    </Expander>
+                </Grid>
+                
             </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>

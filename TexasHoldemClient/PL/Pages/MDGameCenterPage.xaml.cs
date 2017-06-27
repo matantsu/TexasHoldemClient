@@ -44,7 +44,7 @@ namespace TexasHoldemClient.PL.Pages
                 new DemoItem("Active Games", new ActiveGamesPage()),
                 new DemoItem("Avaliable Games", new AvaliableGamesPage()),
             };
-            
+            chatControl.setGameCenter();
             _mainFrame.Navigate(homeItem.Content);
             
         }

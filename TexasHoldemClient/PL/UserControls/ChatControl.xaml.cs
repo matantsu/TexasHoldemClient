@@ -25,9 +25,9 @@ namespace TexasHoldemClient.PL.UserControls
     {
         IGameManager gm = BL.GameManager;
 
-        
-        
-        Game game;
+
+
+        public Bind<Game> BindGame { get; set; } = new Bind<Game>();
         public ChatControl()
         {
             InitializeComponent();
@@ -35,10 +35,11 @@ namespace TexasHoldemClient.PL.UserControls
 
         internal void setGame(Game game)
         {
-            this.game = game;
-            DataContext = game;
+            BindGame.Data = game;
+            DataContext = BindGame;
+        
         }
-
+        
         internal void setGameCenter()
         {
             DataContext = gm;
@@ -52,9 +53,9 @@ namespace TexasHoldemClient.PL.UserControls
             }
             else
             {
-                gm.Send(game, MessageTextBox.Text);
+                gm.Send(BindGame.Data, MessageTextBox.Text);
             }
-                
+            MessageTextBox.Text = "";
         }
     }
 }

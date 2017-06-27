@@ -79,12 +79,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
         {
             this.Dispatcher.Invoke(() =>
             {
-                // Console.WriteLine("" + e.PropertyName);
-                if (e.PropertyName == "Chat")
-                {
-                    Console.Write("");
-
-                }
+                
                 if (e.PropertyName == "Players")
                 {
                     for (int i = 0; i < playerControls.Count; i++)
