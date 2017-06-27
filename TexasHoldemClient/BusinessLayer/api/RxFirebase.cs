@@ -28,7 +28,7 @@ namespace TexasHoldemClient.BusinessLayer.api
                     {
                         sub.Dispose();
                     });
-                }).Replay(1).RefCount();
+                }).Replay(1).RefCount().Throttle(TimeSpan.FromMilliseconds(1000));
                 cache[path] = o as IObservable<object>;
                 return o; 
             }
