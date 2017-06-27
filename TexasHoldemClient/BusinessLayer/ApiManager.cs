@@ -49,7 +49,7 @@ namespace TexasHoldemClient.BusinessLayer
 
         public Task Register(string email, string username, string password, string token)
         {
-            return api.Register(email, username, password, token);
+            return api.Register(email, username, "ignored", token);
         }
 
         public Task SpectateGame(int gameId)
