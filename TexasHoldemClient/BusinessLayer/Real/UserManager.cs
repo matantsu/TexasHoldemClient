@@ -62,7 +62,7 @@ namespace TexasHoldemClient.BusinessLayer
         public async Task<Models.User> Login(string email, string password)
         {
             var data = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
-            CurrentUser = ToUser(data);
+            CurrentUser = ToUser(data,email,password);
             Token = data.FirebaseToken;
             this.email = email;
             this.password = password;
@@ -77,12 +77,14 @@ namespace TexasHoldemClient.BusinessLayer
             password = null;
         }
 
-        private Models.User ToUser(FirebaseAuthLink l)
+        private Models.User ToUser(FirebaseAuthLink l, string email, string pass)
         {
             return new Models.User(l.User.LocalId)
             {
                 DisplayName = l.User.DisplayName,
-            };
+                Email = email,
+                Password = pass
+            };  
         }
 
         public async Task ChangePassword(string password)
