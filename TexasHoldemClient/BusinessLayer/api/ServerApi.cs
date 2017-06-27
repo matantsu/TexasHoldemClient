@@ -75,5 +75,12 @@ namespace TexasHoldemClient.BusinessLayer.api
             [Header("token")] string token,
 
             string newEmail);
+
+        [Get("/sendChat?gID={gid}&msg={msg}")]
+        Task Send(
+            [Header("token")] string token,
+
+            int gid,
+            string msg);
     }
 }

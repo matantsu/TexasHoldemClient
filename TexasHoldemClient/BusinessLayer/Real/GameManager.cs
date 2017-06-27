@@ -137,6 +137,15 @@ namespace TexasHoldemClient.BusinessLayer
             }
         }
 
+        private ChatMessage ToChatMessage(dynamic json)
+        {
+            return new ChatMessage
+            {
+                UserID = json.uid,
+                Message = json.message
+            };
+        } 
+
         private Game ToGame(dynamic json)
         {
             return new Game
@@ -157,7 +166,8 @@ namespace TexasHoldemClient.BusinessLayer
                 Stage = json.stage,
                 BigBlind = json.bigBlind != null ? json.bigBlind : 0,
                 Pot = json.pot,
-                SmallBet = json.smallBet != null ? json.smallBet : 0
+                SmallBet = json.smallBet != null ? json.smallBet : 0,
+                Chat = json.chat != null ? (json.chat.ToObject<List<dynamic>>() as List<dynamic>).Select(ToChatMessage) : new List<ChatMessage>(),
             };
         }
 
