@@ -260,6 +260,9 @@
     <Compile Include="PL\Pages\AfterLoginPages\CurrentRooms.xaml.cs">
       <DependentUpon>CurrentRooms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PL\Pages\AfterLoginPages\EditUserPage.xaml.cs">
+      <DependentUpon>EditUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PL\Pages\AfterLoginPages\GameRoomPage.xaml.cs">
       <DependentUpon>GameRoomPage.xaml</DependentUpon>
     </Compile>
@@ -378,6 +381,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PL\Pages\AfterLoginPages\CurrentRooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PL\Pages\AfterLoginPages\EditUserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

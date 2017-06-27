@@ -113,6 +113,14 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
 
                 if (e.PropertyName == "OpenCards")
                 {
+                    /*LinkedList<Card> Cardslst = new LinkedList<Card>();
+                    Card c0 = new Card(CardType.Club, CardRank.Ace);
+                    Card c1 = new Card(CardType.Spade, CardRank.Nine);
+                    Card c2 = new Card(CardType.Spade, CardRank.Two);
+                    Cardslst.AddFirst(c0);
+                    Cardslst.AddFirst(c1);
+                    Cardslst.AddFirst(c2);
+                    game.OpenCards = Cardslst;*/
                     OpenCardsControl.Cards = IEnumerableToLinkedList(game.OpenCards);
                 }
 
