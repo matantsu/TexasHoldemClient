@@ -367,6 +367,23 @@ namespace TexasHoldemClient.BusinessLayer.Models
             }
         }
 
+        private IEnumerable<ChatMessage> chat;
+        public IEnumerable<ChatMessage> Chat
+        {
+            get
+            {
+                return chat;
+            }
+            set
+            {
+                if(chat != value)
+                {
+                    chat = value;
+                    OnPropertyChanged("Chat");
+                }
+            }
+        }
+
         public void Patch(Game x)
         {
             this.ID = x.ID;
