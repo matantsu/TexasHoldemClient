@@ -50,6 +50,34 @@ namespace TexasHoldemClient.BusinessLayer.Models
             }
         }
 
+        private int wallet;
+        public int Wallet
+        {
+            get { return wallet; }
+            set
+            {
+                if (wallet != value)
+                {
+                    wallet = value;
+                    OnPropertyChanged("Wallet");
+                }
+            }
+        }
+
+        private int league;
+        public int League
+        {
+            get { return league; }
+            set
+            {
+                if (league != value)
+                {
+                    league = value;
+                    OnPropertyChanged("League");
+                }
+            }
+        }
+
         public string UID { get; private set; }
 
         public User(string uid)
