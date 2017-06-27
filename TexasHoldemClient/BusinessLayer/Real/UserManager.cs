@@ -84,5 +84,15 @@ namespace TexasHoldemClient.BusinessLayer
                 DisplayName = l.User.DisplayName,
             };
         }
+
+        public async Task ChangePassword(string password)
+        {
+            await this.api.ChangePassword(Token, password);
+        }
+
+        public async Task ChangeEmail(string email)
+        {
+            await this.api.ChangeEmail(Token, email);
+        }
     }
 }
