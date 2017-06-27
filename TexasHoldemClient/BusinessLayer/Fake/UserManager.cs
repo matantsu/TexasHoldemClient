@@ -42,7 +42,7 @@ namespace TexasHoldemClient.BusinessLayer.Fake
         public async Task<User> Login(string email, string password)
         {
             Thread.Sleep(1000);
-            CurrentUser = new User("someid") { DisplayName = "Matan Tsuberi" };
+            CurrentUser = new User("someid") { DisplayName = "Matan Tsuberi", Email = email, Password = password };
             return CurrentUser;
         }
 
@@ -54,6 +54,16 @@ namespace TexasHoldemClient.BusinessLayer.Fake
         public Task<User> Register(string email, string username, string password)
         {
             return Login(email, password);
+        }
+
+        public Task ChangePassword(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ChangeEmail(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }
