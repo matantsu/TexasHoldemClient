@@ -155,7 +155,7 @@
             </Grid>
 
             <Grid x:Name="ChatSpace" Grid.Column="1" Background="GreenYellow">
-                <UserControls:ChatControl/>
+                <UserControls:ChatControl x:Name="chatControl"/>
             </Grid>
 
         </Grid>

@@ -9,16 +9,7 @@ using System.Windows.Controls;
 
 namespace TexasHoldemClient.Helpers
 {
-    public class NotEmptyValidationRule : ValidationRule
-    {
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
-            return string.IsNullOrWhiteSpace((value ?? "").ToString())
-                ? new ValidationResult(false, "Field is required.")
-                : ValidationResult.ValidResult;
-        }
-    }
-
+    
 
     public static class Validators
     {

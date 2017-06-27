@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TexasHoldemClient.BusinessLayer;
+using TexasHoldemClient.BusinessLayer.Models;
 
 namespace TexasHoldemClient.PL.UserControls
 {
@@ -20,9 +22,23 @@ namespace TexasHoldemClient.PL.UserControls
     /// </summary>
     public partial class ChatControl : UserControl
     {
+        IGameManager gm = BL.GameManager;
+
+        IEnumerable<ChatMessage> chat;
         public ChatControl()
         {
             InitializeComponent();
+            DataContext = chat;
+        }
+
+        internal void setChat(IEnumerable<ChatMessage> chat)
+        {
+            this.chat = chat;
+        }
+
+        private void Send_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

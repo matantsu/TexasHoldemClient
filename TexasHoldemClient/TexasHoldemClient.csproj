@@ -247,6 +247,7 @@
   <ItemGroup>
     <Compile Include="PL\Helpers\Bind.cs" />
     <Compile Include="PL\Helpers\NameValidator.cs" />
+    <Compile Include="PL\Helpers\NotEmptyValidationRule.cs" />
     <Compile Include="PL\Helpers\Validators.cs" />
     <Compile Include="PL\Models\DemoItem.cs" />
     <Compile Include="PL\Models\NotifyPropertyChangedExtension.cs" />

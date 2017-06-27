@@ -51,7 +51,7 @@ namespace TexasHoldemClient.PL.Pages.AfterLoginPages
             this.game = gm.Listen(gameID);
             InitializeComponent();
             DataContext = game;
-
+            chatControl.setChat(game.Chat);
             Button_StartRound.IsEnabled = !game.IsOnRound;
             UserActionsSpace.IsEnabled = true;
 
